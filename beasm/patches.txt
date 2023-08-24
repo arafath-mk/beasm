@@ -1,0 +1,343 @@
+[pre_model_sync]
+beasm.patches.v12_0.update_is_cancelled_field
+beasm.patches.v11_0.rename_production_order_to_work_order
+beasm.patches.v13_0.add_bin_unique_constraint
+beasm.patches.v11_0.refactor_naming_series
+beasm.patches.v11_0.refactor_autoname_naming
+beasm.patches.v14_0.change_is_subcontracted_fieldtype
+execute:frappe.reload_doc("accounts", "doctype", "POS Payment Method") #2020-05-28
+beasm.patches.v4_2.update_requested_and_ordered_qty #2021-03-31
+beasm.patches.v5_7.update_item_description_based_on_item_master
+beasm.patches.v4_2.repost_reserved_qty #2021-03-31
+beasm.patches.v8_1.removed_roles_from_gst_report_non_indian_account #16-08-2018
+beasm.patches.v10_0.fichier_des_ecritures_comptables_for_france
+beasm.patches.v10_0.rename_price_to_rate_in_pricing_rule
+beasm.patches.v10_0.set_currency_in_pricing_rule
+beasm.patches.v10_0.update_translatable_fields
+execute:frappe.delete_doc('DocType', 'Production Planning Tool', ignore_missing=True)
+beasm.patches.v11_0.rename_duplicate_item_code_values
+beasm.patches.v11_0.make_quality_inspection_template
+beasm.patches.v11_0.merge_land_unit_with_location
+beasm.patches.v11_0.add_index_on_nestedset_doctypes
+beasm.patches.v11_0.remove_modules_setup_page
+beasm.patches.v11_0.update_department_lft_rgt
+beasm.patches.v11_0.uom_conversion_data #30-06-2018
+beasm.patches.v11_0.update_account_type_in_party_type
+beasm.patches.v11_0.rename_supplier_type_to_supplier_group
+beasm.patches.v10_1.transfer_subscription_to_auto_repeat
+beasm.patches.v11_0.update_brand_in_item_price
+beasm.patches.v11_0.create_default_success_action
+beasm.patches.v11_0.rebuild_tree_for_company
+beasm.patches.v11_0.create_department_records_for_each_company
+beasm.patches.v11_0.make_location_from_warehouse
+beasm.patches.v11_0.make_asset_finance_book_against_old_entries
+beasm.patches.v11_0.check_buying_selling_in_currency_exchange
+beasm.patches.v11_0.move_item_defaults_to_child_table_for_multicompany #02-07-2018 #19-06-2019
+beasm.patches.v11_0.rename_overproduction_percent_field
+beasm.patches.v11_0.update_backflush_subcontract_rm_based_on_bom
+beasm.patches.v11_0.rename_members_with_naming_series #04-06-2018
+beasm.patches.v11_0.set_update_field_and_value_in_workflow_state
+beasm.patches.v11_0.update_total_qty_field
+beasm.patches.v11_0.update_sales_partner_type
+beasm.patches.v11_0.rename_asset_adjustment_doctype
+beasm.patches.v11_0.set_user_permissions_for_department
+beasm.patches.v11_0.hr_ux_cleanups
+beasm.patches.v11_0.set_department_for_doctypes
+beasm.patches.v11_0.update_allow_transfer_for_manufacture
+beasm.patches.v11_0.add_item_group_defaults
+beasm.patches.v11_0.add_expense_claim_default_account
+beasm.patches.v11_0.make_job_card
+beasm.patches.v11_0.add_default_dispatch_notification_template
+beasm.patches.v11_0.add_market_segments
+beasm.patches.v11_0.add_sales_stages
+execute:frappe.delete_doc_if_exists("Page", "sales-analytics")
+execute:frappe.delete_doc_if_exists("Page", "purchase-analytics")
+execute:frappe.delete_doc_if_exists("Page", "stock-analytics")
+execute:frappe.delete_doc_if_exists("Page", "production-analytics")
+beasm.patches.v10_0.item_barcode_childtable_migrate # 16-02-2019
+beasm.patches.v11_0.update_delivery_trip_status
+beasm.patches.v11_0.rename_bom_wo_fields
+beasm.patches.v12_0.set_default_homepage_type
+beasm.patches.v11_0.renamed_from_to_fields_in_project
+beasm.patches.v11_1.setup_guardian_role
+execute:frappe.delete_doc('DocType', 'Notification Control')
+beasm.patches.v11_0.remove_barcodes_field_from_copy_fields_to_variants
+beasm.patches.v12_0.set_task_status
+beasm.patches.v11_0.make_italian_localization_fields # 26-03-2019
+beasm.patches.v12_0.add_item_name_in_work_orders
+beasm.patches.v12_0.update_pricing_rule_fields
+beasm.patches.v11_1.make_job_card_time_logs
+beasm.patches.v12_0.rename_pricing_rule_child_doctypes
+beasm.patches.v12_0.move_target_distribution_from_parent_to_child
+beasm.patches.v12_0.stock_entry_enhancements
+beasm.patches.v10_0.item_barcode_childtable_migrate # 16-02-2019 #25-06-2019
+beasm.patches.v12_0.make_item_manufacturer
+beasm.patches.v12_0.move_item_tax_to_item_tax_template
+beasm.patches.v11_1.set_variant_based_on
+beasm.patches.v11_1.woocommerce_set_creation_user
+beasm.patches.v11_1.rename_depends_on_lwp
+execute:frappe.delete_doc("Report", "Inactive Items")
+beasm.patches.v11_1.delete_scheduling_tool
+beasm.patches.v12_0.rename_tolerance_fields
+execute:frappe.delete_doc_if_exists("Page", "support-analytics")
+beasm.patches.v12_0.remove_patient_medical_record_page
+beasm.patches.v11_1.move_customer_lead_to_dynamic_column
+beasm.patches.v11_1.set_default_action_for_quality_inspection
+beasm.patches.v11_1.delete_bom_browser
+beasm.patches.v11_1.set_missing_title_for_quotation
+beasm.patches.v11_1.update_bank_transaction_status
+beasm.patches.v11_1.renamed_delayed_item_report
+beasm.patches.v11_1.set_missing_opportunity_from
+beasm.patches.v12_0.set_quotation_status
+beasm.patches.v12_0.set_priority_for_support
+beasm.patches.v12_0.delete_priority_property_setter
+beasm.patches.v12_0.set_default_batch_size
+execute:frappe.delete_doc("DocType", "Project Task")
+beasm.patches.v11_1.update_default_supplier_in_item_defaults
+beasm.patches.v12_0.update_due_date_in_gle
+beasm.patches.v12_0.add_default_buying_selling_terms_in_company
+beasm.patches.v12_0.create_accounting_dimensions_in_missing_doctypes #2020-05-11
+beasm.patches.v11_1.set_status_for_material_request_type_manufacture
+beasm.patches.v12_0.move_plaid_settings_to_doctype
+execute:frappe.reload_doc('desk', 'doctype', 'dashboard_chart_link')
+execute:frappe.reload_doc('desk', 'doctype', 'dashboard')
+execute:frappe.reload_doc('desk', 'doctype', 'dashboard_chart_source')
+execute:frappe.reload_doc('desk', 'doctype', 'dashboard_chart')
+execute:frappe.reload_doc('desk', 'doctype', 'dashboard_chart_field')
+beasm.patches.v12_0.remove_bank_remittance_custom_fields
+beasm.patches.v12_0.move_credit_limit_to_customer_credit_limit
+beasm.patches.v12_0.add_variant_of_in_item_attribute_table
+beasm.patches.v12_0.rename_bank_account_field_in_journal_entry_account
+beasm.patches.v12_0.create_default_energy_point_rules
+beasm.patches.v12_0.set_produced_qty_field_in_sales_order_for_work_order
+beasm.patches.v12_0.set_cwip_and_delete_asset_settings
+beasm.patches.v12_0.set_expense_account_in_landed_cost_voucher_taxes
+beasm.patches.v12_0.replace_accounting_with_accounts_in_home_settings
+beasm.patches.v12_0.set_automatically_process_deferred_accounting_in_accounts_settings
+beasm.patches.v12_0.set_payment_entry_status
+beasm.patches.v12_0.update_owner_fields_in_acc_dimension_custom_fields
+beasm.patches.v12_0.update_price_or_product_discount
+beasm.patches.v12_0.set_production_capacity_in_workstation
+beasm.patches.v12_0.set_employee_preferred_emails
+beasm.patches.v12_0.set_against_blanket_order_in_sales_and_purchase_order
+beasm.patches.v12_0.set_cost_center_in_child_table_of_expense_claim
+beasm.patches.v12_0.set_lead_title_field
+beasm.patches.v12_0.set_permission_einvoicing
+beasm.patches.v12_0.create_irs_1099_field_united_states
+beasm.patches.v12_0.move_bank_account_swift_number_to_bank
+beasm.patches.v12_0.rename_bank_reconciliation
+beasm.patches.v12_0.rename_bank_reconciliation_fields # 2020-01-22
+beasm.patches.v12_0.set_purchase_receipt_delivery_note_detail
+beasm.patches.v12_0.add_permission_in_lower_deduction
+beasm.patches.v12_0.set_received_qty_in_material_request_as_per_stock_uom
+beasm.patches.v12_0.rename_account_type_doctype
+beasm.patches.v12_0.recalculate_requested_qty_in_bin
+beasm.patches.v12_0.set_total_batch_quantity
+beasm.patches.v12_0.rename_mws_settings_fields
+beasm.patches.v12_0.set_updated_purpose_in_pick_list
+beasm.patches.v12_0.repost_stock_ledger_entries_for_target_warehouse
+beasm.patches.v12_0.update_end_date_and_status_in_email_campaign
+beasm.patches.v12_0.fix_quotation_expired_status
+beasm.patches.v12_0.rename_pos_closing_doctype
+beasm.patches.v13_0.replace_pos_payment_mode_table #2020-12-29
+execute:frappe.delete_doc_if_exists("Page", "appointment-analytic")
+execute:frappe.rename_doc("Desk Page", "Getting Started", "Home", force=True)
+beasm.patches.v12_0.unset_customer_supplier_based_on_type_of_item_price
+beasm.patches.v12_0.set_valid_till_date_in_supplier_quotation
+beasm.patches.v12_0.set_serial_no_status #2020-05-21
+beasm.patches.v12_0.update_price_list_currency_in_bom
+execute:frappe.reload_doctype('Dashboard')
+execute:frappe.reload_doc('desk', 'doctype', 'number_card_link')
+execute:frappe.delete_doc_if_exists('Dashboard', 'Accounts')
+beasm.patches.v13_0.update_actual_start_and_end_date_in_wo
+beasm.patches.v12_0.update_bom_in_so_mr
+execute:frappe.delete_doc("Report", "Department Analytics")
+beasm.patches.v12_0.update_uom_conversion_factor
+beasm.patches.v13_0.replace_pos_page_with_point_of_sale_page
+beasm.patches.v13_0.delete_old_purchase_reports
+beasm.patches.v12_0.set_italian_import_supplier_invoice_permissions
+beasm.patches.v13_0.update_subscription
+beasm.patches.v12_0.unhide_cost_center_field
+beasm.patches.v13_0.update_sla_enhancements
+beasm.patches.v13_0.update_deferred_settings
+beasm.patches.v12_0.set_multi_uom_in_rfq
+beasm.patches.v13_0.delete_old_sales_reports
+execute:frappe.delete_doc_if_exists("DocType", "Bank Reconciliation")
+execute:frappe.reload_doc("regional", "doctype", "e_invoice_settings")
+beasm.patches.v13_0.loyalty_points_entry_for_pos_invoice #22-07-2020
+beasm.patches.v12_0.fix_percent_complete_for_projects
+beasm.patches.v13_0.delete_report_requested_items_to_order
+beasm.patches.v12_0.update_item_tax_template_company
+beasm.patches.v13_0.move_branch_code_to_bank_account
+beasm.patches.v13_0.add_standard_navbar_items #2021-03-24
+beasm.patches.v13_0.stock_entry_enhancements
+beasm.patches.v12_0.rename_lost_reason_detail
+beasm.patches.v13_0.drop_razorpay_payload_column
+beasm.patches.v13_0.rename_issue_doctype_fields
+beasm.patches.v13_0.change_default_pos_print_format
+beasm.patches.v13_0.set_youtube_video_id
+beasm.patches.v13_0.set_app_name
+beasm.patches.v13_0.print_uom_after_quantity_patch
+beasm.patches.v13_0.set_payment_channel_in_payment_gateway_account
+execute:frappe.delete_doc("Report", "Quoted Item Comparison")
+beasm.patches.v13_0.update_member_email_address
+beasm.patches.v13_0.update_pos_closing_entry_in_merge_log
+beasm.patches.v13_0.add_po_to_global_search
+beasm.patches.v13_0.update_returned_qty_in_pr_dn
+beasm.patches.v13_0.create_uae_pos_invoice_fields
+beasm.patches.v13_0.update_project_template_tasks
+beasm.patches.v13_0.convert_qi_parameter_to_link_field
+beasm.patches.v13_0.add_naming_series_to_old_projects # 1-02-2021
+beasm.patches.v13_0.update_payment_terms_outstanding
+beasm.patches.v13_0.delete_old_bank_reconciliation_doctypes
+beasm.patches.v13_0.update_vehicle_no_reqd_condition
+beasm.patches.v13_0.rename_membership_settings_to_non_profit_settings
+beasm.patches.v13_0.setup_uae_vat_fields
+execute:frappe.db.set_value('System Settings', None, 'app_name', 'BEASM')
+beasm.patches.v12_0.purchase_receipt_status
+beasm.patches.v13_0.fix_non_unique_represents_company
+beasm.patches.v12_0.add_document_type_field_for_italy_einvoicing
+beasm.patches.v13_0.update_shipment_status
+beasm.patches.v13_0.remove_attribute_field_from_item_variant_setting
+beasm.patches.v13_0.set_pos_closing_as_failed
+beasm.patches.v13_0.update_timesheet_changes
+beasm.patches.v13_0.add_doctype_to_sla #14-06-2021
+beasm.patches.v13_0.bill_for_rejected_quantity_in_purchase_invoice
+beasm.patches.v13_0.rename_issue_status_hold_to_on_hold
+beasm.patches.v13_0.update_response_by_variance
+beasm.patches.v13_0.update_job_card_details
+beasm.patches.v13_0.add_missing_fg_item_for_stock_entry
+beasm.patches.v13_0.update_subscription_status_in_memberships
+beasm.patches.v13_0.update_amt_in_work_order_required_items
+beasm.patches.v13_0.delete_orphaned_tables
+beasm.patches.v13_0.update_tds_check_field #3
+beasm.patches.v13_0.add_custom_field_for_south_africa #2
+beasm.patches.v13_0.update_recipient_email_digest
+beasm.patches.v13_0.shopify_deprecation_warning
+beasm.patches.v13_0.remove_bad_selling_defaults
+beasm.patches.v13_0.trim_whitespace_from_serial_nos  # 16-01-2022
+beasm.patches.v13_0.migrate_stripe_api
+beasm.patches.v13_0.reset_clearance_date_for_intracompany_payment_entries
+execute:frappe.reload_doc("beasm_integrations", "doctype", "TaxJar Settings")
+execute:frappe.reload_doc("beasm_integrations", "doctype", "Product Tax Category")
+beasm.patches.v13_0.set_operation_time_based_on_operating_cost
+beasm.patches.v13_0.create_gst_payment_entry_fields #27-11-2021
+beasm.patches.v13_0.fix_invoice_statuses
+beasm.patches.v13_0.create_website_items #30-09-2021
+beasm.patches.v13_0.populate_e_commerce_settings
+beasm.patches.v13_0.make_homepage_products_website_items
+beasm.patches.v13_0.replace_supplier_item_group_with_party_specific_item
+beasm.patches.v13_0.update_dates_in_tax_withholding_category
+beasm.patches.v14_0.update_opportunity_currency_fields
+beasm.patches.v13_0.create_accounting_dimensions_in_pos_doctypes
+beasm.patches.v13_0.create_custom_field_for_finance_book
+beasm.patches.v13_0.modify_invalid_gain_loss_gl_entries #2
+beasm.patches.v13_0.fix_additional_cost_in_mfg_stock_entry
+beasm.patches.v13_0.set_status_in_maintenance_schedule_table
+beasm.patches.v13_0.enable_scheduler_job_for_item_reposting
+beasm.patches.v13_0.requeue_failed_reposts
+beasm.patches.v13_0.update_job_card_status
+beasm.patches.v13_0.enable_uoms
+beasm.patches.v12_0.update_production_plan_status
+beasm.patches.v13_0.healthcare_deprecation_warning
+beasm.patches.v13_0.item_naming_series_not_mandatory
+beasm.patches.v13_0.update_category_in_ltds_certificate
+beasm.patches.v13_0.fetch_thumbnail_in_website_items
+beasm.patches.v13_0.update_maintenance_schedule_field_in_visit
+beasm.patches.v14_0.migrate_crm_settings
+beasm.patches.v13_0.wipe_serial_no_field_for_0_qty
+beasm.patches.v13_0.agriculture_deprecation_warning
+beasm.patches.v13_0.hospitality_deprecation_warning
+beasm.patches.v13_0.update_asset_quantity_field
+beasm.patches.v13_0.delete_bank_reconciliation_detail
+beasm.patches.v13_0.enable_provisional_accounting
+beasm.patches.v13_0.non_profit_deprecation_warning
+beasm.patches.v13_0.show_india_localisation_deprecation_warning
+beasm.patches.v13_0.show_hr_payroll_deprecation_warning
+beasm.patches.v13_0.reset_corrupt_defaults
+beasm.patches.v13_0.create_accounting_dimensions_for_asset_repair
+beasm.patches.v15_0.delete_taxjar_doctypes
+beasm.patches.v15_0.create_asset_depreciation_schedules_from_assets
+beasm.patches.v14_0.update_reference_due_date_in_journal_entry
+beasm.patches.v15_0.saudi_depreciation_warning
+beasm.patches.v15_0.delete_saudi_doctypes
+beasm.patches.v14_0.show_loan_management_deprecation_warning
+execute:frappe.rename_doc("Report", "TDS Payable Monthly", "Tax Withholding Details", force=True)
+
+[post_model_sync]
+execute:frappe.delete_doc_if_exists('Workspace', 'BEASM Integrations Settings')
+beasm.patches.v14_0.rename_ongoing_status_in_sla_documents
+beasm.patches.v14_0.delete_shopify_doctypes
+beasm.patches.v14_0.delete_healthcare_doctypes
+beasm.patches.v14_0.delete_hub_doctypes
+beasm.patches.v14_0.delete_hospitality_doctypes # 20-01-2022
+beasm.patches.v14_0.delete_agriculture_doctypes # 15-06-2022
+beasm.patches.v14_0.delete_education_doctypes
+beasm.patches.v14_0.delete_datev_doctypes
+beasm.patches.v14_0.rearrange_company_fields
+beasm.patches.v13_0.update_sane_transfer_against
+beasm.patches.v14_0.migrate_cost_center_allocations
+beasm.patches.v13_0.convert_to_website_item_in_item_card_group_template
+beasm.patches.v13_0.shopping_cart_to_ecommerce
+beasm.patches.v13_0.update_reserved_qty_closed_wo
+beasm.patches.v13_0.update_exchange_rate_settings
+beasm.patches.v14_0.delete_amazon_mws_doctype
+beasm.patches.v13_0.set_work_order_qty_in_so_from_mr
+beasm.patches.v13_0.item_reposting_for_incorrect_sl_and_gl
+beasm.patches.v14_0.update_batch_valuation_flag
+beasm.patches.v14_0.delete_non_profit_doctypes
+beasm.patches.v13_0.set_return_against_in_pos_invoice_references
+beasm.patches.v13_0.remove_unknown_links_to_prod_plan_items # 24-03-2022
+beasm.patches.v13_0.copy_custom_field_filters_to_website_item
+beasm.patches.v13_0.change_default_item_manufacturer_fieldtype
+beasm.patches.v13_0.requeue_recoverable_reposts
+beasm.patches.v14_0.discount_accounting_separation
+beasm.patches.v13_0.create_accounting_dimensions_in_orders
+beasm.patches.v13_0.set_per_billed_in_return_delivery_note
+execute:frappe.delete_doc("DocType", "Naming Series")
+beasm.patches.v13_0.job_card_status_on_hold
+beasm.patches.v14_0.copy_is_subcontracted_value_to_is_old_subcontracting_flow
+beasm.patches.v14_0.crm_ux_cleanup
+beasm.patches.v14_0.migrate_existing_lead_notes_as_per_the_new_format
+beasm.patches.v14_0.remove_india_localisation # 14-07-2022
+beasm.patches.v13_0.fix_number_and_frequency_for_monthly_depreciation
+beasm.patches.v14_0.remove_hr_and_payroll_modules # 20-07-2022
+beasm.patches.v14_0.fix_crm_no_of_employees
+beasm.patches.v14_0.create_accounting_dimensions_in_subcontracting_doctypes
+beasm.patches.v14_0.fix_subcontracting_receipt_gl_entries
+beasm.patches.v13_0.drop_unused_sle_index_parts
+beasm.patches.v14_0.create_accounting_dimensions_for_asset_capitalization
+beasm.patches.v14_0.update_partial_tds_fields
+beasm.patches.v14_0.create_incoterms_and_migrate_shipment
+beasm.patches.v14_0.setup_clear_repost_logs
+beasm.patches.v14_0.create_accounting_dimensions_for_payment_request
+beasm.patches.v14_0.update_entry_type_for_journal_entry
+beasm.patches.v14_0.change_autoname_for_tax_withheld_vouchers
+beasm.patches.v14_0.set_pick_list_status
+beasm.patches.v13_0.update_docs_link
+beasm.patches.v15_0.update_asset_value_for_manual_depr_entries
+beasm.patches.v15_0.update_gpa_and_ndb_for_assdeprsch
+beasm.patches.v14_0.create_accounting_dimensions_for_closing_balance
+beasm.patches.v14_0.update_closing_balances #14-07-2023
+execute:frappe.db.set_single_value("Accounts Settings", "merge_similar_account_heads", 0)
+beasm.patches.v14_0.update_reference_type_in_journal_entry_accounts
+beasm.patches.v14_0.update_subscription_details
+execute:frappe.delete_doc_if_exists("Report", "Tax Detail")
+beasm.patches.v15_0.enable_all_leads
+beasm.patches.v14_0.update_company_in_ldc
+beasm.patches.v14_0.set_packed_qty_in_draft_delivery_notes
+execute:frappe.delete_doc('DocType', 'Cash Flow Mapping Template Details', ignore_missing=True)
+execute:frappe.delete_doc('DocType', 'Cash Flow Mapping', ignore_missing=True)
+execute:frappe.delete_doc('DocType', 'Cash Flow Mapper', ignore_missing=True)
+execute:frappe.delete_doc('DocType', 'Cash Flow Mapping Template', ignore_missing=True)
+execute:frappe.delete_doc('DocType', 'Cash Flow Mapping Accounts', ignore_missing=True)
+beasm.patches.v14_0.cleanup_workspaces
+beasm.patches.v15_0.remove_loan_management_module #2023-07-03
+beasm.patches.v14_0.set_report_in_process_SOA
+beasm.buying.doctype.supplier.patches.migrate_supplier_portal_users
+execute:frappe.defaults.clear_default("fiscal_year")
+beasm.patches.v15_0.remove_exotel_integration
+beasm.patches.v14_0.single_to_multi_dunning
+execute:frappe.db.set_single_value('Selling Settings', 'allow_negative_rates_for_items', 0)
+# below migration patch should always run last
+beasm.patches.v14_0.migrate_gl_to_payment_ledger

@@ -1,0 +1,55 @@
+accounts:
+- beasm/accounts/*
+- beasm/controllers/accounts_controller.py
+- beasm/controllers/taxes_and_totals.py
+
+stock:
+- beasm/stock/*
+- beasm/controllers/stock_controller.py
+- beasm/controllers/item_variant.py
+
+assets:
+- beasm/assets/*
+
+regional:
+- beasm/regional/*
+
+selling:
+- beasm/selling/*
+- beasm/controllers/selling_controller.py
+
+buying:
+- beasm/buying/*
+- beasm/controllers/buying_controller.py
+
+support:
+- beasm/support/*
+
+POS:
+- pos*
+
+ecommerce:
+- beasm/e_commerce/*
+
+maintenance:
+- beasm/maintenance/*
+
+manufacturing:
+- beasm/manufacturing/*
+
+crm:
+- beasm/crm/*
+
+HR:
+- beasm/hr/*
+
+payroll:
+- beasm/payroll*
+
+projects:
+- beasm/projects/*
+
+# Any python files modifed but no test files modified
+needs-tests:
+- any: ['beasm/**/*.py']
+  all: ['!beasm/**/test*.py']
