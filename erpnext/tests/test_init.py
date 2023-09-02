@@ -14,22 +14,22 @@ class TestInit(unittest.TestCase):
 
 		names = [
 			"Warehouse Name",
-			"ERPNext Foundation India",
+			"BEASM Foundation India",
 			"Gold - Member - {a}".format(a=abbr),
 			" - {a}".format(a=abbr),
-			"ERPNext - Foundation - India",
-			"ERPNext Foundation India - {a}".format(a=abbr),
+			"BEASM - Foundation - India",
+			"BEASM Foundation India - {a}".format(a=abbr),
 			"No-Space-{a}".format(a=abbr),
 			"- Warehouse",
 		]
 
 		expected_names = [
 			"Warehouse Name - {a}".format(a=abbr),
-			"ERPNext Foundation India - {a}".format(a=abbr),
+			"BEASM Foundation India - {a}".format(a=abbr),
 			"Gold - Member - {a}".format(a=abbr),
 			" - {a}".format(a=abbr),
-			"ERPNext - Foundation - India - {a}".format(a=abbr),
-			"ERPNext Foundation India - {a}".format(a=abbr),
+			"BEASM - Foundation - India - {a}".format(a=abbr),
+			"BEASM Foundation India - {a}".format(a=abbr),
 			"No-Space-{a} - {a}".format(a=abbr),
 			"- Warehouse - {a}".format(a=abbr),
 		]

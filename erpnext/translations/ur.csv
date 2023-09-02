@@ -583,8 +583,8 @@ Condition,حالت,
 Configure,تشکیل دیں۔,
 Configure {0},ترتیب دیں {0},
 Confirmed orders from Customers.,صارفین کی طرف سے اس بات کی تصدیق کے احکامات.,
-Connect Amazon with ERPNext,ایم پی پی کے ساتھ ایمیزون سے رابطہ کریں,
-Connect Shopify with ERPNext,ERPNext کے ساتھ Shopify کو مربوط کریں,
+Connect Amazon with BEASM,ایم پی پی کے ساتھ ایمیزون سے رابطہ کریں,
+Connect Shopify with BEASM,BEASM کے ساتھ Shopify کو مربوط کریں,
 Connect to Quickbooks,فوری کتابوں سے رابطہ کریں,
 Connected to QuickBooks,QuickBooks سے منسلک,
 Connecting to QuickBooks,QuickBooks سے منسلک,
@@ -892,8 +892,8 @@ Duplicate {0} found in the table,ٹیبل میں ڈپلیکیٹ {0} ملا,
 Duration in Days,دنوں میں دورانیہ,
 Duties and Taxes,ڈیوٹی اور ٹیکس,
 E-Invoicing Information Missing,ای انوائسنگ معلومات غائب ہے۔,
-ERPNext Demo,ERPNext ڈیمو,
-ERPNext Settings,ERPNext ترتیبات۔,
+BEASM Demo,BEASM ڈیمو,
+BEASM Settings,BEASM ترتیبات۔,
 Earliest,قدیم ترین,
 Earnest Money,بیانا رقم,
 Earning,کمانے,
@@ -1147,7 +1147,7 @@ Get from Patient Encounter,مریض کے مباحثے سے حاصل کریں,
 Getting Started,شروع ہوا چاہتا ہے,
 GitHub Sync ID,GitHub ہم آہنگی ID,
 Global settings for all manufacturing processes.,تمام مینوفیکچرنگ کے عمل کے لئے عالمی ترتیبات.,
-Go to the Desktop and start using ERPNext,ڈیسک ٹاپ پر جائیں اور ERPNext استعمال کرتے ہوئے شروع,
+Go to the Desktop and start using BEASM,ڈیسک ٹاپ پر جائیں اور BEASM استعمال کرتے ہوئے شروع,
 GoCardless SEPA Mandate,GoCardless SEPA مینڈیٹ,
 GoCardless payment gateway settings,GoCardless ادائیگی کے گیٹ وے کی ترتیبات,
 Goal and Procedure,مقصد اور طریقہ کار,
@@ -2296,7 +2296,7 @@ Raw Materials,خام مال,
 Raw Materials cannot be blank.,خام مال خالی نہیں ہو سکتا.,
 Re-open,دوبارہ کھولنے,
 Read blog,بلاگ پڑھیں,
-Read the ERPNext Manual,ERPNext دستی پڑھیں,
+Read the BEASM Manual,BEASM دستی پڑھیں,
 Reading Uploaded File,اپ لوڈ کردہ فائل پڑھنا۔,
 Real Estate,ریل اسٹیٹ کی,
 Reason For Putting On Hold,ہولڈنگ پر ڈالنے کی وجہ,
@@ -2699,7 +2699,7 @@ Setup SMS gateway settings,سیٹ اپ SMS گیٹ وے کی ترتیبات,
 Setup cheque dimensions for printing,پرنٹنگ کے لئے سیٹ اپ کے چیک جہتوں,
 Setup default values for POS Invoices,POS انوائس کے لئے ڈیفالٹ اقدار سیٹ کریں,
 Setup mode of POS (Online / Offline),POS کی سیٹ اپ موڈ (آن لائن / آف لائن),
-Setup your Institute in ERPNext,ERPNext میں اپنے انسٹی ٹیوٹ قائم کریں,
+Setup your Institute in BEASM,BEASM میں اپنے انسٹی ٹیوٹ قائم کریں,
 Share Balance,حصص بیلنس,
 Share Ledger,شریک لیڈر,
 Share Management,اشتراک مینجمنٹ,
@@ -3000,7 +3000,7 @@ This is a root item group and cannot be edited.,یہ ایک جڑ شے گروپ �
 This is a root sales person and cannot be edited.,یہ ایک جڑ فروخت شخص ہے اور میں ترمیم نہیں کیا جا سکتا.,
 This is a root supplier group and cannot be edited.,یہ جڑ سپلائر گروپ ہے اور اس میں ترمیم نہیں کیا جاسکتا ہے.,
 This is a root territory and cannot be edited.,یہ ایک جڑ علاقہ ہے اور میں ترمیم نہیں کیا جا سکتا.,
-This is an example website auto-generated from ERPNext,یہ ایک مثال ویب سائٹ ERPNext سے آٹو پیدا کیا جاتا ہے,
+This is an example website auto-generated from BEASM,یہ ایک مثال ویب سائٹ BEASM سے آٹو پیدا کیا جاتا ہے,
 This is based on logs against this Vehicle. See timeline below for details,یہ اس گاڑی کے خلاف نوشتہ پر مبنی ہے. تفصیلات کے لئے نیچے ٹائم لائن ملاحظہ کریں,
 This is based on stock movement. See {0} for details,یہ اسٹاک تحریک پر مبنی ہے. تفصیلات کے لئے {0} ملاحظہ کریں,
 This is based on the Time Sheets created against this project,یہ اس منصوبے کے خلاف پیدا وقت کی چادریں پر مبنی ہے,
@@ -3052,7 +3052,7 @@ To date can not be equal or less than from date,تاریخ کی تاریخ سے 
 To date can not be less than from date,تاریخ سے کم سے کم نہیں ہوسکتی ہے,
 To date can not greater than employee's relieving date,تاریخ تک ملازم کی رعایت کی تاریخ سے زیادہ نہیں ہوسکتی ہے,
 "To filter based on Party, select Party Type first",پارٹی کی بنیاد پر فلٹر کرنے کے لئے، منتخب پارٹی پہلی قسم,
-"To get the best out of ERPNext, we recommend that you take some time and watch these help videos.",ERPNext باہر سب سے بہترین حاصل کرنے کے لئے، ہم نے آپ کو کچھ وقت لینے کے لئے اور ان کی مدد کی ویڈیوز دیکھنے کے لئے مشورہ ہے کہ.,
+"To get the best out of BEASM, we recommend that you take some time and watch these help videos.",BEASM باہر سب سے بہترین حاصل کرنے کے لئے، ہم نے آپ کو کچھ وقت لینے کے لئے اور ان کی مدد کی ویڈیوز دیکھنے کے لئے مشورہ ہے کہ.,
 "To include tax in row {0} in Item rate, taxes in rows {1} must also be included",شے کی درجہ بندی میں صف {0} میں ٹیکس شامل کرنے کے لئے، قطار میں ٹیکس {1} بھی شامل کیا جانا چاہئے,
 To make Customer based incentive schemes.,کسٹمر کی بنیاد پر حوصلہ افزائی کے منصوبوں کو بنانے کے لئے.,
 "To merge, following properties must be same for both items",ضم کرنے کے لئے، مندرجہ ذیل خصوصیات دونوں اشیاء کے لئے ایک ہی ہونا چاہیے,
@@ -3295,7 +3295,7 @@ Weekdays,ہفتے کے دن,
 Weekly,ہفتہ وار,
 "Weight is mentioned,\nPlease mention ""Weight UOM"" too",وزن \ n براہ مہربانی بھی &quot;وزن UOM&quot; کا ذکر، ذکر کیا جاتا ہے,
 Welcome email sent,میں خوش آمدید ای میل بھیجا,
-Welcome to ERPNext,ERPNext میں خوش آمدید,
+Welcome to BEASM,BEASM میں خوش آمدید,
 What do you need help with?,کیا آپ کے ساتھ مدد کی ضرورت ہے؟,
 What does it do?,یہ کیا کرتا ہے؟,
 Where manufacturing operations are carried.,مینوفیکچرنگ آپریشنز کہاں کئے جاتے ہیں.,
@@ -3668,8 +3668,8 @@ Compare List function takes on list arguments,موازنہ فہرست کی فہ�
 Complete,مکمل,
 Completed,مکمل,
 Completed Quantity,مکمل مقدار,
-Connect your Exotel Account to ERPNext and track call logs,اپنے ایکسٹل اکاؤنٹ کو ERPNext اور ٹریک کال لاگز سے مربوط کریں۔,
-Connect your bank accounts to ERPNext,اپنے بینک اکاؤنٹس کو ERPNext سے مربوط کریں۔,
+Connect your Exotel Account to BEASM and track call logs,اپنے ایکسٹل اکاؤنٹ کو BEASM اور ٹریک کال لاگز سے مربوط کریں۔,
+Connect your bank accounts to BEASM,اپنے بینک اکاؤنٹس کو BEASM سے مربوط کریں۔,
 Contact Seller,بیچنے والے سے رابطہ کریں,
 Continue,آگے,
 Cost Center: {0} does not exist,لاگت کا مرکز: {0. موجود نہیں ہے,
@@ -3720,7 +3720,7 @@ Duplicate project has been created,ڈپلیکیٹ پروجیکٹ بنایا گی
 E-Way Bill JSON can only be generated from a submitted document,ای وے بل JSON صرف پیش کی گئی دستاویز سے تیار کیا جاسکتا ہے۔,
 E-Way Bill JSON can only be generated from submitted document,ای وے بل JSON صرف پیش کی گئی دستاویز سے تیار کیا جاسکتا ہے۔,
 E-Way Bill JSON cannot be generated for Sales Return as of now,ای وے بل JSON ابھی سیلز ریٹرن کے لئے تیار نہیں کیا جاسکتا۔,
-ERPNext could not find any matching payment entry,ERPNext کوئی مماثل ادائیگی اندراج نہیں پایا۔,
+BEASM could not find any matching payment entry,BEASM کوئی مماثل ادائیگی اندراج نہیں پایا۔,
 Earliest Age,ابتدائی عمر۔,
 Edit Details,تفصیلات میں ترمیم کریں,
 Edit Profile,پروفائل میں ترمیم کریں,
@@ -4093,7 +4093,7 @@ The selected payment entry should be linked with a debtor bank transaction,من�
 The total allocated amount ({0}) is greated than the paid amount ({1}).,کل مختص رقم ({0}) ادا شدہ رقم ({1}) سے گریٹ کی گئی ہے۔,
 There are no vacancies under staffing plan {0},عملے کے منصوبے کے تحت کوئی آسامیاں خالی نہیں ہیں {0},
 This Service Level Agreement is specific to Customer {0},خدمت کی سطح کا یہ معاہدہ گاہک کے لئے مخصوص ہے to 0},
-This action will unlink this account from any external service integrating ERPNext with your bank accounts. It cannot be undone. Are you certain ?,یہ کارروائی اس اکاؤنٹ کو کسی بھی بیرونی سروس سے ERPNext کو آپ کے بینک اکاؤنٹس کے ساتھ مربوط کرے گی۔ اسے کالعدم نہیں کیا جاسکتا۔ کیا آپ کو یقین ہے؟,
+This action will unlink this account from any external service integrating BEASM with your bank accounts. It cannot be undone. Are you certain ?,یہ کارروائی اس اکاؤنٹ کو کسی بھی بیرونی سروس سے BEASM کو آپ کے بینک اکاؤنٹس کے ساتھ مربوط کرے گی۔ اسے کالعدم نہیں کیا جاسکتا۔ کیا آپ کو یقین ہے؟,
 This bank account is already synchronized,یہ بینک اکاؤنٹ پہلے ہی مطابقت پذیر ہے۔,
 This bank transaction is already fully reconciled,بینک کے اس لین دین میں پہلے ہی مکمل طور پر صلح ہوگئی ہے۔,
 This employee already has a log with the same timestamp.{0},اس ملازم کے پاس پہلے ہی ٹائم اسٹیمپ کے ساتھ لاگ ہے۔ {0},
@@ -4393,7 +4393,7 @@ Therapy Type,تھراپی کی قسم,
 Therapy Plan,تھراپی کا منصوبہ,
 Therapy Session,تھراپی سیشن,
 Motor Assessment Scale,موٹر اسسمنٹ اسکیل,
-[Important] [ERPNext] Auto Reorder Errors,[اہم] [ای آر پی نیکسٹ] آٹو ری آرڈر کی خرابیاں,
+[Important] [BEASM] Auto Reorder Errors,[اہم] [ای آر پی نیکسٹ] آٹو ری آرڈر کی خرابیاں,
 "Regards,",حوالے،,
 The following {0} were created: {1},مندرجہ ذیل {0} بنائے گئے تھے: {1},
 Work Orders,کام کے احکامات,
@@ -5980,7 +5980,7 @@ YES,جی ہاں,
 Student Siblings,طالب علم بھائی بہن,
 Topic Content,عنوانات۔,
 Amazon MWS Settings,ایمیزون MWS ترتیبات,
-ERPNext Integrations,ERPNext انٹیگریشن,
+BEASM Integrations,BEASM انٹیگریشن,
 Enable Amazon,ایمیزون کو فعال کریں,
 MWS Credentials,MWS تصدیق نامہ,
 Seller ID,بیچنے والے کی شناخت,
@@ -6060,7 +6060,7 @@ Default Customer,ڈیفالٹ کسٹمر,
 Customer Group will set to selected group while syncing customers from Shopify,گاہکوں کو Shopify سے مطابقت پذیری کرتے وقت گروپ منتخب کیا جائے گا,
 For Company,کمپنی کے لئے,
 Cash Account will used for Sales Invoice creation,سیلز انوائس تخلیق کے لئے نقد اکاؤنٹ استعمال کیا جائے گا,
-Update Price from Shopify To ERPNext Price List,Shopify سے ERPNext قیمت قیمت کی فہرست سے اپ ڈیٹ کریں,
+Update Price from Shopify To BEASM Price List,Shopify سے BEASM قیمت قیمت کی فہرست سے اپ ڈیٹ کریں,
 Default Warehouse to to create Sales Order and Delivery Note,سیلز آرڈر اور ڈلیوری نوٹ تخلیق کرنے کے لئے ڈیفالٹ گودام,
 Sales Order Series,سیلز آرڈر سیریز,
 Import Delivery Notes from Shopify on Shipment,Shopify پر شپمنٹ سے ترسیل کے نوٹس درآمد کریں,
@@ -6069,7 +6069,7 @@ Import Sales Invoice from Shopify if Payment is marked,ادائیگی کی نش�
 Sales Invoice Series,سیلز انوائس سیریز,
 Shopify Tax Account,Shopify ٹیکس اکاؤنٹ,
 Shopify Tax/Shipping Title,Shopify ٹیکس / شپنگ عنوان,
-ERPNext Account,ERPNext اکاؤنٹ,
+BEASM Account,BEASM اکاؤنٹ,
 Shopify Webhook Detail,Shopify Webhook تفصیل,
 Webhook ID,Webhook ID,
 Tally Migration,ٹیلی ہجرت۔,
@@ -6085,8 +6085,8 @@ Tally Company,ٹلی کمپنی۔,
 Company Name as per Imported Tally Data,امپورٹڈ ٹیلی ڈیٹا کے مطابق کمپنی کا نام,
 Default UOM,پہلے سے طے شدہ UOM,
 UOM in case unspecified in imported data,درآمد شدہ ڈیٹا میں غیر مخصوص معاملت میں UOM,
-ERPNext Company,ERPNext کمپنی۔,
-Your Company set in ERPNext,آپ کی کمپنی ERPNext میں سیٹ ہوگئی,
+BEASM Company,BEASM کمپنی۔,
+Your Company set in BEASM,آپ کی کمپنی BEASM میں سیٹ ہوگئی,
 Processed Files,پروسیسڈ فائلیں۔,
 Parties,پارٹیاں۔,
 UOMs,UOMs,
@@ -6510,7 +6510,7 @@ Employment Type,ملازمت کی قسم,
 Emergency Contact,ہنگامی رابطے,
 Emergency Contact Name,ہنگامی رابطہ نام,
 Emergency Phone,ایمرجنسی فون,
-ERPNext User,ERPNext صارف,
+BEASM User,BEASM صارف,
 "System User (login) ID. If set, it will become default for all HR forms.",نظام صارف (لاگ ان) کی شناخت. مقرر کیا ہے تو، یہ سب HR فارم کے لئے پہلے سے طے شدہ ہو جائے گا.,
 Create User Permission,صارف کی اجازت بنائیں,
 This will restrict user access to other employee records,اس سے دوسرے ملازم کے ریکارڈ تک صارف تک رسائی محدود ہو گی,
@@ -6618,7 +6618,7 @@ Total Experience,کل تجربہ,
 Default Leave Policy,پہلے سے طے شدہ چھوڑ پالیسی,
 Default Salary Structure,پہلے سے طے شدہ تنخواہ کی ساخت,
 Employee Group Table,ملازم گروپ ٹیبل۔,
-ERPNext User ID,ERPNext صارف ID,
+BEASM User ID,BEASM صارف ID,
 Employee Health Insurance,ملازم ہیلتھ انشورنس,
 Health Insurance Name,ہیلتھ انشورینس کا نام,
 Employee Incentive,ملازمت انوائشی,
@@ -8825,8 +8825,8 @@ Depreciation Posting Date,فرسودگی پوسٹ کرنے کی تاریخ,
 "By default, the Supplier Name is set as per the Supplier Name entered. If you want Suppliers to be named by a  ",پہلے سے طے شدہ طور پر ، فراہم کنندہ کا نام درج کردہ سپلائر نام کے مطابق مقرر کیا گیا ہے۔ اگر آپ چاہتے ہیں کہ سپلائی کرنے والوں کا نام a کے ذریعہ رکھا جائے,
  choose the 'Naming Series' option.,&#39;نام بندی سیریز&#39; کا اختیار منتخب کریں۔,
 Configure the default Price List when creating a new Purchase transaction. Item prices will be fetched from this Price List.,خریداری کا نیا ٹرانزیکشن بناتے وقت طے شدہ قیمت کی فہرست تشکیل دیں۔ اس قیمت کی فہرست سے آئٹم کی قیمتیں لائی جائیں گی۔,
-"If this option is configured 'Yes', ERPNext will prevent you from creating a Purchase Invoice or Receipt without creating a Purchase Order first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Order' checkbox in the Supplier master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، ERPNext آپ کو خریداری کا انوائس بنانے یا رسید حاصل کرنے سے پہلے خریداری کا آرڈر تیار کیے بغیر روکے گا۔ سپلائر ماسٹر میں &#39;خریداری کے آرڈر کے بغیر خریداری کے انوائس تخلیق کی اجازت دیں&#39; کو چالو کرکے ، کسی خاص سپلائر کے لئے یہ تشکیل اوور رائٹ کی جاسکتی ہے۔,
-"If this option is configured 'Yes', ERPNext will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Receipt' checkbox in the Supplier master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، ERPNext آپ کو خریداری رسید بنانے سے پہلے خریداری کی رسید تخلیق کرنے سے روک دے گا۔ سپلائر ماسٹر میں &#39;خریداری رسید کے بغیر خریداری کے انوائس تخلیق کی اجازت دیں&#39; کو چالو کرکے ، کسی خاص سپلائر کے لئے یہ تشکیل اوور رائیڈ کی جاسکتی ہے۔,
+"If this option is configured 'Yes', BEASM will prevent you from creating a Purchase Invoice or Receipt without creating a Purchase Order first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Order' checkbox in the Supplier master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، BEASM آپ کو خریداری کا انوائس بنانے یا رسید حاصل کرنے سے پہلے خریداری کا آرڈر تیار کیے بغیر روکے گا۔ سپلائر ماسٹر میں &#39;خریداری کے آرڈر کے بغیر خریداری کے انوائس تخلیق کی اجازت دیں&#39; کو چالو کرکے ، کسی خاص سپلائر کے لئے یہ تشکیل اوور رائٹ کی جاسکتی ہے۔,
+"If this option is configured 'Yes', BEASM will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first. This configuration can be overridden for a particular supplier by enabling the 'Allow Purchase Invoice Creation Without Purchase Receipt' checkbox in the Supplier master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، BEASM آپ کو خریداری رسید بنانے سے پہلے خریداری کی رسید تخلیق کرنے سے روک دے گا۔ سپلائر ماسٹر میں &#39;خریداری رسید کے بغیر خریداری کے انوائس تخلیق کی اجازت دیں&#39; کو چالو کرکے ، کسی خاص سپلائر کے لئے یہ تشکیل اوور رائیڈ کی جاسکتی ہے۔,
 Quantity & Stock,مقدار اور اسٹاک,
 Call Details,کال کی تفصیلات,
 Authorised By,مجاز,
@@ -9046,7 +9046,7 @@ Membership Print Format,ممبرشپ پرنٹ فارمیٹ,
 Invoice Print Format,انوائس پرنٹ کی شکل,
 Revoke <Key></Key>,کالعدم کریں&lt;Key&gt;&lt;/Key&gt;,
 You can learn more about memberships in the manual. ,آپ دستی میں رکنیت کے بارے میں مزید معلومات حاصل کرسکتے ہیں۔,
-ERPNext Docs,ERPNext دستاویزات,
+BEASM Docs,BEASM دستاویزات,
 Regenerate Webhook Secret,ویب ہک سیکرٹ کو دوبارہ تخلیق کریں,
 Generate Webhook Secret,ویب ہک سیکریٹ تیار کریں,
 Copy Webhook URL,ویب ہک یو آر ایل کاپی کریں,
@@ -9083,8 +9083,8 @@ Feedback By,تاثرات,
 Manufacturing Section,مینوفیکچرنگ سیکشن,
 "By default, the Customer Name is set as per the Full Name entered. If you want Customers to be named by a ",پہلے سے طے شدہ طور پر ، درج کردہ پورے نام کے مطابق کسٹمر کا نام سیٹ کیا جاتا ہے۔ اگر آپ چاہتے ہیں کہ گاہک ایک کے ذریعہ نامزد ہوں,
 Configure the default Price List when creating a new Sales transaction. Item prices will be fetched from this Price List.,نیا سیلز ٹرانزیکشن بناتے وقت طے شدہ قیمت کی فہرست تشکیل دیں۔ اس قیمت کی فہرست سے آئٹم کی قیمتیں لائی جائیں گی۔,
-"If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice or Delivery Note without creating a Sales Order first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Sales Order' checkbox in the Customer master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، ERPNext آپ کو پہلے سیل آرڈر بنائے بغیر سیل انوائس یا ڈلیوری نوٹ بنانے سے روک دے گا۔ اس ترتیب کو کسٹمر ماسٹر میں &#39;بغیر سیل آرڈر کے سیلز انوائس تخلیق کی اجازت دیں&#39; چیک باکس کو فعال کرکے کسی خاص کسٹمر کے لئے ختم کیا جاسکتا ہے۔,
-"If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice without creating a Delivery Note first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Delivery Note' checkbox in the Customer master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، ERPNext آپ کو پہلے ڈلیوری نوٹ بنائے بغیر سیل انوائس بنانے سے روک دے گا۔ کسٹمر ماسٹر میں &#39;ڈیلیوری نوٹ کے بغیر سیلز انوائس تخلیق کی اجازت دیں&#39; چیک باکس کو چالو کرکے ، یہ تشکیل کسی خاص کسٹمر کے لئے ختم کردی جاسکتی ہے۔,
+"If this option is configured 'Yes', BEASM will prevent you from creating a Sales Invoice or Delivery Note without creating a Sales Order first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Sales Order' checkbox in the Customer master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، BEASM آپ کو پہلے سیل آرڈر بنائے بغیر سیل انوائس یا ڈلیوری نوٹ بنانے سے روک دے گا۔ اس ترتیب کو کسٹمر ماسٹر میں &#39;بغیر سیل آرڈر کے سیلز انوائس تخلیق کی اجازت دیں&#39; چیک باکس کو فعال کرکے کسی خاص کسٹمر کے لئے ختم کیا جاسکتا ہے۔,
+"If this option is configured 'Yes', BEASM will prevent you from creating a Sales Invoice without creating a Delivery Note first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Delivery Note' checkbox in the Customer master.",اگر یہ آپشن &#39;ہاں&#39; میں تشکیل شدہ ہے تو ، BEASM آپ کو پہلے ڈلیوری نوٹ بنائے بغیر سیل انوائس بنانے سے روک دے گا۔ کسٹمر ماسٹر میں &#39;ڈیلیوری نوٹ کے بغیر سیلز انوائس تخلیق کی اجازت دیں&#39; چیک باکس کو چالو کرکے ، یہ تشکیل کسی خاص کسٹمر کے لئے ختم کردی جاسکتی ہے۔,
 Default Warehouse for Sales Return,طے شدہ گودام برائے فروخت,
 Default In Transit Warehouse,ڈیفالٹ ان ٹرانزٹ گودام میں,
 Enable Perpetual Inventory For Non Stock Items,غیر اسٹاک اشیا کے لئے باقاعدہ انوینٹری کو فعال کریں,
