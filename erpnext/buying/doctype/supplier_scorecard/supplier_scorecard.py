@@ -10,7 +10,7 @@ from frappe import _, throw
 from frappe.model.document import Document
 from frappe.utils import add_days, add_years, get_last_day, getdate, nowdate
 
-from erpnext.buying.doctype.supplier_scorecard_period.supplier_scorecard_period import (
+from beasm.buying.doctype.supplier_scorecard_period.supplier_scorecard_period import (
 	make_supplier_scorecard,
 )
 

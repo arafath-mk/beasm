@@ -9,13 +9,13 @@ from frappe import _
 from frappe.model.meta import get_field_precision
 from frappe.utils import cint, cstr, flt, formatdate, getdate, now
 
-import erpnext
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+import beasm
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 )
-from erpnext.accounts.doctype.accounting_period.accounting_period import ClosedAccountingPeriod
-from erpnext.accounts.doctype.budget.budget import validate_expense_against_budget
-from erpnext.accounts.utils import create_payment_ledger_entry
+from beasm.accounts.doctype.accounting_period.accounting_period import ClosedAccountingPeriod
+from beasm.accounts.doctype.budget.budget import validate_expense_against_budget
+from beasm.accounts.utils import create_payment_ledger_entry
 
 
 def make_gl_entries(
@@ -247,8 +247,8 @@ def merge_similar_entries(gl_map, precision=None):
 		else:
 			merged_gl_map.append(entry)
 
-	company = gl_map[0].company if gl_map else erpnext.get_default_company()
-	company_currency = erpnext.get_company_currency(company)
+	company = gl_map[0].company if gl_map else beasm.get_default_company()
+	company_currency = beasm.get_company_currency(company)
 
 	if not precision:
 		precision = get_field_precision(frappe.get_meta("GL Entry").get_field("debit"), company_currency)

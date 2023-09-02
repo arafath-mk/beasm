@@ -55,15 +55,15 @@ def job(deserialized_data, from_doctype, to_doctype):
 
 
 def task(doc_name, from_doctype, to_doctype):
-	from erpnext.accounts.doctype.payment_entry import payment_entry
-	from erpnext.accounts.doctype.purchase_invoice import purchase_invoice
-	from erpnext.accounts.doctype.sales_invoice import sales_invoice
-	from erpnext.buying.doctype.purchase_order import purchase_order
-	from erpnext.buying.doctype.supplier_quotation import supplier_quotation
-	from erpnext.selling.doctype.quotation import quotation
-	from erpnext.selling.doctype.sales_order import sales_order
-	from erpnext.stock.doctype.delivery_note import delivery_note
-	from erpnext.stock.doctype.purchase_receipt import purchase_receipt
+	from beasm.accounts.doctype.payment_entry import payment_entry
+	from beasm.accounts.doctype.purchase_invoice import purchase_invoice
+	from beasm.accounts.doctype.sales_invoice import sales_invoice
+	from beasm.buying.doctype.purchase_order import purchase_order
+	from beasm.buying.doctype.supplier_quotation import supplier_quotation
+	from beasm.selling.doctype.quotation import quotation
+	from beasm.selling.doctype.sales_order import sales_order
+	from beasm.stock.doctype.delivery_note import delivery_note
+	from beasm.stock.doctype.purchase_receipt import purchase_receipt
 
 	mapper = {
 		"Sales Order": {

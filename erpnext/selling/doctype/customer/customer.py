@@ -18,12 +18,12 @@ from frappe.model.rename_doc import update_linked_doctypes
 from frappe.utils import cint, cstr, flt, get_formatted_email, today
 from frappe.utils.user import get_users_with_role
 
-from erpnext.accounts.party import (  # noqa
+from beasm.accounts.party import (  # noqa
 	get_dashboard_info,
 	get_timeline_data,
 	validate_party_accounts,
 )
-from erpnext.utilities.transaction_base import TransactionBase
+from beasm.utilities.transaction_base import TransactionBase
 
 
 class Customer(TransactionBase):
@@ -453,10 +453,10 @@ def get_nested_links(link_doctype, link_name, ignore_permissions=False):
 def get_customer_list(doctype, txt, searchfield, start, page_len, filters=None):
 	from frappe.utils.deprecations import deprecation_warning
 
-	from erpnext.controllers.queries import get_fields
+	from beasm.controllers.queries import get_fields
 
 	deprecation_warning(
-		"`get_customer_list` is deprecated and will be removed in version 15. Use `erpnext.controllers.queries.customer_query` instead."
+		"`get_customer_list` is deprecated and will be removed in version 15. Use `beasm.controllers.queries.customer_query` instead."
 	)
 
 	fields = ["name", "customer_name", "customer_group", "territory"]
@@ -540,7 +540,7 @@ def check_credit_limit(customer, company, ignore_outstanding_sales_order=False, 
 				raise_exception=1,
 				primary_action={
 					"label": "Send Email",
-					"server_action": "erpnext.selling.doctype.customer.customer.send_emails",
+					"server_action": "beasm.selling.doctype.customer.customer.send_emails",
 					"args": {
 						"customer": customer,
 						"customer_outstanding": customer_outstanding,

@@ -1,13 +1,13 @@
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.controllers.item_variant import create_variant
-from erpnext.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
+from beasm.controllers.item_variant import create_variant
+from beasm.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
 	setup_e_commerce_settings,
 )
-from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-from erpnext.e_commerce.variant_selector.utils import get_next_attribute_and_values
-from erpnext.stock.doctype.item.test_item import make_item
+from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+from beasm.e_commerce.variant_selector.utils import get_next_attribute_and_values
+from beasm.stock.doctype.item.test_item import make_item
 
 test_dependencies = ["Item"]
 
@@ -49,7 +49,7 @@ class TestVariantSelector(FrappeTestCase):
 
 		Attribute selection must not be linked to Website Items.
 		"""
-		from erpnext.e_commerce.variant_selector.utils import get_attributes_and_values
+		from beasm.e_commerce.variant_selector.utils import get_attributes_and_values
 
 		attr_data = get_attributes_and_values("Test-Tshirt-Temp")
 
@@ -97,7 +97,7 @@ class TestVariantSelector(FrappeTestCase):
 		"""
 		Test price fetching and matching of variant without Website Item
 		"""
-		from erpnext.e_commerce.doctype.website_item.test_website_item import make_web_item_price
+		from beasm.e_commerce.doctype.website_item.test_website_item import make_web_item_price
 
 		frappe.set_user("Administrator")
 		setup_e_commerce_settings(

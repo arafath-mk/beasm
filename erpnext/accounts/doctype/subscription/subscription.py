@@ -17,13 +17,13 @@ from frappe.utils.data import (
 	nowdate,
 )
 
-import erpnext
-from erpnext import get_default_company
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+import beasm
+from beasm import get_default_company
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 )
-from erpnext.accounts.doctype.subscription_plan.subscription_plan import get_plan_rate
-from erpnext.accounts.party import get_party_account_currency
+from beasm.accounts.doctype.subscription_plan.subscription_plan import get_plan_rate
+from beasm.accounts.party import get_party_account_currency
 
 
 class Subscription(Document):
@@ -280,7 +280,7 @@ class Subscription(Document):
 		self.validate_plans_billing_cycle(self.get_billing_cycle_and_interval())
 		self.validate_end_date()
 		self.validate_to_follow_calendar_months()
-		self.cost_center = erpnext.get_default_cost_center(self.get("company"))
+		self.cost_center = beasm.get_default_cost_center(self.get("company"))
 
 	def validate_trial_period(self):
 		"""

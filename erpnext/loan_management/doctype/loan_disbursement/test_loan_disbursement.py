@@ -15,7 +15,7 @@ from frappe.utils import (
 	nowdate,
 )
 
-from erpnext.loan_management.doctype.loan.test_loan import (
+from beasm.loan_management.doctype.loan.test_loan import (
 	create_demand_loan,
 	create_loan_accounts,
 	create_loan_application,
@@ -27,16 +27,16 @@ from erpnext.loan_management.doctype.loan.test_loan import (
 	create_repayment_entry,
 	make_loan_disbursement_entry,
 )
-from erpnext.loan_management.doctype.loan_application.loan_application import create_pledge
-from erpnext.loan_management.doctype.loan_interest_accrual.loan_interest_accrual import (
+from beasm.loan_management.doctype.loan_application.loan_application import create_pledge
+from beasm.loan_management.doctype.loan_interest_accrual.loan_interest_accrual import (
 	days_in_year,
 	get_per_day_interest,
 )
-from erpnext.loan_management.doctype.loan_repayment.loan_repayment import calculate_amounts
-from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+from beasm.loan_management.doctype.loan_repayment.loan_repayment import calculate_amounts
+from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 	process_loan_interest_accrual_for_demand_loans,
 )
-from erpnext.selling.doctype.customer.test_customer import get_customer_dict
+from beasm.selling.doctype.customer.test_customer import get_customer_dict
 
 
 class TestLoanDisbursement(unittest.TestCase):

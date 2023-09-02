@@ -3,7 +3,7 @@ from typing import List, Union
 
 import frappe
 
-from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
+from beasm.e_commerce.doctype.website_item.website_item import make_website_item
 
 
 def execute():

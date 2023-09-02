@@ -4,7 +4,7 @@
 
 from frappe import _
 
-from erpnext.stock.stock_ledger import get_stock_ledger_entries
+from beasm.stock.stock_ledger import get_stock_ledger_entries
 
 
 def execute(filters=None):

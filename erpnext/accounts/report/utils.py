@@ -1,9 +1,9 @@
 import frappe
 from frappe.utils import flt, formatdate, get_datetime_str, get_table_name
 
-from erpnext import get_company_currency, get_default_company
-from erpnext.accounts.doctype.fiscal_year.fiscal_year import get_from_and_to_date
-from erpnext.setup.utils import get_exchange_rate
+from beasm import get_company_currency, get_default_company
+from beasm.accounts.doctype.fiscal_year.fiscal_year import get_from_and_to_date
+from beasm.setup.utils import get_exchange_rate
 
 __exchange_rates = {}
 
@@ -131,7 +131,7 @@ def get_appropriate_company(filters):
 def get_invoiced_item_gross_margin(
 	sales_invoice=None, item_code=None, company=None, with_item_data=False
 ):
-	from erpnext.accounts.report.gross_profit.gross_profit import GrossProfitGenerator
+	from beasm.accounts.report.gross_profit.gross_profit import GrossProfitGenerator
 
 	sales_invoice = sales_invoice or frappe.form_dict.get("sales_invoice")
 	item_code = item_code or frappe.form_dict.get("item_code")

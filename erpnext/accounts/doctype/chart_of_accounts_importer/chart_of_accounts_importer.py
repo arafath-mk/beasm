@@ -16,7 +16,7 @@ from frappe.utils.xlsxutils import (
 	read_xlsx_file_from_attached_file,
 )
 
-from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
+from beasm.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
 	build_tree_from_json,
 	create_charts,
 )
@@ -478,7 +478,7 @@ def unset_existing_data(company):
 
 
 def set_default_accounts(company):
-	from erpnext.setup.doctype.company.company import install_country_fixtures
+	from beasm.setup.doctype.company.company import install_country_fixtures
 
 	company = frappe.get_doc("Company", company)
 	company.update(

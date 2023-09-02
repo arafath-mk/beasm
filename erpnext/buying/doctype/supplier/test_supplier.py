@@ -6,8 +6,8 @@ import frappe
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 from frappe.test_runner import make_test_records
 
-from erpnext.accounts.party import get_due_date
-from erpnext.exceptions import PartyDisabled
+from beasm.accounts.party import get_due_date
+from beasm.exceptions import PartyDisabled
 
 test_dependencies = ["Payment Term", "Payment Terms Template"]
 test_records = frappe.get_test_records("Supplier")
@@ -100,7 +100,7 @@ class TestSupplier(FrappeTestCase):
 
 		frappe.db.set_value("Supplier", "_Test Supplier", "disabled", 1)
 
-		from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
+		from beasm.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
 
 		po = create_purchase_order(do_not_save=True)
 
@@ -125,7 +125,7 @@ class TestSupplier(FrappeTestCase):
 		self.assertEqual(supplier.country, "Greece")
 
 	def test_party_details_tax_category(self):
-		from erpnext.accounts.party import get_party_details
+		from beasm.accounts.party import get_party_details
 
 		frappe.delete_doc_if_exists("Address", "_Test Address With Tax Category-Billing")
 
@@ -154,7 +154,7 @@ class TestSupplier(FrappeTestCase):
 		address.delete()
 
 	def test_serach_fields_for_supplier(self):
-		from erpnext.controllers.queries import supplier_query
+		from beasm.controllers.queries import supplier_query
 
 		frappe.db.set_value("Buying Settings", None, "supp_master_name", "Naming Series")
 

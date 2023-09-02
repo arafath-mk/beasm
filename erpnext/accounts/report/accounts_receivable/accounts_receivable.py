@@ -10,11 +10,11 @@ from frappe.query_builder import Criterion
 from frappe.query_builder.functions import Date, Sum
 from frappe.utils import cint, cstr, flt, getdate, nowdate
 
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 	get_dimension_with_children,
 )
-from erpnext.accounts.utils import get_currency_precision
+from beasm.accounts.utils import get_currency_precision
 
 #  This report gives a summary of all Outstanding Invoices considering the following
 

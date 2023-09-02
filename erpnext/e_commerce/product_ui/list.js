@@ -1,4 +1,4 @@
-erpnext.ProductList = class {
+beasm.ProductList = class {
 	/* Options:
 		- items: Items
 		- settings: E Commerce Settings

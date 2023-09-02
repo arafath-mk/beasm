@@ -9,7 +9,7 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.query_builder.functions import Sum
 from frappe.utils import flt, getdate
 
-from erpnext.stock.doctype.item.item import get_item_defaults
+from beasm.stock.doctype.item.item import get_item_defaults
 
 
 class BlanketOrder(Document):

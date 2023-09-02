@@ -6,13 +6,13 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, flt, get_datetime, nowdate
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
-from erpnext.loan_management.doctype.loan_security_unpledge.loan_security_unpledge import (
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
+from beasm.loan_management.doctype.loan_security_unpledge.loan_security_unpledge import (
 	get_pledged_security_qty,
 )
-from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 	process_loan_interest_accrual_for_demand_loans,
 )
 
@@ -36,7 +36,7 @@ class LoanDisbursement(AccountsController):
 			self.disbursement_date = nowdate()
 
 		if not self.cost_center:
-			self.cost_center = erpnext.get_default_cost_center(self.company)
+			self.cost_center = beasm.get_default_cost_center(self.company)
 
 		if not self.posting_date:
 			self.posting_date = self.disbursement_date or nowdate()
@@ -200,7 +200,7 @@ def get_total_pledged_security_value(loan):
 
 @frappe.whitelist()
 def get_disbursal_amount(loan, on_current_security_price=0):
-	from erpnext.loan_management.doctype.loan_repayment.loan_repayment import (
+	from beasm.loan_management.doctype.loan_repayment.loan_repayment import (
 		get_pending_principal_amount,
 	)
 

@@ -11,9 +11,9 @@ from frappe.email.inbox import link_communication_to_document
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import comma_and, get_link_to_form, has_gravatar, validate_email_address
 
-from erpnext.accounts.party import set_taxes
-from erpnext.controllers.selling_controller import SellingController
-from erpnext.crm.utils import CRMNote, copy_comments, link_communications, link_open_events
+from beasm.accounts.party import set_taxes
+from beasm.controllers.selling_controller import SellingController
+from beasm.crm.utils import CRMNote, copy_comments, link_communications, link_open_events
 
 
 class Lead(SellingController, CRMNote):
@@ -364,7 +364,7 @@ def get_lead_details(lead, posting_date=None, company=None):
 	if not lead:
 		return {}
 
-	from erpnext.accounts.party import set_address_details
+	from beasm.accounts.party import set_address_details
 
 	out = frappe._dict()
 

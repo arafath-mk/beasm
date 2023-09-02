@@ -9,11 +9,11 @@ from frappe.contacts.doctype.contact.contact import get_contact_name
 from frappe.utils import cint, cstr, flt, get_fullname
 from frappe.utils.nestedset import get_root_of
 
-from erpnext.accounts.utils import get_account_name
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+from beasm.accounts.utils import get_account_name
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 	get_shopping_cart_settings,
 )
-from erpnext.utilities.product import get_web_item_qty_in_stock
+from beasm.utilities.product import get_web_item_qty_in_stock
 
 
 class WebsitePriceListMissingError(frappe.ValidationError):
@@ -95,7 +95,7 @@ def place_order():
 	if not (quotation.shipping_address_name or quotation.customer_address):
 		frappe.throw(_("Set Shipping Address or Billing Address"))
 
-	from erpnext.selling.doctype.quotation.quotation import _make_sales_order
+	from beasm.selling.doctype.quotation.quotation import _make_sales_order
 
 	sales_order = frappe.get_doc(_make_sales_order(quotation.name, ignore_permissions=True))
 	sales_order.payment_schedule = []
@@ -439,7 +439,7 @@ def set_price_list_and_rate(quotation, cart_settings):
 
 def _set_price_list(cart_settings, quotation=None):
 	"""Set price list based on customer or shopping cart default"""
-	from erpnext.accounts.party import get_default_price_list
+	from beasm.accounts.party import get_default_price_list
 
 	party_name = quotation.get("party_name") if quotation else get_party().get("name")
 	selling_price_list = None
@@ -460,7 +460,7 @@ def _set_price_list(cart_settings, quotation=None):
 
 def set_taxes(quotation, cart_settings):
 	"""set taxes based on billing territory"""
-	from erpnext.accounts.party import set_taxes
+	from beasm.accounts.party import set_taxes
 
 	customer_group = frappe.db.get_value("Customer", quotation.party_name, "customer_group")
 
@@ -694,7 +694,7 @@ def apply_coupon_code(applied_code, applied_referral_sales_partner):
 
 	coupon_name = coupon_list[0].name
 
-	from erpnext.accounts.doctype.pricing_rule.utils import validate_coupon_code
+	from beasm.accounts.doctype.pricing_rule.utils import validate_coupon_code
 
 	validate_coupon_code(coupon_name)
 	quotation = _get_cart_quotation()

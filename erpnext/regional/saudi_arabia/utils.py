@@ -8,7 +8,7 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from frappe.utils.data import add_to_date, get_time, getdate
 from pyqrcode import create as qr_create
 
-from erpnext import get_region
+from beasm import get_region
 
 
 def create_qr_code(doc, method=None):

@@ -6,7 +6,7 @@ from frappe import _
 from frappe.contacts.doctype.address.address import get_company_address
 from frappe.utils import cint, flt
 
-from erpnext import get_default_company, get_region
+from beasm import get_default_company, get_region
 
 SUPPORTED_COUNTRY_CODES = [
 	"AT",
@@ -207,7 +207,7 @@ def get_tax_data(doc):
 		"to_state": to_shipping_state,
 		"shipping": shipping,
 		"amount": doc.net_total,
-		"plugin": "erpnext",
+		"plugin": "beasm",
 		"line_items": line_items,
 	}
 	return tax_dict

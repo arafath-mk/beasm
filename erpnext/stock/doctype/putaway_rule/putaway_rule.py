@@ -11,8 +11,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cint, cstr, floor, flt, nowdate
 
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.utils import get_stock_balance
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.utils import get_stock_balance
 
 
 class PutawayRule(Document):

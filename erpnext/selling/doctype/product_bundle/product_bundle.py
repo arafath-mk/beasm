@@ -15,7 +15,7 @@ class ProductBundle(Document):
 	def validate(self):
 		self.validate_main_item()
 		self.validate_child_items()
-		from erpnext.utilities.transaction_base import validate_uom_is_integer
+		from beasm.utilities.transaction_base import validate_uom_is_integer
 
 		validate_uom_is_integer(self, "uom", "qty")
 
@@ -73,7 +73,7 @@ class ProductBundle(Document):
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_new_item_code(doctype, txt, searchfield, start, page_len, filters):
-	from erpnext.controllers.queries import get_match_cond
+	from beasm.controllers.queries import get_match_cond
 
 	return frappe.db.sql(
 		"""select name, item_name, description from tabItem

@@ -6,10 +6,10 @@ import unittest
 import frappe
 from frappe.utils import add_days, now_datetime, random_string, today
 
-from erpnext.crm.doctype.lead.lead import make_customer
-from erpnext.crm.doctype.lead.test_lead import make_lead
-from erpnext.crm.doctype.opportunity.opportunity import make_quotation
-from erpnext.crm.utils import get_linked_communication_list
+from beasm.crm.doctype.lead.lead import make_customer
+from beasm.crm.doctype.lead.test_lead import make_lead
+from beasm.crm.doctype.opportunity.opportunity import make_quotation
+from beasm.crm.utils import get_linked_communication_list
 
 test_records = frappe.get_test_records("Opportunity")
 

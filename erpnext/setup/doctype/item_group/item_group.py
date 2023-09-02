@@ -11,8 +11,8 @@ from frappe.utils.nestedset import NestedSet
 from frappe.website.utils import clear_cache
 from frappe.website.website_generator import WebsiteGenerator
 
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import ECommerceSettings
-from erpnext.e_commerce.product_data_engine.filters import ProductFiltersBuilder
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import ECommerceSettings
+from beasm.e_commerce.product_data_engine.filters import ProductFiltersBuilder
 
 
 class ItemGroup(NestedSet, WebsiteGenerator):
@@ -117,7 +117,7 @@ class ItemGroup(NestedSet, WebsiteGenerator):
 		frappe.cache().hdel("child_item_groups", self.name)
 
 	def validate_item_group_defaults(self):
-		from erpnext.stock.doctype.item.item import validate_item_default_company_links
+		from beasm.stock.doctype.item.item import validate_item_default_company_links
 
 		validate_item_default_company_links(self.item_group_defaults)
 

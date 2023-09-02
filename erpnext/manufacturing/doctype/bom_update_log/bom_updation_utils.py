@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
 if TYPE_CHECKING:
-	from erpnext.manufacturing.doctype.bom_update_log.bom_update_log import BOMUpdateLog
+	from beasm.manufacturing.doctype.bom_update_log.bom_update_log import BOMUpdateLog
 
 import frappe
 from frappe import _

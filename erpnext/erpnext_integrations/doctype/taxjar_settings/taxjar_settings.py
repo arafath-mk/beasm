@@ -10,7 +10,7 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from frappe.model.document import Document
 from frappe.permissions import add_permission, update_permission_property
 
-from erpnext.erpnext_integrations.taxjar_integration import get_client
+from beasm.beasm_integrations.taxjar_integration import get_client
 
 
 class TaxJarSettings(Document):
@@ -32,7 +32,7 @@ class TaxJarSettings(Document):
 				add_product_tax_categories()
 				make_custom_fields()
 				add_permissions()
-				frappe.enqueue("erpnext.regional.united_states.setup.add_product_tax_categories", now=False)
+				frappe.enqueue("beasm.regional.united_states.setup.add_product_tax_categories", now=False)
 
 			elif fields_already_exist and fields_hidden:
 				toggle_tax_category_fields(hidden="0")

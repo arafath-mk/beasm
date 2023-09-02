@@ -5,7 +5,7 @@
 import frappe
 from frappe import _, msgprint
 
-from erpnext import get_company_currency
+from beasm import get_company_currency
 
 
 def execute(filters=None):

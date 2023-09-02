@@ -26,16 +26,16 @@ from frappe.utils import (
 from pypika import Order
 from pypika.terms import ExistsCriterion
 
-import erpnext
+import beasm
 
-# imported to enable erpnext.accounts.utils.get_account_currency
-from erpnext.accounts.doctype.account.account import get_account_currency  # noqa
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import get_dimensions
-from erpnext.stock import get_warehouse_account_map
-from erpnext.stock.utils import get_stock_value_on
+# imported to enable beasm.accounts.utils.get_account_currency
+from beasm.accounts.doctype.account.account import get_account_currency  # noqa
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import get_dimensions
+from beasm.stock import get_warehouse_account_map
+from beasm.stock.utils import get_stock_value_on
 
 if TYPE_CHECKING:
-	from erpnext.stock.doctype.repost_item_valuation.repost_item_valuation import RepostItemValuation
+	from beasm.stock.doctype.repost_item_valuation.repost_item_valuation import RepostItemValuation
 
 
 class FiscalYearError(frappe.ValidationError):
@@ -507,7 +507,7 @@ def check_if_advance_entry_modified(args):
 		)
 	else:
 		party_account_field = (
-			"paid_from" if erpnext.get_party_account_type(args.party_type) == "Receivable" else "paid_to"
+			"paid_from" if beasm.get_party_account_type(args.party_type) == "Receivable" else "paid_to"
 		)
 
 		if args.voucher_detail_no:
@@ -900,7 +900,7 @@ def get_outstanding_invoices(
 		party_account_type = "Receivable" if root_type == "Asset" else "Payable"
 		party_account_type = account_type or party_account_type
 	else:
-		party_account_type = erpnext.get_party_account_type(party_type)
+		party_account_type = beasm.get_party_account_type(party_type)
 
 	held_invoices = get_held_invoices(party_type, party)
 
@@ -981,7 +981,7 @@ def get_companies():
 
 @frappe.whitelist()
 def get_children(doctype, parent, company, is_root=False):
-	from erpnext.accounts.report.financial_statements import sort_accounts
+	from beasm.accounts.report.financial_statements import sort_accounts
 
 	parent_fieldname = "parent_" + doctype.lower().replace(" ", "_")
 	fields = ["name as value", "is_group as expandable"]
@@ -1028,7 +1028,7 @@ def get_account_balances(accounts, company):
 
 
 def create_payment_gateway_account(gateway, payment_channel="Email"):
-	from erpnext.setup.setup_wizard.operations.install_fixtures import create_bank_account
+	from beasm.setup.setup_wizard.operations.install_fixtures import create_bank_account
 
 	company = frappe.db.get_value("Global Defaults", None, "default_company")
 	if not company:
@@ -1140,7 +1140,7 @@ def parse_naming_series_variable(doc, variable):
 
 @frappe.whitelist()
 def get_coa(doctype, parent, is_root, chart=None):
-	from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
+	from beasm.accounts.doctype.account.chart_of_accounts.chart_of_accounts import (
 		build_tree_from_json,
 	)
 
@@ -1179,7 +1179,7 @@ def repost_gle_for_stock_vouchers(
 	repost_doc: Optional["RepostItemValuation"] = None,
 ):
 
-	from erpnext.accounts.general_ledger import toggle_debit_credit_if_negative
+	from beasm.accounts.general_ledger import toggle_debit_credit_if_negative
 
 	if not stock_vouchers:
 		return
@@ -1889,7 +1889,7 @@ def create_gain_loss_journal(
 			"party": party,
 			"account_currency": party_account_currency,
 			"exchange_rate": 0,
-			"cost_center": erpnext.get_default_cost_center(company),
+			"cost_center": beasm.get_default_cost_center(company),
 			"reference_type": ref1_dt,
 			"reference_name": ref1_dn,
 			"reference_detail_no": ref1_detail_no,
@@ -1905,7 +1905,7 @@ def create_gain_loss_journal(
 			"account": gain_loss_account,
 			"account_currency": gain_loss_account_currency,
 			"exchange_rate": 1,
-			"cost_center": erpnext.get_default_cost_center(company),
+			"cost_center": beasm.get_default_cost_center(company),
 			"reference_type": ref2_dt,
 			"reference_name": ref2_dn,
 			"reference_detail_no": ref2_detail_no,

@@ -7,10 +7,10 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_months, flt, fmt_money, get_last_day, getdate
 
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 )
-from erpnext.accounts.utils import get_fiscal_year
+from beasm.accounts.utils import get_fiscal_year
 
 
 class BudgetError(frappe.ValidationError):

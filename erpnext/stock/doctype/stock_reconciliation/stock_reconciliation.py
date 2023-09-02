@@ -8,12 +8,12 @@ from frappe import _, bold, msgprint
 from frappe.query_builder.functions import CombineDatetime, Sum
 from frappe.utils import add_to_date, cint, cstr, flt
 
-import erpnext
-from erpnext.accounts.utils import get_company_default
-from erpnext.controllers.stock_controller import StockController
-from erpnext.stock.doctype.batch.batch import get_batch_qty
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.utils import get_stock_balance
+import beasm
+from beasm.accounts.utils import get_company_default
+from beasm.controllers.stock_controller import StockController
+from beasm.stock.doctype.batch.batch import get_batch_qty
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.utils import get_stock_balance
 
 
 class OpeningEntryAccountError(frappe.ValidationError):
@@ -54,7 +54,7 @@ class StockReconciliation(StockController):
 		self.make_gl_entries()
 		self.repost_future_sle_and_gle()
 
-		from erpnext.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
+		from beasm.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
 
 		update_serial_nos_after_submit(self, "items")
 
@@ -193,7 +193,7 @@ class StockReconciliation(StockController):
 			raise frappe.ValidationError(self.validation_messages)
 
 	def validate_item(self, item_code, row):
-		from erpnext.stock.doctype.item.item import (
+		from beasm.stock.doctype.item.item import (
 			validate_cancelled_item,
 			validate_end_of_life,
 			validate_is_stock_item,
@@ -227,7 +227,7 @@ class StockReconciliation(StockController):
 	def update_stock_ledger(self):
 		"""find difference between current and expected entries
 		and create stock ledger entries based on the difference"""
-		from erpnext.stock.stock_ledger import get_previous_sle
+		from beasm.stock.stock_ledger import get_previous_sle
 
 		sl_entries = []
 		has_serial_no = False
@@ -288,7 +288,7 @@ class StockReconciliation(StockController):
 			self.update_valuation_rate_for_serial_no()
 
 	def get_sle_for_serialized_items(self, row, sl_entries, item):
-		from erpnext.stock.stock_ledger import get_previous_sle
+		from beasm.stock.stock_ledger import get_previous_sle
 
 		serial_nos = get_serial_nos(row.serial_no)
 
@@ -494,7 +494,7 @@ class StockReconciliation(StockController):
 		)
 
 	def validate_expense_account(self):
-		if not cint(erpnext.is_perpetual_inventory_enabled(self.company)):
+		if not cint(beasm.is_perpetual_inventory_enabled(self.company)):
 			return
 
 		if not self.expense_account:
@@ -564,7 +564,7 @@ class StockReconciliation(StockController):
 			self._cancel()
 
 	def recalculate_current_qty(self, voucher_detail_no, sle_creation, add_new_sle=False):
-		from erpnext.stock.stock_ledger import get_valuation_rate
+		from beasm.stock.stock_ledger import get_valuation_rate
 
 		sl_entries = []
 
@@ -780,7 +780,7 @@ def get_item_data(row, qty, valuation_rate, serial_no=None):
 
 
 def get_itemwise_batch(warehouse, posting_date, company, item_code=None):
-	from erpnext.stock.report.batch_wise_balance_history.batch_wise_balance_history import execute
+	from beasm.stock.report.batch_wise_balance_history.batch_wise_balance_history import execute
 
 	itemwise_batch_data = {}
 

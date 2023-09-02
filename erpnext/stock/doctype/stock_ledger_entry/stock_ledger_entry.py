@@ -10,8 +10,8 @@ from frappe.core.doctype.role.role import get_users
 from frappe.model.document import Document
 from frappe.utils import add_days, cint, formatdate, get_datetime, getdate
 
-from erpnext.accounts.utils import get_fiscal_year
-from erpnext.controllers.item_variant import ItemTemplateCannotHaveStock
+from beasm.accounts.utils import get_fiscal_year
+from beasm.controllers.item_variant import ItemTemplateCannotHaveStock
 
 
 class StockFreezeError(frappe.ValidationError):
@@ -37,7 +37,7 @@ class StockLedgerEntry(Document):
 
 	def validate(self):
 		self.flags.ignore_submit_comment = True
-		from erpnext.stock.utils import validate_disabled_warehouse, validate_warehouse_company
+		from beasm.stock.utils import validate_disabled_warehouse, validate_warehouse_company
 
 		self.validate_mandatory()
 		self.validate_item()
@@ -54,7 +54,7 @@ class StockLedgerEntry(Document):
 		self.calculate_batch_qty()
 
 		if not self.get("via_landed_cost_voucher"):
-			from erpnext.stock.doctype.serial_no.serial_no import process_serial_no
+			from beasm.stock.doctype.serial_no.serial_no import process_serial_no
 
 			process_serial_no(self)
 
@@ -167,14 +167,14 @@ class StockLedgerEntry(Document):
 		if not self.fiscal_year:
 			self.fiscal_year = get_fiscal_year(self.posting_date, company=self.company)[0]
 		else:
-			from erpnext.accounts.utils import validate_fiscal_year
+			from beasm.accounts.utils import validate_fiscal_year
 
 			validate_fiscal_year(
 				self.posting_date, self.fiscal_year, self.company, self.meta.get_label("posting_date"), self
 			)
 
 	def block_transactions_against_group_warehouse(self):
-		from erpnext.stock.utils import is_group_warehouse
+		from beasm.stock.utils import is_group_warehouse
 
 		is_group_warehouse(self.warehouse)
 

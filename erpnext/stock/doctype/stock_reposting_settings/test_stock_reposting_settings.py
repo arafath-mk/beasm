@@ -5,7 +5,7 @@ import unittest
 
 import frappe
 
-from erpnext.stock.doctype.repost_item_valuation.repost_item_valuation import get_recipients
+from beasm.stock.doctype.repost_item_valuation.repost_item_valuation import get_recipients
 
 
 class TestStockRepostingSettings(unittest.TestCase):

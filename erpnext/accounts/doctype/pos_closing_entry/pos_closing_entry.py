@@ -6,11 +6,11 @@ import frappe
 from frappe import _
 from frappe.utils import flt, get_datetime
 
-from erpnext.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
+from beasm.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
 	consolidate_pos_invoices,
 	unconsolidate_pos_invoices,
 )
-from erpnext.controllers.status_updater import StatusUpdater
+from beasm.controllers.status_updater import StatusUpdater
 
 
 class POSClosingEntry(StatusUpdater):
@@ -85,7 +85,7 @@ class POSClosingEntry(StatusUpdater):
 	def get_payment_reconciliation_details(self):
 		currency = frappe.get_cached_value("Company", self.company, "default_currency")
 		return frappe.render_template(
-			"erpnext/accounts/doctype/pos_closing_entry/closing_voucher_details.html",
+			"beasm/accounts/doctype/pos_closing_entry/closing_voucher_details.html",
 			{"data": self, "currency": currency},
 		)
 

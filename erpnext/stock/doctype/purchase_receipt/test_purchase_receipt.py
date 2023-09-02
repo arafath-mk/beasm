@@ -6,14 +6,14 @@ from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import add_days, cint, cstr, flt, today
 from pypika import functions as fn
 
-import erpnext
-from erpnext.accounts.doctype.account.test_account import get_inventory_account
-from erpnext.controllers.buying_controller import QtyMismatchError
-from erpnext.stock.doctype.item.test_item import create_item, make_item
-from erpnext.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_invoice
-from erpnext.stock.doctype.serial_no.serial_no import SerialNoDuplicateError, get_serial_nos
-from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
-from erpnext.stock.stock_ledger import SerialNoExistsInFutureTransaction
+import beasm
+from beasm.accounts.doctype.account.test_account import get_inventory_account
+from beasm.controllers.buying_controller import QtyMismatchError
+from beasm.stock.doctype.item.test_item import create_item, make_item
+from beasm.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_invoice
+from beasm.stock.doctype.serial_no.serial_no import SerialNoDuplicateError, get_serial_nos
+from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
+from beasm.stock.stock_ledger import SerialNoExistsInFutureTransaction
 
 
 class TestPurchaseReceipt(FrappeTestCase):
@@ -63,7 +63,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(sl_entry_cancelled[1].actual_qty, -0.5)
 
 	def test_make_purchase_invoice(self):
-		from erpnext.accounts.doctype.payment_entry.test_payment_entry import create_payment_term
+		from beasm.accounts.doctype.payment_entry.test_payment_entry import create_payment_term
 
 		create_payment_term("_Test Payment Term 1 for Purchase Invoice")
 		create_payment_term("_Test Payment Term 2 for Purchase Invoice")
@@ -130,7 +130,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		).delete()
 
 	def test_purchase_receipt_no_gl_entry(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		existing_bin_qty, existing_bin_stock_value = frappe.db.get_value(
 			"Bin",
@@ -198,7 +198,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertFalse(frappe.db.get_all("Serial No", {"batch_no": batch_no}))
 
 	def test_duplicate_serial_nos(self):
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		item = frappe.db.exists("Item", {"item_name": "Test Serialized Item 123"})
 		if not item:
@@ -284,7 +284,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 			get_taxes_and_charges=True,
 		)
 
-		self.assertEqual(cint(erpnext.is_perpetual_inventory_enabled(pr.company)), 1)
+		self.assertEqual(cint(beasm.is_perpetual_inventory_enabled(pr.company)), 1)
 
 		gl_entries = get_gl_entries("Purchase Receipt", pr.name)
 
@@ -410,7 +410,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(pr.items[0].returned_qty, 2)
 		self.assertEqual(pr.per_returned, 40)
 
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 		return_pr_2 = make_return_doc("Purchase Receipt", pr.name)
 
@@ -478,7 +478,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_purchase_return_for_rejected_qty(self):
-		from erpnext.stock.doctype.warehouse.test_warehouse import get_warehouse
+		from beasm.stock.doctype.warehouse.test_warehouse import get_warehouse
 
 		rejected_warehouse = "_Test Rejected Warehouse - TCP1"
 		if not frappe.db.exists("Warehouse", rejected_warehouse):
@@ -524,7 +524,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_purchase_receipt_for_rejected_gle_without_accepted_warehouse(self):
-		from erpnext.stock.doctype.warehouse.test_warehouse import get_warehouse
+		from beasm.stock.doctype.warehouse.test_warehouse import get_warehouse
 
 		rejected_warehouse = "_Test Rejected Warehouse - TCP1"
 		if not frappe.db.exists("Warehouse", rejected_warehouse):
@@ -568,7 +568,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 			for field, value in field_values.items():
 				self.assertEqual(cstr(serial_no.get(field)), value)
 
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 		pr = make_purchase_receipt(item_code="_Test Serialized Item With Series", qty=1)
 
@@ -619,7 +619,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_closed_purchase_receipt(self):
-		from erpnext.stock.doctype.purchase_receipt.purchase_receipt import (
+		from beasm.stock.doctype.purchase_receipt.purchase_receipt import (
 			update_purchase_receipt_status,
 		)
 
@@ -636,11 +636,11 @@ class TestPurchaseReceipt(FrappeTestCase):
 		2. PO -> PI
 		3. PO -> PR2.
 		"""
-		from erpnext.buying.doctype.purchase_order.purchase_order import (
+		from beasm.buying.doctype.purchase_order.purchase_order import (
 			make_purchase_invoice as make_purchase_invoice_from_po,
 		)
-		from erpnext.buying.doctype.purchase_order.purchase_order import make_purchase_receipt
-		from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
+		from beasm.buying.doctype.purchase_order.purchase_order import make_purchase_receipt
+		from beasm.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
 
 		po = create_purchase_order()
 
@@ -689,7 +689,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		po.cancel()
 
 	def test_serial_no_against_purchase_receipt(self):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 		item_code = "Test Manual Created Serial No"
 		if not frappe.db.exists("Item", item_code):
@@ -782,7 +782,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_purchase_return_with_submitted_asset(self):
-		from erpnext.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_return
+		from beasm.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_return
 
 		pr = make_purchase_receipt(item_code="Test Asset Item", qty=1)
 
@@ -812,7 +812,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_purchase_receipt_cost_center(self):
-		from erpnext.accounts.doctype.cost_center.test_cost_center import create_cost_center
+		from beasm.accounts.doctype.cost_center.test_cost_center import create_cost_center
 
 		cost_center = "_Test Cost Center for BS Account - TCP1"
 		create_cost_center(
@@ -870,7 +870,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		pr.cancel()
 
 	def test_make_purchase_invoice_from_pr_for_returned_qty(self):
-		from erpnext.buying.doctype.purchase_order.test_purchase_order import (
+		from beasm.buying.doctype.purchase_order.test_purchase_order import (
 			create_pr_against_po,
 			create_purchase_order,
 		)
@@ -1015,7 +1015,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		- Create PI from PO and submit
 		- Create PR from PO and submit
 		"""
-		from erpnext.buying.doctype.purchase_order import purchase_order, test_purchase_order
+		from beasm.buying.doctype.purchase_order import purchase_order, test_purchase_order
 
 		po = test_purchase_order.create_purchase_order()
 
@@ -1036,7 +1036,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		- Create partial PI from PO and submit
 		- Create PR from PO and submit
 		"""
-		from erpnext.buying.doctype.purchase_order import purchase_order, test_purchase_order
+		from beasm.buying.doctype.purchase_order import purchase_order, test_purchase_order
 
 		po = test_purchase_order.create_purchase_order()
 
@@ -1058,13 +1058,13 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertAlmostEqual(pr.per_billed, 50.0, places=2)
 
 	def test_purchase_receipt_with_exchange_rate_difference(self):
-		from erpnext.accounts.doctype.purchase_invoice.purchase_invoice import (
+		from beasm.accounts.doctype.purchase_invoice.purchase_invoice import (
 			make_purchase_receipt as create_purchase_receipt,
 		)
-		from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import (
+		from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import (
 			make_purchase_invoice as create_purchase_invoice,
 		)
-		from erpnext.accounts.party import add_party_account
+		from beasm.accounts.party import add_party_account
 
 		add_party_account(
 			"Supplier",
@@ -1107,15 +1107,15 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(discrepancy_caused_by_exchange_rate_diff, amount)
 
 	def test_payment_terms_are_fetched_when_creating_purchase_invoice(self):
-		from erpnext.accounts.doctype.payment_entry.test_payment_entry import (
+		from beasm.accounts.doctype.payment_entry.test_payment_entry import (
 			create_payment_terms_template,
 		)
-		from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-		from erpnext.buying.doctype.purchase_order.test_purchase_order import (
+		from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+		from beasm.buying.doctype.purchase_order.test_purchase_order import (
 			create_purchase_order,
 			make_pr_against_po,
 		)
-		from erpnext.selling.doctype.sales_order.test_sales_order import (
+		from beasm.selling.doctype.sales_order.test_sales_order import (
 			automatically_fetch_payment_terms,
 			compare_payment_schedules,
 		)
@@ -1143,7 +1143,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 
 	@change_settings("Stock Settings", {"allow_negative_stock": 1})
 	def test_neg_to_positive(self):
-		from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+		from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 		item_code = "_TestNegToPosItem"
 		warehouse = "Stores - TCP1"
@@ -1173,8 +1173,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 				self.assertEqual(gle.credit, 50)
 
 	def test_backdated_transaction_for_internal_transfer(self):
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		prepare_data_for_internal_transfer()
 		customer = "_Test Internal Customer 2"
@@ -1259,8 +1259,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(query[0].value, 0)
 
 	def test_rejected_qty_for_internal_transfer(self):
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		prepare_data_for_internal_transfer()
 		customer = "_Test Internal Customer 2"
@@ -1325,8 +1325,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 	def test_backdated_transaction_for_internal_transfer_in_trasit_warehouse_for_purchase_receipt(
 		self,
 	):
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		prepare_data_for_internal_transfer()
 		customer = "_Test Internal Customer 2"
@@ -1432,13 +1432,13 @@ class TestPurchaseReceipt(FrappeTestCase):
 	def test_backdated_transaction_for_internal_transfer_in_trasit_warehouse_for_purchase_invoice(
 		self,
 	):
-		from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import (
+		from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import (
 			make_purchase_invoice as make_purchase_invoice_for_si,
 		)
-		from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
+		from beasm.accounts.doctype.sales_invoice.sales_invoice import (
 			make_inter_company_purchase_invoice,
 		)
-		from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+		from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
 
 		prepare_data_for_internal_transfer()
 		customer = "_Test Internal Customer 2"
@@ -1551,7 +1551,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(query[0].value, 0)
 
 	def test_batch_expiry_for_purchase_receipt(self):
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 		item = make_item(
 			"_Test Batch Item For Return Check",
@@ -1582,7 +1582,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertTrue(return_pi.docstatus == 1)
 
 	def test_disable_last_purchase_rate(self):
-		from erpnext.stock.get_item_details import get_item_details
+		from beasm.stock.get_item_details import get_item_details
 
 		item = make_item(
 			"_Test Disable Last Purchase Rate",
@@ -1636,7 +1636,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		item = make_item(properties={"is_stock_item": 1, "valuation_rate": 100})
 
 		# Step 2: Create Stock Entry (Material Receipt)
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		make_stock_entry(
 			purpose="Material Receipt",
@@ -1647,7 +1647,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		)
 
 		# Step 3: Create Delivery Note with Internal Customer
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		dn = create_delivery_note(
 			item_code=item.name,
@@ -1662,8 +1662,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 		)
 
 		# Step 4: Create Internal Purchase Receipt
-		from erpnext.controllers.status_updater import OverAllowanceError
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.controllers.status_updater import OverAllowanceError
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
 
 		pr = make_inter_company_purchase_receipt(dn.name)
 		pr.items[0].qty = 15
@@ -1691,11 +1691,11 @@ class TestPurchaseReceipt(FrappeTestCase):
 		frappe.db.set_single_value("Stock Settings", "over_delivery_receipt_allowance", 0)
 
 	def test_internal_pr_gl_entries(self):
-		from erpnext.stock import get_warehouse_account_map
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
-		from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+		from beasm.stock import get_warehouse_account_map
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 			create_stock_reconciliation,
 		)
 
@@ -1782,7 +1782,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		to_warehouse = create_warehouse("_Test Internal To Warehouse New 1", company=company)
 
 		# Step 2: Create Stock Entry (Material Receipt)
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		make_stock_entry(
 			purpose="Material Receipt",
@@ -1793,7 +1793,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		)
 
 		# Step 3: Create Delivery Note with Internal Customer
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		dn = create_delivery_note(
 			item_code=item.name,
@@ -1808,8 +1808,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 		)
 
 		# Step 4: Create Internal Purchase Receipt
-		from erpnext.controllers.status_updater import OverAllowanceError
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
+		from beasm.controllers.status_updater import OverAllowanceError
+		from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_purchase_receipt
 
 		pr = make_inter_company_purchase_receipt(dn.name)
 		pr.inter_company_reference = ""
@@ -1859,7 +1859,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 		)
 
 		# Step 3: Create Purchase Return for 2 qty
-		from erpnext.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_return
+		from beasm.stock.doctype.purchase_receipt.purchase_receipt import make_purchase_return
 
 		pr_return = make_purchase_return(pr.name)
 		pr_return.items[0].qty = 2 * -1
@@ -1878,11 +1878,11 @@ class TestPurchaseReceipt(FrappeTestCase):
 		self.assertEqual(abs(data["stock_value_difference"]), 400.00)
 
 	def test_purchase_receipt_with_backdated_landed_cost_voucher(self):
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
-		from erpnext.stock.doctype.landed_cost_voucher.test_landed_cost_voucher import (
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.stock.doctype.landed_cost_voucher.test_landed_cost_voucher import (
 			create_landed_cost_voucher,
 		)
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		item_code = "_Test Purchase Item With Landed Cost"
 		create_item(item_code)
@@ -2026,8 +2026,8 @@ class TestPurchaseReceipt(FrappeTestCase):
 
 
 def prepare_data_for_internal_transfer():
-	from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_internal_supplier
-	from erpnext.selling.doctype.customer.test_customer import create_internal_customer
+	from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_internal_supplier
+	from beasm.selling.doctype.customer.test_customer import create_internal_customer
 
 	company = "_Test Company with perpetual inventory"
 

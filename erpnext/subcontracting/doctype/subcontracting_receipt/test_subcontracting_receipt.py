@@ -8,10 +8,10 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_days, cint, cstr, flt, today
 
-import erpnext
-from erpnext.accounts.doctype.account.test_account import get_inventory_account
-from erpnext.controllers.sales_and_purchase_return import make_return_doc
-from erpnext.controllers.tests.test_subcontracting_controller import (
+import beasm
+from beasm.accounts.doctype.account.test_account import get_inventory_account
+from beasm.controllers.sales_and_purchase_return import make_return_doc
+from beasm.controllers.tests.test_subcontracting_controller import (
 	get_rm_items,
 	get_subcontracting_order,
 	make_bom_for_subcontracted_items,
@@ -23,13 +23,13 @@ from erpnext.controllers.tests.test_subcontracting_controller import (
 	make_subcontracted_items,
 	set_backflush_based_on,
 )
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
-from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
-from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
+from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 	create_stock_reconciliation,
 )
-from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 	make_subcontracting_receipt,
 )
 
@@ -126,7 +126,7 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		self.assertRaises(frappe.ValidationError, scr.submit)
 
 	def test_subcontracting_gle_fg_item_rate_zero(self):
-		from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
+		from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
 
 		set_backflush_based_on("BOM")
 		make_stock_entry(
@@ -174,13 +174,13 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		        receive more than the required qty in the SCO.
 		Expected Result: Error Raised for Over Receipt against SCO.
 		"""
-		from erpnext.controllers.subcontracting_controller import (
+		from beasm.controllers.subcontracting_controller import (
 			make_rm_stock_entry as make_subcontract_transfer_entry,
 		)
-		from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+		from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 			make_subcontracting_receipt,
 		)
-		from erpnext.subcontracting.doctype.subcontracting_order.test_subcontracting_order import (
+		from beasm.subcontracting.doctype.subcontracting_order.test_subcontracting_order import (
 			make_subcontracted_item,
 		)
 
@@ -243,8 +243,8 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		self.assertRaises(frappe.ValidationError, scr2.submit)
 
 	def test_subcontracted_scr_for_multi_transfer_batches(self):
-		from erpnext.controllers.subcontracting_controller import make_rm_stock_entry
-		from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+		from beasm.controllers.subcontracting_controller import make_rm_stock_entry
+		from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 			make_subcontracting_receipt,
 		)
 
@@ -369,7 +369,7 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		scr1.save()
 		scr1.submit()
 
-		from erpnext.controllers.status_updater import OverAllowanceError
+		from beasm.controllers.status_updater import OverAllowanceError
 
 		args = frappe._dict(scr_name=scr1.name, qty=-15)
 		self.assertRaises(OverAllowanceError, make_return_subcontracting_receipt, **args)
@@ -439,7 +439,7 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		scr.save()
 		scr.submit()
 
-		self.assertEqual(cint(erpnext.is_perpetual_inventory_enabled(scr.company)), 1)
+		self.assertEqual(cint(beasm.is_perpetual_inventory_enabled(scr.company)), 1)
 
 		gl_entries = get_gl_entries("Subcontracting Receipt", scr.name)
 
@@ -595,7 +595,7 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		self.assertEqual(scr.supplied_items[0].rate, sr.items[0].valuation_rate)
 
 	def test_subcontracting_receipt_raw_material_rate(self):
-		from erpnext.manufacturing.doctype.production_plan.test_production_plan import make_bom
+		from beasm.manufacturing.doctype.production_plan.test_production_plan import make_bom
 
 		# Step - 1: Set Backflush Based On as "BOM"
 		set_backflush_based_on("BOM")

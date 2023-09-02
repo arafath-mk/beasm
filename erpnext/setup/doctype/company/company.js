@@ -1,7 +1,7 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
-frappe.provide("erpnext.company");
+frappe.provide("beasm.company");
 
 frappe.ui.form.on("Company", {
 	onload: function(frm) {
@@ -19,7 +19,7 @@ frappe.ui.form.on("Company", {
 	},
 	setup: function(frm) {
 		frm.__rename_queue = "long";
-		erpnext.company.setup_queries(frm);
+		beasm.company.setup_queries(frm);
 
 		frm.set_query("parent_company", function() {
 			return {
@@ -123,7 +123,7 @@ frappe.ui.form.on("Company", {
 			}
 		}
 
-		erpnext.company.set_chart_of_accounts_options(frm.doc);
+		beasm.company.set_chart_of_accounts_options(frm.doc);
 	},
 
 	make_default_tax_template: function(frm) {
@@ -138,7 +138,7 @@ frappe.ui.form.on("Company", {
 	},
 
 	country: function(frm) {
-		erpnext.company.set_chart_of_accounts_options(frm.doc);
+		beasm.company.set_chart_of_accounts_options(frm.doc);
 	},
 
 	delete_company_transactions: function(frm) {
@@ -156,7 +156,7 @@ frappe.ui.form.on("Company", {
 					return;
 				}
 				frappe.call({
-					method: "erpnext.setup.doctype.company.company.create_transaction_deletion_request",
+					method: "beasm.setup.doctype.company.company.create_transaction_deletion_request",
 					args: {
 						company: data.company_name
 					},
@@ -178,11 +178,11 @@ frappe.ui.form.on("Company", {
 });
 
 
-erpnext.company.set_chart_of_accounts_options = function(doc) {
+beasm.company.set_chart_of_accounts_options = function(doc) {
 	var selected_value = doc.chart_of_accounts;
 	if(doc.country) {
 		return frappe.call({
-			method: "erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country",
+			method: "beasm.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country",
 			args: {
 				"country": doc.country,
 				"with_standard": true
@@ -198,7 +198,7 @@ erpnext.company.set_chart_of_accounts_options = function(doc) {
 	}
 }
 
-erpnext.company.setup_queries = function(frm) {
+beasm.company.setup_queries = function(frm) {
 	$.each([
 		["default_bank_account", {"account_type": "Bank"}],
 		["default_cash_account", {"account_type": "Cash"}],
@@ -229,7 +229,7 @@ erpnext.company.setup_queries = function(frm) {
 		["unrealized_profit_loss_account", {"root_type": ["in", ["Liability", "Asset"]]}],
 		["default_provisional_account", {"root_type": ["in", ["Liability", "Asset"]]}]
 	], function(i, v) {
-		erpnext.company.set_custom_query(frm, v);
+		beasm.company.set_custom_query(frm, v);
 	});
 
 	if (frm.doc.enable_perpetual_inventory) {
@@ -244,12 +244,12 @@ erpnext.company.setup_queries = function(frm) {
 				{"root_type": "Liability", "account_type": "Service Received But Not Billed"}],
 
 		], function(i, v) {
-			erpnext.company.set_custom_query(frm, v);
+			beasm.company.set_custom_query(frm, v);
 		});
 	}
 }
 
-erpnext.company.set_custom_query = function(frm, v) {
+beasm.company.set_custom_query = function(frm, v) {
 	var filters = {
 		"company": frm.doc.name,
 		"is_group": 0

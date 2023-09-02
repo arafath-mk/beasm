@@ -1,9 +1,9 @@
 // Copyright (c) 2022, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
 
-frappe.provide('erpnext.buying');
+frappe.provide('beasm.buying');
 
-{% include 'erpnext/stock/landed_taxes_and_charges_common.js' %};
+{% include 'beasm/stock/landed_taxes_and_charges_common.js' %};
 
 frappe.ui.form.on('Subcontracting Order', {
 	setup: (frm) => {
@@ -49,7 +49,7 @@ frappe.ui.form.on('Subcontracting Order', {
 		}));
 
 		frm.set_query('expense_account', 'items', () => ({
-			query: 'erpnext.controllers.queries.get_expense_account',
+			query: 'beasm.controllers.queries.get_expense_account',
 			filters: {
 				company: frm.doc.company
 			}
@@ -90,8 +90,8 @@ frappe.ui.form.on('Subcontracting Order', {
 		frm.set_value('supplied_items', null);
 
 		if (frm.doc.purchase_order) {
-			erpnext.utils.map_current_doc({
-				method: 'erpnext.buying.doctype.purchase_order.purchase_order.make_subcontracting_order',
+			beasm.utils.map_current_doc({
+				method: 'beasm.buying.doctype.purchase_order.purchase_order.make_subcontracting_order',
 				source_name: frm.doc.purchase_order,
 				target_doc: frm,
 				freeze: true,
@@ -118,7 +118,7 @@ frappe.ui.form.on('Subcontracting Order', {
 		if (sco_rm_details && sco_rm_details.length) {
 			frm.add_custom_button(__('Return of Components'), () => {
 				frm.call({
-					method: 'erpnext.controllers.subcontracting_controller.get_materials_from_supplier',
+					method: 'beasm.controllers.subcontracting_controller.get_materials_from_supplier',
 					freeze: true,
 					freeze_message: __('Creating Stock Entry'),
 					args: {
@@ -148,7 +148,7 @@ frappe.ui.form.on('Landed Cost Taxes and Charges', {
 	}
 });
 
-erpnext.buying.SubcontractingOrderController = class SubcontractingOrderController {
+beasm.buying.SubcontractingOrderController = class SubcontractingOrderController {
 	setup() {
 		this.frm.custom_make_buttons = {
 			'Subcontracting Receipt': 'Subcontracting Receipt',
@@ -188,7 +188,7 @@ erpnext.buying.SubcontractingOrderController = class SubcontractingOrderControll
 	}
 
 	set_warehouse_in_children(child_table, warehouse_field, warehouse) {
-		let transaction_controller = new erpnext.TransactionController();
+		let transaction_controller = new beasm.TransactionController();
 		transaction_controller.autofill_warehouse(child_table, warehouse_field, warehouse);
 	}
 
@@ -198,7 +198,7 @@ erpnext.buying.SubcontractingOrderController = class SubcontractingOrderControll
 
 	make_subcontracting_receipt() {
 		frappe.model.open_mapped_doc({
-			method: 'erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order.make_subcontracting_receipt',
+			method: 'beasm.subcontracting.doctype.subcontracting_order.subcontracting_order.make_subcontracting_receipt',
 			frm: cur_frm,
 			freeze_message: __('Creating Subcontracting Receipt ...')
 		});
@@ -206,7 +206,7 @@ erpnext.buying.SubcontractingOrderController = class SubcontractingOrderControll
 
 	make_stock_entry() {
 		frappe.call({
-			method: 'erpnext.controllers.subcontracting_controller.make_rm_stock_entry',
+			method: 'beasm.controllers.subcontracting_controller.make_rm_stock_entry',
 			args: {
 				subcontract_order: cur_frm.doc.name,
 				order_doctype: cur_frm.doc.doctype
@@ -219,4 +219,4 @@ erpnext.buying.SubcontractingOrderController = class SubcontractingOrderControll
 	}
 };
 
-extend_cscript(cur_frm.cscript, new erpnext.buying.SubcontractingOrderController({ frm: cur_frm }));
+extend_cscript(cur_frm.cscript, new beasm.buying.SubcontractingOrderController({ frm: cur_frm }));

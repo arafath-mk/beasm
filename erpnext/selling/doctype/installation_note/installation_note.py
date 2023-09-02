@@ -6,8 +6,8 @@ import frappe
 from frappe import _
 from frappe.utils import cstr, getdate
 
-from erpnext.stock.utils import get_valid_serial_nos
-from erpnext.utilities.transaction_base import TransactionBase
+from beasm.stock.utils import get_valid_serial_nos
+from beasm.utilities.transaction_base import TransactionBase
 
 
 class InstallationNote(TransactionBase):
@@ -34,7 +34,7 @@ class InstallationNote(TransactionBase):
 		self.validate_installation_date()
 		self.check_item_table()
 
-		from erpnext.controllers.selling_controller import set_default_income_account_for_item
+		from beasm.controllers.selling_controller import set_default_income_account_for_item
 
 		set_default_income_account_for_item(self)
 

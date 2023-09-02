@@ -8,7 +8,7 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from frappe.tests.utils import change_settings
 from frappe.utils import today
 
-from erpnext.accounts.utils import get_fiscal_year
+from beasm.accounts.utils import get_fiscal_year
 
 test_dependencies = ["Supplier Group", "Customer Group"]
 
@@ -324,7 +324,7 @@ class TestTaxWithholdingCategory(unittest.TestCase):
 			d.cancel()
 
 	def test_tds_deduction_for_po_via_payment_entry(self):
-		from erpnext.accounts.doctype.payment_entry.payment_entry import get_payment_entry
+		from beasm.accounts.doctype.payment_entry.payment_entry import get_payment_entry
 
 		frappe.db.set_value(
 			"Supplier", "Test TDS Supplier8", "tax_withholding_category", "Cumulative Threshold TDS"

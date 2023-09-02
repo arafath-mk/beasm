@@ -5,9 +5,9 @@
 import frappe
 from frappe import _
 
-from erpnext import get_default_company
-from erpnext.accounts.party import get_party_details
-from erpnext.stock.get_item_details import get_price_list_rate_for
+from beasm import get_default_company
+from beasm.accounts.party import get_party_details
+from beasm.stock.get_item_details import get_price_list_rate_for
 
 
 def execute(filters=None):

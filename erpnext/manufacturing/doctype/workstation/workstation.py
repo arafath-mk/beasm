@@ -16,7 +16,7 @@ from frappe.utils import (
 	to_timedelta,
 )
 
-from erpnext.support.doctype.issue.issue import get_holidays
+from beasm.support.doctype.issue.issue import get_holidays
 
 
 class WorkstationHolidayError(frappe.ValidationError):

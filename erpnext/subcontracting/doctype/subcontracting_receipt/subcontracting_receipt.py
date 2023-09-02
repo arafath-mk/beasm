@@ -5,9 +5,9 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt, getdate, nowdate
 
-import erpnext
-from erpnext.accounts.utils import get_account_currency
-from erpnext.controllers.subcontracting_controller import SubcontractingController
+import beasm
+from beasm.accounts.utils import get_account_currency
+from beasm.controllers.subcontracting_controller import SubcontractingController
 
 
 class SubcontractingReceipt(SubcontractingController):
@@ -99,7 +99,7 @@ class SubcontractingReceipt(SubcontractingController):
 		self.set_consumed_qty_in_subcontract_order()
 		self.update_stock_ledger()
 
-		from erpnext.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
+		from beasm.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
 
 		update_serial_nos_after_submit(self, "items")
 
@@ -288,9 +288,9 @@ class SubcontractingReceipt(SubcontractingController):
 			)
 
 	def get_gl_entries(self, warehouse_account=None):
-		from erpnext.accounts.general_ledger import process_gl_map
+		from beasm.accounts.general_ledger import process_gl_map
 
-		if not erpnext.is_perpetual_inventory_enabled(self.company):
+		if not beasm.is_perpetual_inventory_enabled(self.company):
 			return []
 
 		gl_entries = []
@@ -423,6 +423,6 @@ class SubcontractingReceipt(SubcontractingController):
 
 @frappe.whitelist()
 def make_subcontract_return(source_name, target_doc=None):
-	from erpnext.controllers.sales_and_purchase_return import make_return_doc
+	from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 	return make_return_doc("Subcontracting Receipt", source_name, target_doc)

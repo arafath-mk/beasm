@@ -14,7 +14,7 @@ from frappe.utils.data import (
 	nowdate,
 )
 
-from erpnext.accounts.doctype.subscription.subscription import get_prorata_factor
+from beasm.accounts.doctype.subscription.subscription import get_prorata_factor
 
 test_dependencies = ("UOM", "Item Group", "Item")
 

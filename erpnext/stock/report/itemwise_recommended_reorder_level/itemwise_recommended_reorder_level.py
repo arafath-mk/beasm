@@ -68,7 +68,7 @@ def get_columns():
 
 
 def get_item_info(filters):
-	from erpnext.stock.report.stock_ledger.stock_ledger import get_item_group_condition
+	from beasm.stock.report.stock_ledger.stock_ledger import get_item_group_condition
 
 	item = frappe.qb.DocType("Item")
 	query = (

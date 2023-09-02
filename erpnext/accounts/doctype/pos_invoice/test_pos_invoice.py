@@ -6,12 +6,12 @@ import unittest
 
 import frappe
 
-from erpnext.accounts.doctype.pos_invoice.pos_invoice import make_sales_return
-from erpnext.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.accounts.doctype.pos_invoice.pos_invoice import make_sales_return
+from beasm.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 
 class TestPOSInvoice(unittest.TestCase):
@@ -239,8 +239,8 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(pos_return.get("payments")[1].amount, -500)
 
 	def test_pos_return_for_serialized_item(self):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -279,8 +279,8 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(pos_return.get("items")[0].serial_no, serial_nos[0])
 
 	def test_partial_pos_returns(self):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -358,8 +358,8 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertRaises(frappe.ValidationError, inv.insert)
 
 	def test_serialized_item_transaction(self):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -413,8 +413,8 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertRaises(frappe.ValidationError, pos2.submit)
 
 	def test_delivered_serialized_item_transaction(self):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -465,7 +465,7 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertRaises(frappe.ValidationError, pos2.submit)
 
 	def test_invalid_serial_no_validation(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -496,7 +496,7 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertRaises(frappe.ValidationError, pos.submit)
 
 	def test_value_error_on_serial_no_validation(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		se = make_serialized_item(
 			company="_Test Company",
@@ -557,10 +557,10 @@ class TestPOSInvoice(unittest.TestCase):
 		pos2.save()
 
 	def test_loyalty_points(self):
-		from erpnext.accounts.doctype.loyalty_program.loyalty_program import (
+		from beasm.accounts.doctype.loyalty_program.loyalty_program import (
 			get_loyalty_program_details_with_points,
 		)
-		from erpnext.accounts.doctype.loyalty_program.test_loyalty_program import create_records
+		from beasm.accounts.doctype.loyalty_program.test_loyalty_program import create_records
 
 		create_records()
 		frappe.db.set_value(
@@ -591,7 +591,7 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(after_cancel_lp_details.loyalty_points, before_lp_details.loyalty_points)
 
 	def test_loyalty_points_redeemption(self):
-		from erpnext.accounts.doctype.loyalty_program.loyalty_program import (
+		from beasm.accounts.doctype.loyalty_program.loyalty_program import (
 			get_loyalty_program_details_with_points,
 		)
 
@@ -619,10 +619,10 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(after_redeem_lp_details.loyalty_points, 9)
 
 	def test_merging_into_sales_invoice_with_discount(self):
-		from erpnext.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
+		from beasm.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
 			init_user_and_profile,
 		)
-		from erpnext.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
+		from beasm.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
 			consolidate_pos_invoices,
 		)
 
@@ -645,10 +645,10 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(rounded_total, 3470)
 
 	def test_merging_into_sales_invoice_with_discount_and_inclusive_tax(self):
-		from erpnext.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
+		from beasm.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
 			init_user_and_profile,
 		)
-		from erpnext.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
+		from beasm.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
 			consolidate_pos_invoices,
 		)
 
@@ -694,10 +694,10 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(rounded_total, 840)
 
 	def test_merging_with_validate_selling_price(self):
-		from erpnext.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
+		from beasm.accounts.doctype.pos_closing_entry.test_pos_closing_entry import (
 			init_user_and_profile,
 		)
-		from erpnext.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
+		from beasm.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
 			consolidate_pos_invoices,
 		)
 
@@ -748,7 +748,7 @@ class TestPOSInvoice(unittest.TestCase):
 		self.assertEqual(rounded_total, 400)
 
 	def test_pos_batch_item_qty_validation(self):
-		from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+		from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 			create_batch_item_with_batch,
 		)
 
@@ -790,7 +790,7 @@ class TestPOSInvoice(unittest.TestCase):
 		batch.delete()
 
 	def test_ignore_pricing_rule(self):
-		from erpnext.accounts.doctype.pricing_rule.test_pricing_rule import make_pricing_rule
+		from beasm.accounts.doctype.pricing_rule.test_pricing_rule import make_pricing_rule
 
 		item_price = frappe.get_doc(
 			{
@@ -828,12 +828,12 @@ class TestPOSInvoice(unittest.TestCase):
 			pr.delete()
 
 	def test_delivered_serial_no_case(self):
-		from erpnext.accounts.doctype.pos_invoice_merge_log.test_pos_invoice_merge_log import (
+		from beasm.accounts.doctype.pos_invoice_merge_log.test_pos_invoice_merge_log import (
 			init_user_and_profile,
 		)
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-		from erpnext.stock.doctype.serial_no.test_serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.serial_no.test_serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		frappe.db.savepoint("before_test_delivered_serial_no_case")
 		try:
@@ -862,12 +862,12 @@ class TestPOSInvoice(unittest.TestCase):
 			frappe.set_user("Administrator")
 
 	def test_returned_serial_no_case(self):
-		from erpnext.accounts.doctype.pos_invoice_merge_log.test_pos_invoice_merge_log import (
+		from beasm.accounts.doctype.pos_invoice_merge_log.test_pos_invoice_merge_log import (
 			init_user_and_profile,
 		)
-		from erpnext.stock.doctype.serial_no.serial_no import get_pos_reserved_serial_nos
-		from erpnext.stock.doctype.serial_no.test_serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import get_pos_reserved_serial_nos
+		from beasm.stock.doctype.serial_no.test_serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		frappe.db.savepoint("before_test_returned_serial_no_case")
 		try:
@@ -954,7 +954,7 @@ def create_pos_invoice(**args):
 
 
 def make_batch_item(item_name):
-	from erpnext.stock.doctype.item.test_item import make_item
+	from beasm.stock.doctype.item.test_item import make_item
 
 	if not frappe.db.exists(item_name):
 		return make_item(item_name, dict(has_batch_no=1, create_new_batch=1, is_stock_item=1))

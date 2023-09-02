@@ -9,16 +9,16 @@ from frappe.model.meta import get_field_precision
 from frappe.model.naming import set_name_from_naming_options
 from frappe.utils import flt, fmt_money
 
-import erpnext
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+import beasm
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_checks_for_pl_and_bs_accounts,
 )
-from erpnext.accounts.doctype.accounting_dimension_filter.accounting_dimension_filter import (
+from beasm.accounts.doctype.accounting_dimension_filter.accounting_dimension_filter import (
 	get_dimension_filter_map,
 )
-from erpnext.accounts.party import validate_party_frozen_disabled, validate_party_gle_currency
-from erpnext.accounts.utils import get_account_currency, get_fiscal_year
-from erpnext.exceptions import (
+from beasm.accounts.party import validate_party_frozen_disabled, validate_party_gle_currency
+from beasm.accounts.utils import get_account_currency, get_fiscal_year
+from beasm.exceptions import (
 	InvalidAccountCurrency,
 	InvalidAccountDimensionError,
 	MandatoryAccountDimensionError,
@@ -267,7 +267,7 @@ class GLEntry(Document):
 		validate_party_frozen_disabled(self.party_type, self.party)
 
 	def validate_currency(self):
-		company_currency = erpnext.get_company_currency(self.company)
+		company_currency = beasm.get_company_currency(self.company)
 		account_currency = get_account_currency(self.account)
 
 		if not self.account_currency:
@@ -410,7 +410,7 @@ def update_against_account(voucher_type, voucher_no):
 
 	if not entries:
 		return
-	company_currency = erpnext.get_company_currency(entries[0].company)
+	company_currency = beasm.get_company_currency(entries[0].company)
 	precision = get_field_precision(frappe.get_meta("GL Entry").get_field("debit"), company_currency)
 
 	accounts_debited, accounts_credited = [], []

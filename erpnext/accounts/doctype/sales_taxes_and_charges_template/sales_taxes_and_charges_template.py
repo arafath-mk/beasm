@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
-from erpnext.controllers.accounts_controller import (
+from beasm.controllers.accounts_controller import (
 	validate_account_head,
 	validate_cost_center,
 	validate_inclusive_tax,

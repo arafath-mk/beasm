@@ -8,7 +8,7 @@ from frappe.model.document import Document
 from frappe.query_builder.custom import ConstantColumn
 from frappe.utils import flt, fmt_money, getdate
 
-import erpnext
+import beasm
 
 form_grid_templates = {"journal_entries": "templates/form_grid/bank_reconciliation_grid.html"}
 
@@ -187,7 +187,7 @@ class BankClearance(Document):
 		)
 
 		self.set("payment_entries", [])
-		default_currency = erpnext.get_default_currency()
+		default_currency = beasm.get_default_currency()
 
 		for d in entries:
 			row = self.append("payment_entries", {})

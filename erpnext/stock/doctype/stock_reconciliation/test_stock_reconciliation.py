@@ -1,7 +1,7 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
-# BEASM - web based ERP (http://erpnext.com)
+# BEASM - web based ERP (http://beasm.com)
 # For license information, please see license.txt
 
 
@@ -9,18 +9,18 @@ import frappe
 from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import add_days, cstr, flt, nowdate, nowtime, random_string
 
-from erpnext.accounts.utils import get_stock_and_account_balance
-from erpnext.stock.doctype.item.test_item import create_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import (
+from beasm.accounts.utils import get_stock_and_account_balance
+from beasm.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.doctype.stock_reconciliation.stock_reconciliation import (
 	EmptyStockReconciliationItemsError,
 	get_items,
 )
-from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
-from erpnext.stock.stock_ledger import get_previous_sle, update_entries_after
-from erpnext.stock.tests.test_utils import StockTestMixin
-from erpnext.stock.utils import get_incoming_rate, get_stock_value_on, get_valuation_method
+from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
+from beasm.stock.stock_ledger import get_previous_sle, update_entries_after
+from beasm.stock.tests.test_utils import StockTestMixin
+from beasm.stock.utils import get_incoming_rate, get_stock_value_on, get_valuation_method
 
 
 class TestStockReconciliation(FrappeTestCase, StockTestMixin):
@@ -315,7 +315,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		self.assertEqual(frappe.db.exists("Batch", batch_no), None)
 
 	def test_stock_reco_balance_qty_for_serial_and_batch_item(self):
-		from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+		from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 		item = create_item("_TestBatchSerialItemReco_1")
 		item.has_batch_no = 1
@@ -347,8 +347,8 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		3) Cancel Stock Entry
 		Expected Result: 3) Serial No only in the Stock Entry is Inactive and Batch qty decreases
 		"""
-		from erpnext.stock.doctype.batch.batch import get_batch_qty
-		from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+		from beasm.stock.doctype.batch.batch import get_batch_qty
+		from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 		item = create_item("_TestBatchSerialItemDependentReco")
 		item.has_batch_no = 1
@@ -480,8 +480,8 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		SR3		| Reco	|	0	|	1		(posting date: today-1) [backdated & blocked]
 		DN2		| DN	|	-2	|	8(-1)	(posting date: today)
 		"""
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-		from erpnext.stock.stock_ledger import NegativeStockError
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.stock_ledger import NegativeStockError
 
 		item_code = self.make_item().name
 		warehouse = "_Test Warehouse - _TC"
@@ -528,8 +528,8 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		SR  | Reco | 100 | 100     (posting date: today-1) (shouldn't be cancelled after DN)
 		DN  | DN   | 100 |   0     (posting date: today)
 		"""
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-		from erpnext.stock.stock_ledger import NegativeStockError
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.stock_ledger import NegativeStockError
 
 		item_code = self.make_item().name
 		warehouse = "_Test Warehouse - _TC"
@@ -569,7 +569,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		|  3       | SR2 | Reco | 11  | 11     (posting date: today+11)
 		|  2       | DN  | DN   | 5   | 6 <-- assert in BIN  (posting date: today+12)
 		"""
-		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+		from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 
 		frappe.db.rollback()
 
@@ -609,7 +609,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		self.assertRaises(frappe.ValidationError, sr.submit)
 
 	def test_serial_no_cancellation(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		item = create_item("Stock-Reco-Serial-Item-9", is_stock_item=1)
 		if not item.has_serial_no:
@@ -703,7 +703,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 		self.assertEqual(flt(sl_entry.qty_after_transaction), 1.0)
 
 	def test_backdated_stock_reco_entry(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		item_code = self.make_item(
 			"Test New Batch Item ABCV",
@@ -823,7 +823,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 				self.assertEqual(row.actual_qty, -60)
 
 	def test_update_stock_reconciliation_while_reposting(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		item_code = self.make_item().name
 		warehouse = "_Test Warehouse - _TC"
@@ -868,7 +868,7 @@ class TestStockReconciliation(FrappeTestCase, StockTestMixin):
 
 	@change_settings("Stock Settings", {"allow_negative_stock": 0})
 	def test_negative_stock_reco_for_batch(self):
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 		item_code = self.make_item(
 			"Test New Batch Item ABCVSD",
@@ -932,7 +932,7 @@ def create_batch_item_with_batch(item_name, batch_id):
 
 
 def insert_existing_sle(warehouse, item_code="_Test Item"):
-	from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+	from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 	se1 = make_stock_entry(
 		posting_date="2012-12-15",

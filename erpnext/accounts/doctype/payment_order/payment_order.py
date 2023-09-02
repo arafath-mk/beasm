@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import nowdate
 
-from erpnext.accounts.party import get_party_account
+from beasm.accounts.party import get_party_account
 
 
 class PaymentOrder(Document):

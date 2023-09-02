@@ -10,9 +10,9 @@ from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cint, cstr, flt, get_link_to_form
 
-from erpnext.controllers.stock_controller import StockController
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.utils import get_incoming_rate
+from beasm.controllers.stock_controller import StockController
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.utils import get_incoming_rate
 
 
 class SubcontractingController(StockController):

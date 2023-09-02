@@ -8,7 +8,7 @@ from frappe.contacts.address_and_contact import (
 )
 from frappe.model.mapper import get_mapped_doc
 
-from erpnext.crm.utils import CRMNote, copy_comments, link_communications, link_open_events
+from beasm.crm.utils import CRMNote, copy_comments, link_communications, link_open_events
 
 
 class Prospect(CRMNote):

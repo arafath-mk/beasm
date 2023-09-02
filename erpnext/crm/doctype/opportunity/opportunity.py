@@ -13,15 +13,15 @@ from frappe.query_builder import DocType, Interval
 from frappe.query_builder.functions import Now
 from frappe.utils import flt, get_fullname
 
-from erpnext.crm.utils import (
+from beasm.crm.utils import (
 	CRMNote,
 	copy_comments,
 	link_communications,
 	link_open_events,
 	link_open_tasks,
 )
-from erpnext.setup.utils import get_exchange_rate
-from erpnext.utilities.transaction_base import TransactionBase
+from beasm.setup.utils import get_exchange_rate
+from beasm.utilities.transaction_base import TransactionBase
 
 
 class Opportunity(TransactionBase, CRMNote):
@@ -288,7 +288,7 @@ def get_item_details(item_code):
 @frappe.whitelist()
 def make_quotation(source_name, target_doc=None):
 	def set_missing_values(source, target):
-		from erpnext.controllers.accounts_controller import get_default_taxes_and_charges
+		from beasm.controllers.accounts_controller import get_default_taxes_and_charges
 
 		quotation = frappe.get_doc(target)
 
@@ -435,7 +435,7 @@ def auto_close_opportunity():
 
 @frappe.whitelist()
 def make_opportunity_from_communication(communication, company, ignore_communication_links=False):
-	from erpnext.crm.doctype.lead.lead import make_lead_from_communication
+	from beasm.crm.doctype.lead.lead import make_lead_from_communication
 
 	doc = frappe.get_doc("Communication", communication)
 

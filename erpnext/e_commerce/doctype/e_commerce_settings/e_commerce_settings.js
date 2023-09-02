@@ -16,7 +16,7 @@ frappe.ui.form.on("E Commerce Settings", {
 		if (frm.doc.enabled) {
 			frm.get_field('store_page_docs').$wrapper.removeClass('hide-control').html(
 				`<div>${__("Follow these steps to create a landing page for your store")}:
-					<a href="https://docs.erpnext.com/docs/user/manual/en/website/store-landing-page"
+					<a href="https://docs.beasm.com/docs/user/manual/en/website/store-landing-page"
 						style="color: var(--gray-600)">
 						docs/store-landing-page
 					</a>
@@ -52,7 +52,7 @@ frappe.ui.form.on("E Commerce Settings", {
 
 	enable_checkout: function(frm) {
 		if (frm.doc.enable_checkout) {
-			erpnext.utils.check_payments_app();
+			beasm.utils.check_payments_app();
 		}
 	}
 });

@@ -18,7 +18,7 @@ class TestQuotation(FrappeTestCase):
 		self.assertTrue(quotation.payment_schedule)
 
 	def test_make_sales_order_terms_copied(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		quotation = frappe.copy_doc(test_records[0])
 		quotation.transaction_date = nowdate()
@@ -31,7 +31,7 @@ class TestQuotation(FrappeTestCase):
 		self.assertTrue(sales_order.get("payment_schedule"))
 
 	def test_maintain_rate_in_sales_cycle_is_enforced(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		maintain_rate = frappe.db.get_single_value("Selling Settings", "maintain_same_sales_rate")
 		frappe.db.set_single_value("Selling Settings", "maintain_same_sales_rate", 1)
@@ -49,7 +49,7 @@ class TestQuotation(FrappeTestCase):
 		frappe.db.set_single_value("Selling Settings", "maintain_same_sales_rate", maintain_rate)
 
 	def test_make_sales_order_with_different_currency(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		quotation = frappe.copy_doc(test_records[0])
 		quotation.transaction_date = nowdate()
@@ -69,7 +69,7 @@ class TestQuotation(FrappeTestCase):
 		self.assertNotEqual(sales_order.currency, quotation.currency)
 
 	def test_make_sales_order(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		quotation = frappe.copy_doc(test_records[0])
 		quotation.transaction_date = nowdate()
@@ -93,7 +93,7 @@ class TestQuotation(FrappeTestCase):
 		sales_order.insert()
 
 	def test_make_sales_order_with_terms(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		quotation = frappe.copy_doc(test_records[0])
 		quotation.transaction_date = nowdate()
@@ -142,7 +142,7 @@ class TestQuotation(FrappeTestCase):
 		self.assertRaises(frappe.ValidationError, quotation.validate)
 
 	def test_so_from_expired_quotation(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
 
 		frappe.db.set_single_value(
 			"Selling Settings", "allow_sales_order_creation_for_expired_quotation", 0
@@ -171,8 +171,8 @@ class TestQuotation(FrappeTestCase):
 		self.assertRaises(frappe.ValidationError, quotation.validate)
 
 	def test_create_quotation_with_margin(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
-		from erpnext.selling.doctype.sales_order.sales_order import (
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.selling.doctype.sales_order.sales_order import (
 			make_delivery_note,
 			make_sales_invoice,
 		)
@@ -212,7 +212,7 @@ class TestQuotation(FrappeTestCase):
 		si.save()
 
 	def test_create_two_quotations(self):
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		first_item = make_item("_Test Laptop", {"is_stock_item": 1})
 
@@ -245,7 +245,7 @@ class TestQuotation(FrappeTestCase):
 		sec_qo.submit()
 
 	def test_quotation_expiry(self):
-		from erpnext.selling.doctype.quotation.quotation import set_expired_status
+		from beasm.selling.doctype.quotation.quotation import set_expired_status
 
 		quotation_item = [{"item_code": "_Test Item", "warehouse": "", "qty": 1, "rate": 500}]
 
@@ -261,9 +261,9 @@ class TestQuotation(FrappeTestCase):
 		self.assertEqual(expired_quotation.status, "Expired")
 
 	def test_product_bundle_mapping_on_creating_so(self):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.stock.doctype.item.test_item import make_item
 
 		make_item("_Test Product Bundle", {"is_stock_item": 0})
 		make_item("_Test Bundle Item 1", {"is_stock_item": 1})
@@ -317,8 +317,8 @@ class TestQuotation(FrappeTestCase):
 		self.assertEqual(quotation_packed_items, so_packed_items)
 
 	def test_product_bundle_price_calculation_when_calculate_bundle_price_is_unchecked(self):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.stock.doctype.item.test_item import make_item
 
 		make_item("_Test Product Bundle", {"is_stock_item": 0})
 		bundle_item1 = make_item("_Test Bundle Item 1", {"is_stock_item": 1})
@@ -336,8 +336,8 @@ class TestQuotation(FrappeTestCase):
 		self.assertEqual(quotation.items[0].amount, 200)
 
 	def test_product_bundle_price_calculation_when_calculate_bundle_price_is_checked(self):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.stock.doctype.item.test_item import make_item
 
 		make_item("_Test Product Bundle", {"is_stock_item": 0})
 		make_item("_Test Bundle Item 1", {"is_stock_item": 1})
@@ -360,8 +360,8 @@ class TestQuotation(FrappeTestCase):
 	def test_product_bundle_price_calculation_for_multiple_product_bundles_when_calculate_bundle_price_is_checked(
 		self,
 	):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.stock.doctype.item.test_item import make_item
 
 		make_item("_Test Product Bundle 1", {"is_stock_item": 0})
 		make_item("_Test Product Bundle 2", {"is_stock_item": 0})
@@ -408,8 +408,8 @@ class TestQuotation(FrappeTestCase):
 		enable_calculate_bundle_price(enable=0)
 
 	def test_packed_items_indices_are_reset_when_product_bundle_is_deleted_from_items_table(self):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.stock.doctype.item.test_item import make_item
 
 		make_item("_Test Product Bundle 1", {"is_stock_item": 0})
 		make_item("_Test Product Bundle 2", {"is_stock_item": 0})
@@ -463,7 +463,7 @@ class TestQuotation(FrappeTestCase):
 		- One set of non-alternative & alternative items [first 3 rows]
 		- One simple stock item
 		"""
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		item_list = []
 		stock_items = {
@@ -509,7 +509,7 @@ class TestQuotation(FrappeTestCase):
 		All having the same item code and unique item name/description due to
 		dynamic services
 		"""
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		item_list = []
 		service_items = {
@@ -551,8 +551,8 @@ class TestQuotation(FrappeTestCase):
 		self.assertEqual(quotation.grand_total, 319)
 
 	def test_alternative_items_sales_order_mapping_with_stock_items(self):
-		from erpnext.selling.doctype.quotation.quotation import make_sales_order
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.quotation.quotation import make_sales_order
+		from beasm.stock.doctype.item.test_item import make_item
 
 		frappe.flags.args = frappe._dict()
 		item_list = []

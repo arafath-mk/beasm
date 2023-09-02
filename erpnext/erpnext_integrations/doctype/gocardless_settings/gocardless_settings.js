@@ -3,6 +3,6 @@
 
 frappe.ui.form.on('GoCardless Settings', {
 	refresh: function(frm) {
-		erpnext.utils.check_payments_app();
+		beasm.utils.check_payments_app();
 	}
 });

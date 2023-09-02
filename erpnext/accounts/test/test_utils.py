@@ -3,17 +3,17 @@ import unittest
 import frappe
 from frappe.test_runner import make_test_objects
 
-from erpnext.accounts.doctype.payment_entry.payment_entry import get_payment_entry
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.party import get_party_shipping_address
-from erpnext.accounts.utils import (
+from beasm.accounts.doctype.payment_entry.payment_entry import get_payment_entry
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.party import get_party_shipping_address
+from beasm.accounts.utils import (
 	get_future_stock_vouchers,
 	get_voucherwise_gl_entries,
 	sort_stock_vouchers_by_posting_date,
 )
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 
 class TestUtils(unittest.TestCase):

@@ -5,8 +5,8 @@ import unittest
 
 import frappe
 
-from erpnext.loan_management.doctype.loan.test_loan import create_loan_accounts, create_loan_type
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from beasm.loan_management.doctype.loan.test_loan import create_loan_accounts, create_loan_type
+from beasm.setup.doctype.employee.test_employee import make_employee
 
 
 class TestLoanApplication(unittest.TestCase):

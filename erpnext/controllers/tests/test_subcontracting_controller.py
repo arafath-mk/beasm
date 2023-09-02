@@ -8,16 +8,16 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import cint
 
-from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
-from erpnext.controllers.subcontracting_controller import (
+from beasm.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
+from beasm.controllers.subcontracting_controller import (
 	get_materials_from_supplier,
 	make_rm_stock_entry,
 )
-from erpnext.manufacturing.doctype.production_plan.test_production_plan import make_bom
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
-from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+from beasm.manufacturing.doctype.production_plan.test_production_plan import make_bom
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 	make_subcontracting_receipt,
 )
 
@@ -1017,7 +1017,7 @@ def set_backflush_based_on(based_on):
 
 
 def get_subcontracting_order(**args):
-	from erpnext.subcontracting.doctype.subcontracting_order.test_subcontracting_order import (
+	from beasm.subcontracting.doctype.subcontracting_order.test_subcontracting_order import (
 		create_subcontracting_order,
 	)
 
@@ -1072,7 +1072,7 @@ def get_rm_items(supplied_items):
 
 
 def make_subcontracted_item(**args):
-	from erpnext.manufacturing.doctype.production_plan.test_production_plan import make_bom
+	from beasm.manufacturing.doctype.production_plan.test_production_plan import make_bom
 
 	args = frappe._dict(args)
 

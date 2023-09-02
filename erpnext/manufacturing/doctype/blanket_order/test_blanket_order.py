@@ -4,7 +4,7 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_months, today
 
-from erpnext import get_company_currency
+from beasm import get_company_currency
 
 from .blanket_order import make_order
 

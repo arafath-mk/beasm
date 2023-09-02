@@ -6,7 +6,7 @@ from datetime import date
 
 import frappe
 
-from erpnext.utilities.bulk_transaction import transaction_processing
+from beasm.utilities.bulk_transaction import transaction_processing
 
 
 class TestBulkTransactionLog(unittest.TestCase):

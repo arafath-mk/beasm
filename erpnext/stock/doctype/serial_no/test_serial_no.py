@@ -1,21 +1,21 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
-# BEASM - web based ERP (http://erpnext.com)
+# BEASM - web based ERP (http://beasm.com)
 # For license information, please see license.txt
 
 
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
-from erpnext.stock.doctype.serial_no.serial_no import *
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
-from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
-from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+from beasm.stock.doctype.serial_no.serial_no import *
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 test_dependencies = ["Item"]
 test_records = frappe.get_test_records("Serial No")

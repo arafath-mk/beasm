@@ -4,7 +4,7 @@ import unittest
 
 import frappe
 
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 	ShoppingCartSetupError,
 )
 

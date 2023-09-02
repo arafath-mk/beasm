@@ -6,10 +6,10 @@ import unittest
 
 import frappe
 
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
-from erpnext.selling.doctype.sales_order.test_sales_order import make_sales_order
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.get_item_details import get_item_details
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.selling.doctype.sales_order.test_sales_order import make_sales_order
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.get_item_details import get_item_details
 
 
 class TestPricingRule(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestPricingRule(unittest.TestCase):
 	def test_pricing_rule_for_discount(self):
 		from frappe import MandatoryError
 
-		from erpnext.stock.get_item_details import get_item_details
+		from beasm.stock.get_item_details import get_item_details
 
 		test_record = {
 			"doctype": "Pricing Rule",
@@ -94,7 +94,7 @@ class TestPricingRule(unittest.TestCase):
 		self.assertEqual(details.get("discount_percentage"), 5)
 
 		frappe.db.sql("update `tabPricing Rule` set priority=NULL where campaign='_Test Campaign'")
-		from erpnext.accounts.doctype.pricing_rule.utils import MultiplePricingRuleConflict
+		from beasm.accounts.doctype.pricing_rule.utils import MultiplePricingRuleConflict
 
 		self.assertRaises(MultiplePricingRuleConflict, get_item_details, args)
 
@@ -105,7 +105,7 @@ class TestPricingRule(unittest.TestCase):
 	def test_pricing_rule_for_margin(self):
 		from frappe import MandatoryError
 
-		from erpnext.stock.get_item_details import get_item_details
+		from beasm.stock.get_item_details import get_item_details
 
 		test_record = {
 			"doctype": "Pricing Rule",
@@ -207,7 +207,7 @@ class TestPricingRule(unittest.TestCase):
 	def test_pricing_rule_for_variants(self):
 		from frappe import MandatoryError
 
-		from erpnext.stock.get_item_details import get_item_details
+		from beasm.stock.get_item_details import get_item_details
 
 		if not frappe.db.exists("Item", "Test Variant PRT"):
 			frappe.get_doc(

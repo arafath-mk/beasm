@@ -5,7 +5,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
-from erpnext.accounts.doctype.account.account import merge_account
+from beasm.accounts.doctype.account.account import merge_account
 
 
 class LedgerMerge(Document):

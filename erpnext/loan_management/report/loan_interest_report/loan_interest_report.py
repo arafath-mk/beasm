@@ -6,8 +6,8 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, flt, getdate
 
-import erpnext
-from erpnext.loan_management.report.applicant_wise_loan_security_exposure.applicant_wise_loan_security_exposure import (
+import beasm
+from beasm.loan_management.report.applicant_wise_loan_security_exposure.applicant_wise_loan_security_exposure import (
 	get_loan_security_details,
 )
 
@@ -181,7 +181,7 @@ def get_active_loan_details(filters):
 	penal_interest_rate_map = get_penal_interest_rate_map()
 	payments = get_payments(loan_list, filters)
 	accrual_map = get_interest_accruals(loan_list, filters)
-	currency = erpnext.get_company_currency(filters.get("company"))
+	currency = beasm.get_company_currency(filters.get("company"))
 
 	for loan in loan_details:
 		total_payment = loan.total_payment if loan.status == "Disbursed" else loan.disbursed_amount

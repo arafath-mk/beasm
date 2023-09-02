@@ -15,23 +15,23 @@ from frappe.utils import (
 	nowdate,
 )
 
-from erpnext.accounts.doctype.journal_entry.test_journal_entry import make_journal_entry
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.assets.doctype.asset.asset import (
+from beasm.accounts.doctype.journal_entry.test_journal_entry import make_journal_entry
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.assets.doctype.asset.asset import (
 	make_sales_invoice,
 	split_asset,
 	update_maintenance_status,
 )
-from erpnext.assets.doctype.asset.depreciation import (
+from beasm.assets.doctype.asset.depreciation import (
 	is_last_day_of_the_month,
 	post_depreciation_entries,
 	restore_asset,
 	scrap_asset,
 )
-from erpnext.stock.doctype.purchase_receipt.purchase_receipt import (
+from beasm.stock.doctype.purchase_receipt.purchase_receipt import (
 	make_purchase_invoice as make_invoice,
 )
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
 
 
 class AssetSetup(unittest.TestCase):
@@ -328,7 +328,7 @@ class TestAsset(AssetSetup):
 		self.assertEqual(frappe.db.get_value("Asset", asset.name, "status"), "Partially Depreciated")
 
 	def test_gle_made_by_asset_sale_for_existing_asset(self):
-		from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+		from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
 
 		asset = create_asset(
 			calculate_depreciation=1,
@@ -993,7 +993,7 @@ class TestDepreciationBasics(AssetSetup):
 	def test_get_depreciation_amount(self):
 		"""Tests if get_depreciation_amount() returns the right value."""
 
-		from erpnext.assets.doctype.asset.asset import get_depreciation_amount
+		from beasm.assets.doctype.asset.asset import get_depreciation_amount
 
 		asset = create_asset(item_code="Macbook Pro", available_for_use_date="2019-12-31")
 

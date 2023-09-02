@@ -14,8 +14,8 @@ from frappe.desk.page.setup_wizard.setup_wizard import make_records
 from frappe.utils import cint, formatdate, get_timestamp, today
 from frappe.utils.nestedset import NestedSet, rebuild_tree
 
-from erpnext.accounts.doctype.account.account import get_account_currency
-from erpnext.setup.setup_wizard.operations.taxes_setup import setup_taxes_and_charges
+from beasm.accounts.doctype.account.account import get_account_currency
+from beasm.setup.setup_wizard.operations.taxes_setup import setup_taxes_and_charges
 
 
 class Company(NestedSet):
@@ -199,7 +199,7 @@ class Company(NestedSet):
 				warehouse.insert()
 
 	def create_default_accounts(self):
-		from erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts import create_charts
+		from beasm.accounts.doctype.account.chart_of_accounts.chart_of_accounts import create_charts
 
 		frappe.local.flags.ignore_root_company_validation = True
 		create_charts(self.name, self.chart_of_accounts, self.existing_company)
@@ -601,7 +601,7 @@ def get_name_with_abbr(name, company):
 
 def install_country_fixtures(company, country):
 	try:
-		module_name = f"erpnext.regional.{frappe.scrub(country)}.setup.setup"
+		module_name = f"beasm.regional.{frappe.scrub(country)}.setup.setup"
 		frappe.get_attr(module_name)(company, False)
 	except ImportError:
 		pass

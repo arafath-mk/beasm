@@ -11,12 +11,12 @@ from frappe.contacts.address_and_contact import (
 )
 from frappe.model.naming import set_name_by_naming_series, set_name_from_naming_options
 
-from erpnext.accounts.party import (  # noqa
+from beasm.accounts.party import (  # noqa
 	get_dashboard_info,
 	get_timeline_data,
 	validate_party_accounts,
 )
-from erpnext.utilities.transaction_base import TransactionBase
+from beasm.utilities.transaction_base import TransactionBase
 
 
 class Supplier(TransactionBase):
@@ -105,7 +105,7 @@ class Supplier(TransactionBase):
 			)
 
 	def create_primary_contact(self):
-		from erpnext.selling.doctype.customer.customer import make_contact
+		from beasm.selling.doctype.customer.customer import make_contact
 
 		if not self.supplier_primary_contact:
 			if self.mobile_no or self.email_id:
@@ -117,7 +117,7 @@ class Supplier(TransactionBase):
 	def create_primary_address(self):
 		from frappe.contacts.doctype.address.address import get_address_display
 
-		from erpnext.selling.doctype.customer.customer import make_address
+		from beasm.selling.doctype.customer.customer import make_address
 
 		if self.flags.is_new_doc and self.get("address_line1"):
 			address = make_address(self)

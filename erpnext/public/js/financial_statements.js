@@ -1,13 +1,13 @@
-frappe.provide("erpnext.financial_statements");
+frappe.provide("beasm.financial_statements");
 
-erpnext.financial_statements = {
+beasm.financial_statements = {
 	"filters": get_filters(),
 	"formatter": function(value, row, column, data, default_formatter) {
 		if (data && column.fieldname=="account") {
 			value = data.account_name || value;
 
 			column.link_onclick =
-				"erpnext.financial_statements.open_general_ledger(" + JSON.stringify(data) + ")";
+				"beasm.financial_statements.open_general_ledger(" + JSON.stringify(data) + ")";
 			column.is_tree = true;
 		}
 
@@ -54,9 +54,9 @@ erpnext.financial_statements = {
 	"initial_depth": 3,
 	onload: function(report) {
 		// dropdown for links to other financial statements
-		erpnext.financial_statements.filters = get_filters()
+		beasm.financial_statements.filters = get_filters()
 
-		let fiscal_year = erpnext.utils.get_fiscal_year(frappe.datetime.get_today());
+		let fiscal_year = beasm.utils.get_fiscal_year(frappe.datetime.get_today());
 
 		frappe.model.with_doc("Fiscal Year", fiscal_year, function(r) {
 			var fy = frappe.model.get_doc("Fiscal Year", fiscal_year);
@@ -137,7 +137,7 @@ function get_filters() {
 			"label": __("Start Year"),
 			"fieldtype": "Link",
 			"options": "Fiscal Year",
-			"default": erpnext.utils.get_fiscal_year(frappe.datetime.get_today()),
+			"default": beasm.utils.get_fiscal_year(frappe.datetime.get_today()),
 			"reqd": 1,
 			"depends_on": "eval:doc.filter_based_on == 'Fiscal Year'"
 		},
@@ -146,7 +146,7 @@ function get_filters() {
 			"label": __("End Year"),
 			"fieldtype": "Link",
 			"options": "Fiscal Year",
-			"default": erpnext.utils.get_fiscal_year(frappe.datetime.get_today()),
+			"default": beasm.utils.get_fiscal_year(frappe.datetime.get_today()),
 			"reqd": 1,
 			"depends_on": "eval:doc.filter_based_on == 'Fiscal Year'"
 		},
@@ -171,7 +171,7 @@ function get_filters() {
 			"fieldname": "presentation_currency",
 			"label": __("Currency"),
 			"fieldtype": "Select",
-			"options": erpnext.get_presentation_currency_list()
+			"options": beasm.get_presentation_currency_list()
 		},
 		{
 			"fieldname": "cost_center",

@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import flt, getdate, nowdate
 
-from erpnext.controllers.selling_controller import SellingController
+from beasm.controllers.selling_controller import SellingController
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -31,7 +31,7 @@ class Quotation(SellingController):
 		if self.items:
 			self.with_items = 1
 
-		from erpnext.stock.doctype.packed_item.packed_item import make_packing_list
+		from beasm.stock.doctype.packed_item.packed_item import make_packing_list
 
 		make_packing_list(self)
 
@@ -232,7 +232,7 @@ class Quotation(SellingController):
 
 
 def get_list_context(context=None):
-	from erpnext.controllers.website_list_for_contact import get_list_context
+	from beasm.controllers.website_list_for_contact import get_list_context
 
 	list_context = get_list_context(context)
 	list_context.update(
@@ -440,7 +440,7 @@ def _make_customer(source_name, ignore_permissions=False):
 				"Customer", {"lead_name": lead_name}, ["name", "customer_name"], as_dict=True
 			)
 			if not customer_name:
-				from erpnext.crm.doctype.lead.lead import _make_customer
+				from beasm.crm.doctype.lead.lead import _make_customer
 
 				customer_doclist = _make_customer(lead_name, ignore_permissions=ignore_permissions)
 				customer = frappe.get_doc(customer_doclist)

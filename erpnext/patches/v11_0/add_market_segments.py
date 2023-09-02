@@ -1,6 +1,6 @@
 import frappe
 
-from erpnext.setup.setup_wizard.operations.install_fixtures import add_market_segments
+from beasm.setup.setup_wizard.operations.install_fixtures import add_market_segments
 
 
 def execute():

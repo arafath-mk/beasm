@@ -271,7 +271,7 @@ def apply_pricing_rule(args, doc=None):
 
 
 def get_serial_no_for_item(args):
-	from erpnext.stock.get_item_details import get_serial_no
+	from beasm.stock.get_item_details import get_serial_no
 
 	item_details = frappe._dict(
 		{"doctype": args.doctype, "name": args.name, "serial_no": args.serial_no}
@@ -294,7 +294,7 @@ def update_pricing_rule_uom(pricing_rule, args):
 
 
 def get_pricing_rule_for_item(args, doc=None, for_validate=False):
-	from erpnext.accounts.doctype.pricing_rule.utils import (
+	from beasm.accounts.doctype.pricing_rule.utils import (
 		get_applied_pricing_rules,
 		get_pricing_rule_items,
 		get_pricing_rules,
@@ -466,7 +466,7 @@ def apply_price_discount_rule(pricing_rule, item_details, args):
 		if pricing_rule.currency == args.currency:
 			pricing_rule_rate = pricing_rule.rate
 
-		# TODO https://github.com/frappe/erpnext/pull/23636 solve this in some other way.
+		# TODO https://github.com/frappe/beasm/pull/23636 solve this in some other way.
 		if pricing_rule_rate:
 			is_blank_uom = pricing_rule.get("uom") != args.get("uom")
 			# Override already set price list rate (from item price)
@@ -495,7 +495,7 @@ def apply_price_discount_rule(pricing_rule, item_details, args):
 
 
 def remove_pricing_rule_for_item(pricing_rules, item_details, item_code=None, rate=None):
-	from erpnext.accounts.doctype.pricing_rule.utils import (
+	from beasm.accounts.doctype.pricing_rule.utils import (
 		get_applied_pricing_rules,
 		get_pricing_rule_items,
 	)

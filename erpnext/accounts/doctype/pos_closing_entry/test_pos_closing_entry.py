@@ -5,13 +5,13 @@ import unittest
 
 import frappe
 
-from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import (
+from beasm.accounts.doctype.pos_closing_entry.pos_closing_entry import (
 	make_closing_entry_from_opening,
 )
-from erpnext.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
-from erpnext.accounts.doctype.pos_opening_entry.test_pos_opening_entry import create_opening_entry
-from erpnext.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
-from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+from beasm.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
+from beasm.accounts.doctype.pos_opening_entry.test_pos_opening_entry import create_opening_entry
+from beasm.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
+from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
 
 
 class TestPOSClosingEntry(unittest.TestCase):

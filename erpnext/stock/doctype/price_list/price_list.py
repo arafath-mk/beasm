@@ -39,7 +39,7 @@ class PriceList(Document):
 
 	def check_impact_on_shopping_cart(self):
 		"Check if Price List currency change impacts E Commerce Cart."
-		from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+		from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 			validate_cart_settings,
 		)
 

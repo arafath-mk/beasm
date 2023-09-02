@@ -7,9 +7,9 @@ import frappe
 from frappe.tests.utils import FrappeTestCase, change_settings, timeout
 from frappe.utils import add_days, add_months, add_to_date, cint, flt, now, today
 
-from erpnext.manufacturing.doctype.job_card.job_card import JobCardCancelError
-from erpnext.manufacturing.doctype.production_plan.test_production_plan import make_bom
-from erpnext.manufacturing.doctype.work_order.work_order import (
+from beasm.manufacturing.doctype.job_card.job_card import JobCardCancelError
+from beasm.manufacturing.doctype.production_plan.test_production_plan import make_bom
+from beasm.manufacturing.doctype.work_order.work_order import (
 	CapacityError,
 	ItemHasVariantError,
 	OverProductionError,
@@ -20,12 +20,12 @@ from erpnext.manufacturing.doctype.work_order.work_order import (
 	make_stock_return_entry,
 	stop_unstop,
 )
-from erpnext.selling.doctype.sales_order.test_sales_order import make_sales_order
-from erpnext.stock.doctype.item.test_item import create_item, make_item
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
-from erpnext.stock.doctype.stock_entry import test_stock_entry
-from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
-from erpnext.stock.utils import get_bin
+from beasm.selling.doctype.sales_order.test_sales_order import make_sales_order
+from beasm.stock.doctype.item.test_item import create_item, make_item
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.doctype.stock_entry import test_stock_entry
+from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
+from beasm.stock.utils import get_bin
 
 test_dependencies = ["BOM"]
 
@@ -841,7 +841,7 @@ class TestWorkOrder(FrappeTestCase):
 		self.assertRaises(frappe.ValidationError, stock_entry.save)
 
 	def test_wo_completion_with_pl_bom(self):
-		from erpnext.manufacturing.doctype.bom.test_bom import (
+		from beasm.manufacturing.doctype.bom.test_bom import (
 			create_bom_with_process_loss_item,
 			create_process_loss_bom_items,
 		)
@@ -1131,7 +1131,7 @@ class TestWorkOrder(FrappeTestCase):
 
 	@change_settings("Manufacturing Settings", {"make_serial_no_batch_from_work_order": 1})
 	def test_auto_batch_creation(self):
-		from erpnext.manufacturing.doctype.bom.test_bom import create_nested_bom
+		from beasm.manufacturing.doctype.bom.test_bom import create_nested_bom
 
 		fg_item = frappe.generate_hash(length=20)
 		child_item = frappe.generate_hash(length=20)
@@ -1152,7 +1152,7 @@ class TestWorkOrder(FrappeTestCase):
 
 	@change_settings("Manufacturing Settings", {"make_serial_no_batch_from_work_order": 1})
 	def test_auto_serial_no_creation(self):
-		from erpnext.manufacturing.doctype.bom.test_bom import create_nested_bom
+		from beasm.manufacturing.doctype.bom.test_bom import create_nested_bom
 
 		fg_item = frappe.generate_hash(length=20)
 		child_item = frappe.generate_hash(length=20)
@@ -1714,9 +1714,9 @@ class TestWorkOrder(FrappeTestCase):
 
 
 def prepare_data_for_workstation_type_check():
-	from erpnext.manufacturing.doctype.operation.test_operation import make_operation
-	from erpnext.manufacturing.doctype.workstation.test_workstation import make_workstation
-	from erpnext.manufacturing.doctype.workstation_type.test_workstation_type import (
+	from beasm.manufacturing.doctype.operation.test_operation import make_operation
+	from beasm.manufacturing.doctype.workstation.test_workstation import make_workstation
+	from beasm.manufacturing.doctype.workstation_type.test_workstation_type import (
 		create_workstation_type,
 	)
 

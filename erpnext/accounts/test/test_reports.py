@@ -1,7 +1,7 @@
 import unittest
 from typing import List, Tuple
 
-from erpnext.tests.utils import ReportFilters, ReportName, execute_script_report
+from beasm.tests.utils import ReportFilters, ReportName, execute_script_report
 
 DEFAULT_FILTERS = {
 	"company": "_Test Company",

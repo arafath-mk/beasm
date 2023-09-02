@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.permissions import add_permission, update_permission_property
-from erpnext.regional.saudi_arabia.wizard.operations.setup_ksa_vat_setting import (
+from beasm.regional.saudi_arabia.wizard.operations.setup_ksa_vat_setting import (
 	create_ksa_vat_setting,
 )
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields

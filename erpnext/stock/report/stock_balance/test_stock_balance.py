@@ -5,9 +5,9 @@ from frappe import _dict
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import today
 
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
-from erpnext.stock.report.stock_balance.stock_balance import execute
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.report.stock_balance.stock_balance import execute
 
 
 def stock_balance(filters):
@@ -156,7 +156,7 @@ class TestStockBalance(FrappeTestCase):
 		)
 
 	def test_show_item_attr(self):
-		from erpnext.controllers.item_variant import create_variant
+		from beasm.controllers.item_variant import create_variant
 
 		self.item.has_variants = True
 		self.item.append("attributes", {"attribute": "Test Size"})

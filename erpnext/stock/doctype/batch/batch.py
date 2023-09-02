@@ -128,7 +128,7 @@ class Batch(Document):
 			frappe.throw(_("The selected item cannot have Batch"))
 
 	def set_batchwise_valuation(self):
-		from erpnext.stock.stock_ledger import get_valuation_method
+		from beasm.stock.stock_ledger import get_valuation_method
 
 		if self.is_new() and get_valuation_method(self.item) != "Moving Average":
 			self.use_batchwise_valuation = 1
@@ -308,7 +308,7 @@ def get_batch_no(item_code, warehouse, qty=1, throw=False, serial_no=None):
 
 
 def get_batches(item_code, warehouse, qty=1, throw=False, serial_no=None):
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	batch = frappe.qb.DocType("Batch")
 	sle = frappe.qb.DocType("Stock Ledger Entry")

@@ -8,13 +8,13 @@ from frappe.contacts.doctype.address.address import get_address_display
 from frappe.utils import cint, cstr, flt, getdate
 from frappe.utils.data import nowtime
 
-from erpnext.accounts.doctype.budget.budget import validate_expense_against_budget
-from erpnext.accounts.party import get_party_details
-from erpnext.buying.utils import update_last_purchase_rate, validate_for_items
-from erpnext.controllers.sales_and_purchase_return import get_rate_for_return
-from erpnext.controllers.subcontracting_controller import SubcontractingController
-from erpnext.stock.get_item_details import get_conversion_factor
-from erpnext.stock.utils import get_incoming_rate
+from beasm.accounts.doctype.budget.budget import validate_expense_against_budget
+from beasm.accounts.party import get_party_details
+from beasm.buying.utils import update_last_purchase_rate, validate_for_items
+from beasm.controllers.sales_and_purchase_return import get_rate_for_return
+from beasm.controllers.subcontracting_controller import SubcontractingController
+from beasm.stock.get_item_details import get_conversion_factor
+from beasm.stock.utils import get_incoming_rate
 
 
 class QtyMismatchError(ValidationError):

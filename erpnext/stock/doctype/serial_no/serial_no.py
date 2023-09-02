@@ -20,8 +20,8 @@ from frappe.utils import (
 	safe_json_loads,
 )
 
-from erpnext.controllers.stock_controller import StockController
-from erpnext.stock.get_item_details import get_reserved_qty_for_so
+from beasm.controllers.stock_controller import StockController
+from beasm.stock.get_item_details import get_reserved_qty_for_so
 
 
 class SerialNoCannotCreateDirectError(ValidationError):

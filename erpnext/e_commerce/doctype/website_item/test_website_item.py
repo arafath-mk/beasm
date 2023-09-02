@@ -6,17 +6,17 @@ import unittest
 
 import frappe
 
-from erpnext.controllers.item_variant import create_variant
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+from beasm.controllers.item_variant import create_variant
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 	get_shopping_cart_settings,
 )
-from erpnext.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
 	setup_e_commerce_settings,
 )
-from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-from erpnext.e_commerce.shopping_cart.product_info import get_product_info_for_website
-from erpnext.stock.doctype.item.item import DataValidationError
-from erpnext.stock.doctype.item.test_item import make_item
+from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+from beasm.e_commerce.shopping_cart.product_info import get_product_info_for_website
+from beasm.stock.doctype.item.item import DataValidationError
+from beasm.stock.doctype.item.test_item import make_item
 
 WEBITEM_DESK_TESTS = ("test_website_item_desk_item_sync", "test_publish_variant_and_template")
 WEBITEM_PRICE_TESTS = (
@@ -77,7 +77,7 @@ class TestWebsiteItem(unittest.TestCase):
 
 	def test_index_creation(self):
 		"Check if index is getting created in db."
-		from erpnext.e_commerce.doctype.website_item.website_item import on_doctype_update
+		from beasm.e_commerce.doctype.website_item.website_item import on_doctype_update
 
 		on_doctype_update()
 
@@ -178,7 +178,7 @@ class TestWebsiteItem(unittest.TestCase):
 		Check if breadcrumbs include homepage, product listing navigation page,
 		parent item group(s) and item group
 		"""
-		from erpnext.setup.doctype.item_group.item_group import get_parent_item_groups
+		from beasm.setup.doctype.item_group.item_group import get_parent_item_groups
 
 		item_code = "Test Breadcrumb Item"
 		item = make_item(
@@ -335,7 +335,7 @@ class TestWebsiteItem(unittest.TestCase):
 		        - Warehouse unset
 		2) Showing stock availability disabled
 		"""
-		from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+		from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 		item_code = "Test Mobile Phone"
 		create_regular_web_item()

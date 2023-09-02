@@ -8,9 +8,9 @@ import frappe
 from frappe.tests.utils import change_settings
 from frappe.utils import flt, nowdate
 
-from erpnext.accounts.doctype.account.test_account import get_inventory_account
-from erpnext.accounts.doctype.journal_entry.journal_entry import StockAccountInvalidTransaction
-from erpnext.exceptions import InvalidAccountCurrency
+from beasm.accounts.doctype.account.test_account import get_inventory_account
+from beasm.accounts.doctype.journal_entry.journal_entry import StockAccountInvalidTransaction
+from beasm.exceptions import InvalidAccountCurrency
 
 
 class TestJournalEntry(unittest.TestCase):
@@ -21,14 +21,14 @@ class TestJournalEntry(unittest.TestCase):
 		self.jv_against_voucher_testcase(base_jv, jv_invoice)
 
 	def test_jv_against_sales_order(self):
-		from erpnext.selling.doctype.sales_order.test_sales_order import make_sales_order
+		from beasm.selling.doctype.sales_order.test_sales_order import make_sales_order
 
 		sales_order = make_sales_order(do_not_save=True)
 		base_jv = frappe.copy_doc(test_records[0])
 		self.jv_against_voucher_testcase(base_jv, sales_order)
 
 	def test_jv_against_purchase_order(self):
-		from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
+		from beasm.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
 
 		purchase_order = create_purchase_order(do_not_save=True)
 		base_jv = frappe.copy_doc(test_records[1])
@@ -117,7 +117,7 @@ class TestJournalEntry(unittest.TestCase):
 		company = "_Test Company with perpetual inventory"
 		stock_account = get_inventory_account(company)
 
-		from erpnext.accounts.utils import get_stock_and_account_balance
+		from beasm.accounts.utils import get_stock_and_account_balance
 
 		account_bal, stock_bal, warehouse_list = get_stock_and_account_balance(
 			stock_account, nowdate(), company
@@ -216,7 +216,7 @@ class TestJournalEntry(unittest.TestCase):
 		self.assertFalse(gle)
 
 	def test_reverse_journal_entry(self):
-		from erpnext.accounts.doctype.journal_entry.journal_entry import make_reverse_journal_entry
+		from beasm.accounts.doctype.journal_entry.journal_entry import make_reverse_journal_entry
 
 		jv = make_journal_entry("_Test Bank USD - _TC", "Sales - _TC", 100, exchange_rate=50, save=False)
 
@@ -330,7 +330,7 @@ class TestJournalEntry(unittest.TestCase):
 		self.assertEqual(jv1.inter_company_journal_entry_reference, "")
 
 	def test_jv_with_cost_centre(self):
-		from erpnext.accounts.doctype.cost_center.test_cost_center import create_cost_center
+		from beasm.accounts.doctype.cost_center.test_cost_center import create_cost_center
 
 		cost_center = "_Test Cost Center for BS Account - _TC"
 		create_cost_center(cost_center_name="_Test Cost Center for BS Account", company="_Test Company")
@@ -363,7 +363,7 @@ class TestJournalEntry(unittest.TestCase):
 			self.assertEqual(expected_values[gle.account]["cost_center"], gle.cost_center)
 
 	def test_jv_with_project(self):
-		from erpnext.projects.doctype.project.test_project import make_project
+		from beasm.projects.doctype.project.test_project import make_project
 
 		if not frappe.db.exists("Project", {"project_name": "Journal Entry Project"}):
 			project = make_project(
@@ -406,8 +406,8 @@ class TestJournalEntry(unittest.TestCase):
 			self.assertEqual(expected_values[gle.account]["project"], gle.project)
 
 	def test_jv_account_and_party_balance_with_cost_centre(self):
-		from erpnext.accounts.doctype.cost_center.test_cost_center import create_cost_center
-		from erpnext.accounts.utils import get_balance_on
+		from beasm.accounts.doctype.cost_center.test_cost_center import create_cost_center
+		from beasm.accounts.utils import get_balance_on
 
 		cost_center = "_Test Cost Center for BS Account - _TC"
 		create_cost_center(cost_center_name="_Test Cost Center for BS Account", company="_Test Company")

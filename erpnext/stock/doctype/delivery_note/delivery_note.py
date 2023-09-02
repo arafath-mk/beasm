@@ -10,10 +10,10 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.model.utils import get_fetch_values
 from frappe.utils import cint, flt
 
-from erpnext.controllers.accounts_controller import get_taxes_and_charges
-from erpnext.controllers.selling_controller import SellingController
-from erpnext.stock.doctype.batch.batch import set_batch_nos
-from erpnext.stock.doctype.serial_no.serial_no import get_delivery_note_serial_no
+from beasm.controllers.accounts_controller import get_taxes_and_charges
+from beasm.controllers.selling_controller import SellingController
+from beasm.stock.doctype.batch.batch import set_batch_nos
+from beasm.stock.doctype.serial_no.serial_no import get_delivery_note_serial_no
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -139,7 +139,7 @@ class DeliveryNote(SellingController):
 		self.validate_uom_is_integer("uom", "qty")
 		self.validate_with_previous_doc()
 
-		from erpnext.stock.doctype.packed_item.packed_item import make_packing_list
+		from beasm.stock.doctype.packed_item.packed_item import make_packing_list
 
 		make_packing_list(self)
 
@@ -273,7 +273,7 @@ class DeliveryNote(SellingController):
 		self.ignore_linked_doctypes = ("GL Entry", "Stock Ledger Entry", "Repost Item Valuation")
 
 	def check_credit_limit(self):
-		from erpnext.selling.doctype.customer.customer import check_credit_limit
+		from beasm.selling.doctype.customer.customer import check_credit_limit
 
 		extra_amount = 0
 		validate_against_credit_limit = False
@@ -320,7 +320,7 @@ class DeliveryNote(SellingController):
 					)
 
 	def update_pick_list_status(self):
-		from erpnext.stock.doctype.pick_list.pick_list import update_pick_list_status
+		from beasm.stock.doctype.pick_list.pick_list import update_pick_list_status
 
 		update_pick_list_status(self.pick_list)
 
@@ -491,7 +491,7 @@ def update_billed_amount_based_on_so(so_detail, update_modified=True):
 
 
 def get_list_context(context=None):
-	from erpnext.controllers.website_list_for_contact import get_list_context
+	from beasm.controllers.website_list_for_contact import get_list_context
 
 	list_context = get_list_context(context)
 	list_context.update(
@@ -832,7 +832,7 @@ def make_shipment(source_name, target_doc=None):
 
 @frappe.whitelist()
 def make_sales_return(source_name, target_doc=None):
-	from erpnext.controllers.sales_and_purchase_return import make_return_doc
+	from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 	return make_return_doc("Delivery Note", source_name, target_doc)
 
@@ -849,7 +849,7 @@ def make_inter_company_purchase_receipt(source_name, target_doc=None):
 
 
 def make_inter_company_transaction(doctype, source_name, target_doc=None):
-	from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
+	from beasm.accounts.doctype.sales_invoice.sales_invoice import (
 		get_inter_company_details,
 		set_purchase_references,
 		update_address,

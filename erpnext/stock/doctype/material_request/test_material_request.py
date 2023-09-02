@@ -1,7 +1,7 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
-# BEASM - web based ERP (http://erpnext.com)
+# BEASM - web based ERP (http://beasm.com)
 # For license information, please see license.txt
 
 
@@ -9,8 +9,8 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import flt, today
 
-from erpnext.stock.doctype.item.test_item import create_item
-from erpnext.stock.doctype.material_request.material_request import (
+from beasm.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.material_request.material_request import (
 	make_in_transit_stock_entry,
 	make_purchase_order,
 	make_stock_entry,
@@ -572,7 +572,7 @@ class TestMaterialRequest(FrappeTestCase):
 		self.assertEqual(se_doc.get("items")[0].s_warehouse, "_Test Warehouse - _TC")
 
 	def test_warehouse_company_validation(self):
-		from erpnext.stock.utils import InvalidWarehouseCompany
+		from beasm.stock.utils import InvalidWarehouseCompany
 
 		mr = frappe.copy_doc(test_records[0])
 		mr.company = "_Test Company 1"

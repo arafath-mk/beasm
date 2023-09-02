@@ -6,16 +6,16 @@ import unittest
 import frappe
 from frappe.utils import flt, nowdate
 
-from erpnext.assets.doctype.asset.asset import (
+from beasm.assets.doctype.asset.asset import (
 	get_asset_account,
 	get_asset_value_after_depreciation,
 )
-from erpnext.assets.doctype.asset.test_asset import (
+from beasm.assets.doctype.asset.test_asset import (
 	create_asset,
 	create_asset_data,
 	set_depreciation_settings_in_company,
 )
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.item.test_item import create_item
 
 
 class TestAssetRepair(unittest.TestCase):
@@ -81,8 +81,8 @@ class TestAssetRepair(unittest.TestCase):
 		self.assertEqual(stock_entry.items[0].qty, asset_repair.stock_items[0].consumed_quantity)
 
 	def test_serialized_item_consumption(self):
-		from erpnext.stock.doctype.serial_no.serial_no import SerialNoRequiredError
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.serial_no import SerialNoRequiredError
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		stock_entry = make_serialized_item()
 		serial_nos = stock_entry.get("items")[0].serial_no
@@ -252,8 +252,8 @@ def num_of_depreciations(asset):
 
 
 def create_asset_repair(**args):
-	from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-	from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+	from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+	from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 	args = frappe._dict(args)
 

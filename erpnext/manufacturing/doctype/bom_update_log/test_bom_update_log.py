@@ -4,11 +4,11 @@
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.manufacturing.doctype.bom_update_log.bom_update_log import (
+from beasm.manufacturing.doctype.bom_update_log.bom_update_log import (
 	BOMMissingError,
 	resume_bom_cost_update_jobs,
 )
-from erpnext.manufacturing.doctype.bom_update_tool.bom_update_tool import (
+from beasm.manufacturing.doctype.bom_update_tool.bom_update_tool import (
 	enqueue_replace_bom,
 	enqueue_update_cost,
 )

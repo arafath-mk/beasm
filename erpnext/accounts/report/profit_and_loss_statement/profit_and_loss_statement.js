@@ -2,11 +2,11 @@
 // License: GNU General Public License v3. See license.txt
 
 
-frappe.require("assets/erpnext/js/financial_statements.js", function() {
+frappe.require("assets/beasm/js/financial_statements.js", function() {
 	frappe.query_reports["Profit and Loss Statement"] = $.extend({},
-		erpnext.financial_statements);
+		beasm.financial_statements);
 
-	erpnext.utils.add_dimensions('Profit and Loss Statement', 10);
+	beasm.utils.add_dimensions('Profit and Loss Statement', 10);
 
 	frappe.query_reports["Profit and Loss Statement"]["filters"].push(
 		{

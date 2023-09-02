@@ -6,13 +6,13 @@ import unittest
 import frappe
 from frappe.utils import cint, flt, getdate, now_datetime
 
-from erpnext.assets.doctype.asset.depreciation import post_depreciation_entries
-from erpnext.assets.doctype.asset.test_asset import (
+from beasm.assets.doctype.asset.depreciation import post_depreciation_entries
+from beasm.assets.doctype.asset.test_asset import (
 	create_asset,
 	create_asset_data,
 	set_depreciation_settings_in_company,
 )
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.item.test_item import create_item
 
 
 class TestAssetCapitalization(unittest.TestCase):
@@ -310,7 +310,7 @@ def create_asset_capitalization_data():
 
 
 def create_asset_capitalization(**args):
-	from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+	from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 	args = frappe._dict(args)
 
@@ -386,7 +386,7 @@ def create_asset_capitalization(**args):
 
 
 def create_stock_reconciliation(asset_capitalization, stock_rate=0):
-	from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+	from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 		EmptyStockReconciliationItemsError,
 		create_stock_reconciliation,
 	)

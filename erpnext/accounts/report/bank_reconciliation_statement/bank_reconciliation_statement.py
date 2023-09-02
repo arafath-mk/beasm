@@ -9,7 +9,7 @@ from frappe.query_builder.functions import Sum
 from frappe.utils import flt, getdate
 from pypika import CustomFunction
 
-from erpnext.accounts.utils import get_balance_on
+from beasm.accounts.utils import get_balance_on
 
 
 def execute(filters=None):

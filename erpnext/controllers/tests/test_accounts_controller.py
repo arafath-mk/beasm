@@ -9,13 +9,13 @@ from frappe.query_builder.functions import Sum
 from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import add_days, flt, nowdate
 
-from erpnext import get_default_cost_center
-from erpnext.accounts.doctype.payment_entry.payment_entry import get_payment_entry
-from erpnext.accounts.doctype.payment_entry.test_payment_entry import create_payment_entry
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
-from erpnext.accounts.party import get_party_account
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm import get_default_cost_center
+from beasm.accounts.doctype.payment_entry.payment_entry import get_payment_entry
+from beasm.accounts.doctype.payment_entry.test_payment_entry import create_payment_entry
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.accounts.party import get_party_account
+from beasm.stock.doctype.item.test_item import create_item
 
 
 def make_customer(customer_name, currency=None):

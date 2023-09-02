@@ -6,7 +6,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt
 
-from erpnext.controllers.status_updater import StatusUpdater
+from beasm.controllers.status_updater import StatusUpdater
 
 
 class PackingSlip(StatusUpdater):
@@ -34,7 +34,7 @@ class PackingSlip(StatusUpdater):
 		]
 
 	def validate(self) -> None:
-		from erpnext.utilities.transaction_base import validate_uom_is_integer
+		from beasm.utilities.transaction_base import validate_uom_is_integer
 
 		self.validate_delivery_note()
 		self.validate_case_nos()
@@ -184,7 +184,7 @@ class PackingSlip(StatusUpdater):
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def item_details(doctype, txt, searchfield, start, page_len, filters):
-	from erpnext.controllers.queries import get_match_cond
+	from beasm.controllers.queries import get_match_cond
 
 	return frappe.db.sql(
 		"""select name, item_name, description from `tabItem`

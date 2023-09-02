@@ -9,7 +9,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint, date_diff, flt
 
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 Filters = frappe._dict
 

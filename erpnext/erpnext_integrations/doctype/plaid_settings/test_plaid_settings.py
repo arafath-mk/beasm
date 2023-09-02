@@ -7,8 +7,8 @@ import unittest
 import frappe
 from frappe.utils.response import json_handler
 
-from erpnext.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
-from erpnext.erpnext_integrations.doctype.plaid_settings.plaid_settings import (
+from beasm.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
+from beasm.beasm_integrations.doctype.plaid_settings.plaid_settings import (
 	add_account_subtype,
 	add_account_type,
 	add_bank_accounts,

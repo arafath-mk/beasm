@@ -6,7 +6,7 @@ import frappe
 from frappe import _
 from frappe.utils import format_date, get_datetime
 
-from erpnext.utilities.transaction_base import TransactionBase
+from beasm.utilities.transaction_base import TransactionBase
 
 
 class MaintenanceVisit(TransactionBase):

@@ -8,7 +8,7 @@ from frappe.contacts.doctype.contact.contact import get_default_contact
 from frappe.model.document import Document
 from frappe.utils import flt, get_time
 
-from erpnext.accounts.party import get_party_shipping_address
+from beasm.accounts.party import get_party_shipping_address
 
 
 class Shipment(Document):

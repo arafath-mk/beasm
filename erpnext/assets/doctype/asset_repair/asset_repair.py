@@ -5,10 +5,10 @@ import frappe
 from frappe import _
 from frappe.utils import add_months, cint, flt, getdate, time_diff_in_hours
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.assets.doctype.asset.asset import get_asset_account
-from erpnext.controllers.accounts_controller import AccountsController
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.assets.doctype.asset.asset import get_asset_account
+from beasm.controllers.accounts_controller import AccountsController
 
 
 class AssetRepair(AccountsController):
@@ -225,7 +225,7 @@ class AssetRepair(AccountsController):
 		stock_entry = frappe.get_doc("Stock Entry", self.stock_entry)
 
 		default_expense_account = None
-		if not erpnext.is_perpetual_inventory_enabled(self.company):
+		if not beasm.is_perpetual_inventory_enabled(self.company):
 			default_expense_account = frappe.get_cached_value(
 				"Company", self.company, "default_expense_account"
 			)

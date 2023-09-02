@@ -9,17 +9,17 @@ from frappe.query_builder import Criterion
 from frappe.query_builder.custom import ConstantColumn
 from frappe.utils import flt, fmt_money, get_link_to_form, getdate, nowdate, today
 
-import erpnext
-from erpnext.accounts.doctype.process_payment_reconciliation.process_payment_reconciliation import (
+import beasm
+from beasm.accounts.doctype.process_payment_reconciliation.process_payment_reconciliation import (
 	is_any_doc_running,
 )
-from erpnext.accounts.utils import (
+from beasm.accounts.utils import (
 	QueryPaymentLedger,
 	create_gain_loss_journal,
 	get_outstanding_invoices,
 	reconcile_against_document,
 )
-from erpnext.controllers.accounts_controller import get_advance_payment_entries
+from beasm.controllers.accounts_controller import get_advance_payment_entries
 
 
 class PaymentReconciliation(Document):
@@ -85,7 +85,7 @@ class PaymentReconciliation(Document):
 
 		dr_or_cr = (
 			"credit_in_account_currency"
-			if erpnext.get_party_account_type(self.party_type) == "Receivable"
+			if beasm.get_party_account_type(self.party_type) == "Receivable"
 			else "debit_in_account_currency"
 		)
 
@@ -163,7 +163,7 @@ class PaymentReconciliation(Document):
 
 		ple = qb.DocType("Payment Ledger Entry")
 
-		if erpnext.get_party_account_type(self.party_type) == "Receivable":
+		if beasm.get_party_account_type(self.party_type) == "Receivable":
 			self.common_filter_conditions.append(ple.account_type == "Receivable")
 		else:
 			self.common_filter_conditions.append(ple.account_type == "Payable")
@@ -350,7 +350,7 @@ class PaymentReconciliation(Document):
 	def reconcile_allocations(self, skip_ref_details_update_for_pe=False):
 		dr_or_cr = (
 			"credit_in_account_currency"
-			if erpnext.get_party_account_type(self.party_type) == "Receivable"
+			if beasm.get_party_account_type(self.party_type) == "Receivable"
 			else "debit_in_account_currency"
 		)
 
@@ -573,7 +573,7 @@ def reconcile_dr_cr_note(dr_cr_notes, company):
 			else "credit_in_account_currency"
 		)
 
-		company_currency = erpnext.get_company_currency(company)
+		company_currency = beasm.get_company_currency(company)
 
 		jv = frappe.get_doc(
 			{
@@ -590,7 +590,7 @@ def reconcile_dr_cr_note(dr_cr_notes, company):
 						inv.dr_or_cr: abs(inv.allocated_amount),
 						"reference_type": inv.against_voucher_type,
 						"reference_name": inv.against_voucher,
-						"cost_center": erpnext.get_default_cost_center(company),
+						"cost_center": beasm.get_default_cost_center(company),
 						"user_remark": f"{fmt_money(flt(inv.allocated_amount), currency=company_currency)} against {inv.against_voucher}",
 						"exchange_rate": inv.exchange_rate,
 					},
@@ -605,7 +605,7 @@ def reconcile_dr_cr_note(dr_cr_notes, company):
 						),
 						"reference_type": inv.voucher_type,
 						"reference_name": inv.voucher_no,
-						"cost_center": erpnext.get_default_cost_center(company),
+						"cost_center": beasm.get_default_cost_center(company),
 						"user_remark": f"{fmt_money(flt(inv.allocated_amount), currency=company_currency)} from {inv.voucher_no}",
 						"exchange_rate": inv.exchange_rate,
 					},

@@ -6,12 +6,12 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_days, add_to_date, flt, now
 
-from erpnext.accounts.doctype.account.test_account import create_account, get_inventory_account
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.utils import update_gl_entries_after
-from erpnext.assets.doctype.asset.test_asset import create_asset_category, create_fixed_asset_item
-from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import (
+from beasm.accounts.doctype.account.test_account import create_account, get_inventory_account
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.utils import update_gl_entries_after
+from beasm.assets.doctype.asset.test_asset import create_asset_category, create_fixed_asset_item
+from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import (
 	get_gl_entries,
 	make_purchase_receipt,
 )
@@ -122,7 +122,7 @@ class TestLandedCostVoucher(FrappeTestCase):
 
 	def test_landed_cost_voucher_stock_impact(self):
 		"Test impact of LCV on future stock balances."
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		item = make_item("LCV Stock Item", {"is_stock_item": 1})
 		warehouse = "Stores - _TC"
@@ -177,7 +177,7 @@ class TestLandedCostVoucher(FrappeTestCase):
 
 	def test_landed_cost_voucher_for_zero_purchase_rate(self):
 		"Test impact of LCV on future stock balances."
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		item = make_item("LCV Stock Item", {"is_stock_item": 1})
 		warehouse = "Stores - _TC"
@@ -465,7 +465,7 @@ class TestLandedCostVoucher(FrappeTestCase):
 		self.assertEqual(pr.items[1].landed_cost_voucher_amount, 100)
 
 	def test_multi_currency_lcv(self):
-		from erpnext.setup.doctype.currency_exchange.test_currency_exchange import (
+		from beasm.setup.doctype.currency_exchange.test_currency_exchange import (
 			save_new_records,
 			test_records,
 		)

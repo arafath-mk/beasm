@@ -19,10 +19,10 @@ from frappe.utils import (
 from frappe.utils.data import get_link_to_form
 from frappe.utils.user import get_users_with_role
 
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_checks_for_pl_and_bs_accounts,
 )
-from erpnext.accounts.doctype.journal_entry.journal_entry import make_reverse_journal_entry
+from beasm.accounts.doctype.journal_entry.journal_entry import make_reverse_journal_entry
 
 
 def post_depreciation_entries(date=None):

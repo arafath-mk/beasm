@@ -6,12 +6,12 @@ from json import dumps
 
 import frappe
 
-from erpnext.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
-from erpnext.erpnext_integrations.doctype.mpesa_settings.mpesa_settings import (
+from beasm.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
+from beasm.beasm_integrations.doctype.mpesa_settings.mpesa_settings import (
 	process_balance_info,
 	verify_transaction,
 )
-from erpnext.erpnext_integrations.utils import create_mode_of_payment
+from beasm.beasm_integrations.utils import create_mode_of_payment
 
 
 class TestMpesaSettings(unittest.TestCase):

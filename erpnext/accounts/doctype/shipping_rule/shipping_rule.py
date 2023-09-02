@@ -9,7 +9,7 @@ from frappe import _, msgprint, throw
 from frappe.model.document import Document
 from frappe.utils import flt, fmt_money
 
-import erpnext
+import beasm
 
 
 class OverlappingConditionError(frappe.ValidationError):
@@ -167,7 +167,7 @@ class ShippingRule(Document):
 						overlaps.append([d1, d2])
 
 		if overlaps:
-			company_currency = erpnext.get_company_currency(self.company)
+			company_currency = beasm.get_company_currency(self.company)
 			msgprint(_("Overlapping conditions found between:"))
 			messages = []
 			for d1, d2 in overlaps:

@@ -7,7 +7,7 @@ from frappe import _
 from frappe.utils import cint, flt, getdate
 from pypika import functions as fn
 
-from erpnext.stock.doctype.warehouse.warehouse import apply_warehouse_filter
+from beasm.stock.doctype.warehouse.warehouse import apply_warehouse_filter
 
 SLE_COUNT_LIMIT = 10_000
 

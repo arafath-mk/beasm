@@ -4,7 +4,7 @@
 
 import frappe
 
-from erpnext.setup.install import create_default_cash_flow_mapper_templates
+from beasm.setup.install import create_default_cash_flow_mapper_templates
 
 
 def execute():

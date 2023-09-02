@@ -10,13 +10,13 @@ from frappe.model.document import Document
 from frappe.query_builder.custom import ConstantColumn
 from frappe.utils import cint, flt
 
-from erpnext import get_default_cost_center
-from erpnext.accounts.doctype.bank_transaction.bank_transaction import get_total_allocated_amount
-from erpnext.accounts.report.bank_reconciliation_statement.bank_reconciliation_statement import (
+from beasm import get_default_cost_center
+from beasm.accounts.doctype.bank_transaction.bank_transaction import get_total_allocated_amount
+from beasm.accounts.report.bank_reconciliation_statement.bank_reconciliation_statement import (
 	get_amounts_not_reflected_in_system,
 	get_entries,
 )
-from erpnext.accounts.utils import get_balance_on
+from beasm.accounts.utils import get_balance_on
 
 
 class BankReconciliationTool(Document):

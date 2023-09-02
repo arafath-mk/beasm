@@ -6,12 +6,12 @@ import unittest
 import frappe
 from frappe.utils import getdate
 
-from erpnext.accounts.doctype.bank_transaction.test_bank_transaction import create_bank_account
-from erpnext.accounts.doctype.payment_entry.payment_entry import (
+from beasm.accounts.doctype.bank_transaction.test_bank_transaction import create_bank_account
+from beasm.accounts.doctype.payment_entry.payment_entry import (
 	get_payment_entry,
 	make_payment_order,
 )
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
 
 
 class TestPaymentOrder(unittest.TestCase):

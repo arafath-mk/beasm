@@ -102,11 +102,11 @@ jobs:
       - name: Run Patch Tests
         run: |
           cd ~/frappe-bench/
-          wget https://erpnext.com/files/v10-erpnext.sql.gz
-          bench --site test_site --force restore ~/frappe-bench/v10-erpnext.sql.gz
+          wget https://beasm.com/files/v10-beasm.sql.gz
+          bench --site test_site --force restore ~/frappe-bench/v10-beasm.sql.gz
 
           git -C "apps/frappe" remote set-url upstream https://github.com/frappe/frappe.git
-          git -C "apps/erpnext" remote set-url upstream https://github.com/frappe/erpnext.git
+          git -C "apps/beasm" remote set-url upstream https://github.com/frappe/beasm.git
 
           for version in $(seq 12 13)
           do
@@ -114,15 +114,15 @@ jobs:
               branch_name="version-$version-hotfix"
 
               git -C "apps/frappe" fetch --depth 1 upstream $branch_name:$branch_name
-              git -C "apps/erpnext" fetch --depth 1 upstream $branch_name:$branch_name
+              git -C "apps/beasm" fetch --depth 1 upstream $branch_name:$branch_name
 
               git -C "apps/frappe" checkout -q -f $branch_name
-              git -C "apps/erpnext" checkout -q -f $branch_name
+              git -C "apps/beasm" checkout -q -f $branch_name
 
               rm -rf ~/frappe-bench/env
               bench setup env --python python3.7
               bench pip install -e ./apps/payments
-              bench pip install -e ./apps/erpnext
+              bench pip install -e ./apps/beasm
 
               bench --site test_site migrate
           done
@@ -130,12 +130,12 @@ jobs:
 
           echo "Updating to latest version"
           git -C "apps/frappe" checkout -q -f "${GITHUB_BASE_REF:-${GITHUB_REF##*/}}"
-          git -C "apps/erpnext" checkout -q -f "$GITHUB_SHA"
+          git -C "apps/beasm" checkout -q -f "$GITHUB_SHA"
 
           rm -rf ~/frappe-bench/env
           bench -v setup env --python python3.10
           bench pip install -e ./apps/payments
-          bench pip install -e ./apps/erpnext
+          bench pip install -e ./apps/beasm
 
           bench --site test_site migrate
           bench --site test_site install-app payments

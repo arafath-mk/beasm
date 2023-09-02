@@ -5,7 +5,7 @@ import frappe
 from frappe import _
 from frappe.integrations.utils import create_request_log
 
-from erpnext.utilities import payment_app_import_guard
+from beasm.utilities import payment_app_import_guard
 
 
 def create_stripe_subscription(gateway_controller, data):

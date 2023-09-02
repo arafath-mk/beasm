@@ -8,33 +8,33 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_days, cstr, flt, nowdate, nowtime, today
 
-from erpnext.accounts.doctype.account.test_account import get_inventory_account
-from erpnext.accounts.utils import get_balance_on
-from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-from erpnext.selling.doctype.sales_order.test_sales_order import (
+from beasm.accounts.doctype.account.test_account import get_inventory_account
+from beasm.accounts.utils import get_balance_on
+from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+from beasm.selling.doctype.sales_order.test_sales_order import (
 	automatically_fetch_payment_terms,
 	compare_payment_schedules,
 	create_dn_against_so,
 	make_sales_order,
 )
-from erpnext.stock.doctype.delivery_note.delivery_note import (
+from beasm.stock.doctype.delivery_note.delivery_note import (
 	make_delivery_trip,
 	make_sales_invoice,
 )
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
-from erpnext.stock.doctype.serial_no.serial_no import SerialNoWarehouseError, get_serial_nos
-from erpnext.stock.doctype.stock_entry.test_stock_entry import (
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
+from beasm.stock.doctype.serial_no.serial_no import SerialNoWarehouseError, get_serial_nos
+from beasm.stock.doctype.stock_entry.test_stock_entry import (
 	get_qty_after_transaction,
 	make_serialized_item,
 	make_stock_entry,
 )
-from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 	create_stock_reconciliation,
 	set_valuation_method,
 )
-from erpnext.stock.doctype.warehouse.test_warehouse import get_warehouse
-from erpnext.stock.stock_ledger import get_previous_sle
+from beasm.stock.doctype.warehouse.test_warehouse import get_warehouse
+from beasm.stock.stock_ledger import get_previous_sle
 
 
 class TestDeliveryNote(FrappeTestCase):
@@ -268,7 +268,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn.items[0].returned_qty, 2)
 		self.assertEqual(dn.per_returned, 40)
 
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 		return_dn_2 = make_return_doc("Delivery Note", dn.name)
 
@@ -339,7 +339,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn.status, "Return Issued")
 
 	def test_delivery_note_return_valuation_on_different_warehuose(self):
-		from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+		from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 		company = frappe.db.get_value("Warehouse", "Stores - TCP1", "company")
 		item_code = "Test Return Valuation For DN"
@@ -361,7 +361,7 @@ class TestDeliveryNote(FrappeTestCase):
 		dn.submit()
 		self.assertEqual(dn.items[0].incoming_rate, 150)
 
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 		return_dn = make_return_doc(dn.doctype, dn.name)
 		return_dn.items[0].warehouse = return_warehouse
@@ -522,8 +522,8 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(gle_warehouse_amount, 1400)
 
 	def test_bin_details_of_packed_item(self):
-		from erpnext.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.selling.doctype.product_bundle.test_product_bundle import make_product_bundle
+		from beasm.stock.doctype.item.test_item import make_item
 
 		# test Update Items with product bundle
 		if not frappe.db.exists("Item", "_Test Product Bundle Item New"):
@@ -601,7 +601,7 @@ class TestDeliveryNote(FrappeTestCase):
 		)
 
 	def test_delivery_of_bundled_items_to_target_warehouse(self):
-		from erpnext.selling.doctype.customer.test_customer import create_internal_customer
+		from beasm.selling.doctype.customer.test_customer import create_internal_customer
 
 		company = frappe.db.get_value("Warehouse", "Stores - TCP1", "company")
 		customer_name = create_internal_customer(
@@ -704,7 +704,7 @@ class TestDeliveryNote(FrappeTestCase):
 		frappe.db.rollback()
 
 	def test_closed_delivery_note(self):
-		from erpnext.stock.doctype.delivery_note.delivery_note import update_delivery_note_status
+		from beasm.stock.doctype.delivery_note.delivery_note import update_delivery_note_status
 
 		make_stock_entry(target="Stores - TCP1", qty=5, basic_rate=100)
 
@@ -750,7 +750,7 @@ class TestDeliveryNote(FrappeTestCase):
 
 	def test_dn_billing_status_case2(self):
 		# SO -> SI and SO -> DN1, DN2
-		from erpnext.selling.doctype.sales_order.sales_order import (
+		from beasm.selling.doctype.sales_order.sales_order import (
 			make_delivery_note,
 			make_sales_invoice,
 		)
@@ -792,8 +792,8 @@ class TestDeliveryNote(FrappeTestCase):
 
 	def test_dn_billing_status_case3(self):
 		# SO -> DN1 -> SI and SO -> SI and SO -> DN2
-		from erpnext.selling.doctype.sales_order.sales_order import make_delivery_note
-		from erpnext.selling.doctype.sales_order.sales_order import (
+		from beasm.selling.doctype.sales_order.sales_order import make_delivery_note
+		from beasm.selling.doctype.sales_order.sales_order import (
 			make_sales_invoice as make_sales_invoice_from_so,
 		)
 
@@ -842,8 +842,8 @@ class TestDeliveryNote(FrappeTestCase):
 
 	def test_dn_billing_status_case4(self):
 		# SO -> SI -> DN
-		from erpnext.accounts.doctype.sales_invoice.sales_invoice import make_delivery_note
-		from erpnext.selling.doctype.sales_order.sales_order import make_sales_invoice
+		from beasm.accounts.doctype.sales_invoice.sales_invoice import make_delivery_note
+		from beasm.selling.doctype.sales_order.sales_order import make_sales_invoice
 
 		so = make_sales_order(po_no="12345")
 
@@ -869,7 +869,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn.name, dt.delivery_stops[0].delivery_note)
 
 	def test_delivery_note_with_cost_center(self):
-		from erpnext.accounts.doctype.cost_center.test_cost_center import create_cost_center
+		from beasm.accounts.doctype.cost_center.test_cost_center import create_cost_center
 
 		cost_center = "_Test Cost Center for BS Account - TCP1"
 		create_cost_center(
@@ -929,8 +929,8 @@ class TestDeliveryNote(FrappeTestCase):
 			self.assertEqual(expected_values[gle.account]["cost_center"], gle.cost_center)
 
 	def test_make_sales_invoice_from_dn_for_returned_qty(self):
-		from erpnext.selling.doctype.sales_order.sales_order import make_delivery_note
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_sales_invoice
+		from beasm.selling.doctype.sales_order.sales_order import make_delivery_note
+		from beasm.stock.doctype.delivery_note.delivery_note import make_sales_invoice
 
 		so = make_sales_order(qty=2)
 		so.submit()
@@ -948,7 +948,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(si.items[0].qty, 1)
 
 	def test_make_sales_invoice_from_dn_with_returned_qty_duplicate_items(self):
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_sales_invoice
+		from beasm.stock.doctype.delivery_note.delivery_note import make_sales_invoice
 
 		dn = create_delivery_note(qty=8, do_not_submit=True)
 		dn.append(
@@ -1007,10 +1007,10 @@ class TestDeliveryNote(FrappeTestCase):
 		)
 
 	def test_payment_terms_are_fetched_when_creating_sales_invoice(self):
-		from erpnext.accounts.doctype.payment_entry.test_payment_entry import (
+		from beasm.accounts.doctype.payment_entry.test_payment_entry import (
 			create_payment_terms_template,
 		)
-		from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+		from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
 
 		automatically_fetch_payment_terms()
 
@@ -1042,8 +1042,8 @@ class TestDeliveryNote(FrappeTestCase):
 		#                 |
 		#                 |---> DN(Partial Sales Return) ---> SI(Credit Note)
 
-		from erpnext.accounts.doctype.sales_invoice.sales_invoice import make_delivery_note
-		from erpnext.selling.doctype.sales_order.sales_order import make_sales_invoice
+		from beasm.accounts.doctype.sales_invoice.sales_invoice import make_delivery_note
+		from beasm.selling.doctype.sales_order.sales_order import make_sales_invoice
 
 		so = make_sales_order(qty=10)
 		si = make_sales_invoice(so.name)
@@ -1055,7 +1055,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn.items[0].returned_qty, 0)
 		self.assertEqual(dn.per_billed, 100)
 
-		from erpnext.stock.doctype.delivery_note.delivery_note import make_sales_invoice
+		from beasm.stock.doctype.delivery_note.delivery_note import make_sales_invoice
 
 		dn1 = create_delivery_note(is_return=1, return_against=dn.name, qty=-3)
 		si1 = make_sales_invoice(dn1.name)
@@ -1074,7 +1074,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn2.per_billed, 100)
 
 	def test_internal_transfer_with_valuation_only(self):
-		from erpnext.selling.doctype.customer.test_customer import create_internal_customer
+		from beasm.selling.doctype.customer.test_customer import create_internal_customer
 
 		item = make_item().name
 		warehouse = "_Test Warehouse - _TC"
@@ -1155,7 +1155,7 @@ class TestDeliveryNote(FrappeTestCase):
 		self.assertEqual(dn.items[0].net_rate, rate)
 
 	def test_internal_transfer_precision_gle(self):
-		from erpnext.selling.doctype.customer.test_customer import create_internal_customer
+		from beasm.selling.doctype.customer.test_customer import create_internal_customer
 
 		item = make_item(properties={"valuation_method": "Moving Average"}).name
 		company = "_Test Company with perpetual inventory"
@@ -1182,8 +1182,8 @@ class TestDeliveryNote(FrappeTestCase):
 		)
 
 	def test_batch_expiry_for_delivery_note(self):
-		from erpnext.controllers.sales_and_purchase_return import make_return_doc
-		from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+		from beasm.controllers.sales_and_purchase_return import make_return_doc
+		from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
 
 		item = make_item(
 			"_Test Batch Item For Return Check",

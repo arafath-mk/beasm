@@ -4,9 +4,9 @@
 import frappe
 from frappe.utils import flt
 
-from erpnext.e_commerce.doctype.item_review.item_review import get_customer
-from erpnext.e_commerce.shopping_cart.product_info import get_product_info_for_website
-from erpnext.utilities.product import get_non_stock_item_status
+from beasm.e_commerce.doctype.item_review.item_review import get_customer
+from beasm.e_commerce.shopping_cart.product_info import get_product_info_for_website
+from beasm.utilities.product import get_non_stock_item_status
 
 
 class ProductQuery:
@@ -178,7 +178,7 @@ class ProductQuery:
 
 	def build_item_group_filters(self, item_group):
 		"Add filters for Item group page and include Website Item Groups."
-		from erpnext.setup.doctype.item_group.item_group import get_child_groups_for_website
+		from beasm.setup.doctype.item_group.item_group import get_child_groups_for_website
 
 		item_group_filters = []
 

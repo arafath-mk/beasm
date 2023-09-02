@@ -1,21 +1,21 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
-if(!window.erpnext) window.erpnext = {};
+if(!window.beasm) window.beasm = {};
 
 // Add / update a new Lead / Communication
 // subject, sender, description
 frappe.send_message = function(opts, btn) {
 	return frappe.call({
 		type: "POST",
-		method: "erpnext.templates.utils.send_message",
+		method: "beasm.templates.utils.send_message",
 		btn: btn,
 		args: opts,
 		callback: opts.callback
 	});
 };
 
-erpnext.subscribe_to_newsletter = function(opts, btn) {
+beasm.subscribe_to_newsletter = function(opts, btn) {
 	return frappe.call({
 		type: "POST",
 		method: "frappe.email.doctype.newsletter.newsletter.subscribe",
@@ -26,4 +26,4 @@ erpnext.subscribe_to_newsletter = function(opts, btn) {
 }
 
 // for backward compatibility
-erpnext.send_message = frappe.send_message;
+beasm.send_message = frappe.send_message;

@@ -8,7 +8,7 @@ from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cint, cstr, flt
 
-from erpnext.stock.doctype.quality_inspection_template.quality_inspection_template import (
+from beasm.stock.doctype.quality_inspection_template.quality_inspection_template import (
 	get_template_details,
 )
 

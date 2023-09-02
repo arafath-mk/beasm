@@ -5,12 +5,12 @@ import unittest
 
 import frappe
 
-from erpnext.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
 	setup_e_commerce_settings,
 )
-from erpnext.e_commerce.doctype.website_item.test_website_item import create_regular_web_item
-from erpnext.e_commerce.product_data_engine.filters import ProductFiltersBuilder
-from erpnext.e_commerce.product_data_engine.query import ProductQuery
+from beasm.e_commerce.doctype.website_item.test_website_item import create_regular_web_item
+from beasm.e_commerce.product_data_engine.filters import ProductFiltersBuilder
+from beasm.e_commerce.product_data_engine.query import ProductQuery
 
 test_dependencies = ["Item", "Item Group"]
 
@@ -179,7 +179,7 @@ class TestProductDataEngine(unittest.TestCase):
 
 	def test_product_list_discount_filter_builder(self):
 		"Test if discount filters are fetched correctly."
-		from erpnext.e_commerce.doctype.website_item.test_website_item import (
+		from beasm.e_commerce.doctype.website_item.test_website_item import (
 			make_web_item_price,
 			make_web_pricing_rule,
 		)
@@ -204,7 +204,7 @@ class TestProductDataEngine(unittest.TestCase):
 
 	def test_product_list_with_discount_filters(self):
 		"Test if discount filters are applied correctly."
-		from erpnext.e_commerce.doctype.website_item.test_website_item import (
+		from beasm.e_commerce.doctype.website_item.test_website_item import (
 			make_web_item_price,
 			make_web_pricing_rule,
 		)
@@ -240,7 +240,7 @@ class TestProductDataEngine(unittest.TestCase):
 
 	def test_product_list_with_api(self):
 		"Test products listing using API."
-		from erpnext.e_commerce.api import get_product_filter_data
+		from beasm.e_commerce.api import get_product_filter_data
 
 		create_variant_web_item()
 
@@ -328,9 +328,9 @@ class TestProductDataEngine(unittest.TestCase):
 
 def create_variant_web_item():
 	"Create Variant and Template Website Items."
-	from erpnext.controllers.item_variant import create_variant
-	from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-	from erpnext.stock.doctype.item.test_item import make_item
+	from beasm.controllers.item_variant import create_variant
+	from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+	from beasm.stock.doctype.item.test_item import make_item
 
 	make_item(
 		"Test Web Item",

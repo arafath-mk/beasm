@@ -6,17 +6,17 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, cint, date_diff, flt, get_datetime, getdate
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
-from erpnext.loan_management.doctype.loan_interest_accrual.loan_interest_accrual import (
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
+from beasm.loan_management.doctype.loan_interest_accrual.loan_interest_accrual import (
 	get_last_accrual_date,
 	get_per_day_interest,
 )
-from erpnext.loan_management.doctype.loan_security_shortfall.loan_security_shortfall import (
+from beasm.loan_management.doctype.loan_security_shortfall.loan_security_shortfall import (
 	update_shortfall_status,
 )
-from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 	process_loan_interest_accrual_for_demand_loans,
 )
 
@@ -51,7 +51,7 @@ class LoanRepayment(AccountsController):
 			self.posting_date = get_datetime()
 
 		if not self.cost_center:
-			self.cost_center = erpnext.get_default_cost_center(self.company)
+			self.cost_center = beasm.get_default_cost_center(self.company)
 
 		if not self.interest_payable:
 			self.interest_payable = flt(amounts["interest_amount"], precision)
@@ -568,7 +568,7 @@ def get_penalty_details(against_loan):
 
 
 def regenerate_repayment_schedule(loan, cancel=0):
-	from erpnext.loan_management.doctype.loan.loan import (
+	from beasm.loan_management.doctype.loan.loan import (
 		add_single_month,
 		get_monthly_repayment_amount,
 	)

@@ -1,13 +1,13 @@
 import frappe
 
-from erpnext.stock.stock_balance import (
+from beasm.stock.stock_balance import (
 	get_balance_qty_from_sle,
 	get_indented_qty,
 	get_ordered_qty,
 	get_planned_qty,
 	get_reserved_qty,
 )
-from erpnext.stock.utils import get_bin
+from beasm.stock.utils import get_bin
 
 
 def execute():

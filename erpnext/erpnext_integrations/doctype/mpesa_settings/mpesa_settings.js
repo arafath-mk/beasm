@@ -7,7 +7,7 @@ frappe.ui.form.on('Mpesa Settings', {
 	},
 
 	refresh: function(frm) {
-		erpnext.utils.check_payments_app();
+		beasm.utils.check_payments_app();
 
 		frappe.realtime.on("refresh_mpesa_dashboard", function(){
 			frm.reload_doc();

@@ -6,8 +6,8 @@ import frappe
 from frappe import _, scrub
 from frappe.utils import cint, flt
 
-from erpnext.accounts.party import get_partywise_advanced_payment_amount
-from erpnext.accounts.report.accounts_receivable.accounts_receivable import ReceivablePayableReport
+from beasm.accounts.party import get_partywise_advanced_payment_amount
+from beasm.accounts.report.accounts_receivable.accounts_receivable import ReceivablePayableReport
 
 
 def execute(filters=None):

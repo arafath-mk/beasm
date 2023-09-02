@@ -30,7 +30,7 @@ class Bin(Document):
 	def update_reserved_qty_for_production_plan(self, skip_project_qty_update=False):
 		"""Update qty reserved for production from Production Plan tables
 		in open production plan"""
-		from erpnext.manufacturing.doctype.production_plan.production_plan import (
+		from beasm.manufacturing.doctype.production_plan.production_plan import (
 			get_reserved_qty_for_production_plan,
 		)
 
@@ -51,7 +51,7 @@ class Bin(Document):
 	def update_reserved_qty_for_production(self):
 		"""Update qty reserved for production from Production Item tables
 		in open work orders"""
-		from erpnext.manufacturing.doctype.work_order.work_order import get_reserved_qty_for_production
+		from beasm.manufacturing.doctype.work_order.work_order import get_reserved_qty_for_production
 
 		self.reserved_qty_for_production = get_reserved_qty_for_production(
 			self.item_code, self.warehouse
@@ -172,7 +172,7 @@ def get_bin_details(bin_name):
 
 
 def update_qty(bin_name, args):
-	from erpnext.controllers.stock_controller import future_sle_exists
+	from beasm.controllers.stock_controller import future_sle_exists
 
 	bin_details = get_bin_details(bin_name)
 	# actual qty is already updated by processing current voucher

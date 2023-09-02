@@ -8,14 +8,14 @@ import frappe
 from frappe import _, _dict
 from frappe.utils import cstr, getdate
 
-from erpnext import get_company_currency, get_default_company
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+from beasm import get_company_currency, get_default_company
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 	get_dimension_with_children,
 )
-from erpnext.accounts.report.financial_statements import get_cost_centers_with_children
-from erpnext.accounts.report.utils import convert_to_presentation_currency, get_currency
-from erpnext.accounts.utils import get_account_currency
+from beasm.accounts.report.financial_statements import get_cost_centers_with_children
+from beasm.accounts.report.utils import convert_to_presentation_currency, get_currency
+from beasm.accounts.utils import get_account_currency
 
 # to cache translations
 TRANSLATIONS = frappe._dict()

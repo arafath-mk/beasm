@@ -7,7 +7,7 @@ from frappe import _
 from frappe.utils import flt
 from frappe.utils.nestedset import NestedSet, get_root_of
 
-from erpnext import get_default_currency
+from beasm import get_default_currency
 
 
 class SalesPerson(NestedSet):

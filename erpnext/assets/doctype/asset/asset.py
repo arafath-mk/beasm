@@ -21,16 +21,16 @@ from frappe.utils import (
 	today,
 )
 
-import erpnext
-from erpnext.accounts.general_ledger import make_reverse_gl_entries
-from erpnext.assets.doctype.asset.depreciation import (
+import beasm
+from beasm.accounts.general_ledger import make_reverse_gl_entries
+from beasm.assets.doctype.asset.depreciation import (
 	get_depreciation_accounts,
 	get_disposal_account_and_cost_center,
 	is_first_day_of_the_month,
 	is_last_day_of_the_month,
 )
-from erpnext.assets.doctype.asset_category.asset_category import get_asset_category_account
-from erpnext.controllers.accounts_controller import AccountsController
+from beasm.assets.doctype.asset_category.asset_category import get_asset_category_account
+from beasm.controllers.accounts_controller import AccountsController
 
 
 class Asset(AccountsController):
@@ -858,7 +858,7 @@ class Asset(AccountsController):
 
 	def get_default_finance_book_idx(self):
 		if not self.get("default_finance_book") and self.company:
-			self.default_finance_book = erpnext.get_default_finance_book(self.company)
+			self.default_finance_book = beasm.get_default_finance_book(self.company)
 
 		if self.get("default_finance_book"):
 			for d in self.get("finance_books"):
@@ -976,7 +976,7 @@ class Asset(AccountsController):
 			)
 
 		if gl_entries:
-			from erpnext.accounts.general_ledger import make_gl_entries
+			from beasm.accounts.general_ledger import make_gl_entries
 
 			make_gl_entries(gl_entries)
 			self.db_set("booked_fixed_asset", 1)
@@ -1339,7 +1339,7 @@ def get_depreciation_amount(
 		)
 
 
-@erpnext.allow_regional
+@beasm.allow_regional
 def get_updated_rate_of_depreciation_for_wdv_and_dd(asset, depreciable_value, fb_row):
 	return fb_row.rate_of_depreciation
 

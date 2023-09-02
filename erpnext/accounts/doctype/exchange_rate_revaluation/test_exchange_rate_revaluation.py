@@ -8,14 +8,14 @@ from frappe import qb
 from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import add_days, flt, today
 
-from erpnext import get_default_cost_center
-from erpnext.accounts.doctype.payment_entry.payment_entry import get_payment_entry
-from erpnext.accounts.doctype.payment_entry.test_payment_entry import create_payment_entry
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
-from erpnext.accounts.party import get_party_account
-from erpnext.accounts.test.accounts_mixin import AccountsTestMixin
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm import get_default_cost_center
+from beasm.accounts.doctype.payment_entry.payment_entry import get_payment_entry
+from beasm.accounts.doctype.payment_entry.test_payment_entry import create_payment_entry
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.accounts.party import get_party_account
+from beasm.accounts.test.accounts_mixin import AccountsTestMixin
+from beasm.stock.doctype.item.test_item import create_item
 
 
 class TestExchangeRateRevaluation(AccountsTestMixin, FrappeTestCase):
@@ -277,7 +277,7 @@ class TestExchangeRateRevaluation(AccountsTestMixin, FrappeTestCase):
 		si.conversion_rate = 80
 		si.save().submit()
 
-		from erpnext.accounts.doctype.exchange_rate_revaluation.exchange_rate_revaluation import (
+		from beasm.accounts.doctype.exchange_rate_revaluation.exchange_rate_revaluation import (
 			get_account_details,
 		)
 

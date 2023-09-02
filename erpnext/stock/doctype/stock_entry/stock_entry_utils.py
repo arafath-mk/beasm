@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING, Optional, overload
 import frappe
 from frappe.utils import cint, flt
 
-import erpnext
+import beasm
 
 if TYPE_CHECKING:
-	from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
+	from beasm.stock.doctype.stock_entry.stock_entry import StockEntry
 
 
 @overload
@@ -116,7 +116,7 @@ def make_stock_entry(**args):
 		if not args.item:
 			args.item = "_Test Item"
 
-	s.company = args.company or erpnext.get_default_company()
+	s.company = args.company or beasm.get_default_company()
 	s.add_to_transit = args.add_to_transit or 0
 	s.purchase_receipt_no = args.purchase_receipt_no
 	s.delivery_note_no = args.delivery_note_no

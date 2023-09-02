@@ -16,10 +16,10 @@ from frappe.query_builder.functions import Coalesce, IfNull, Locate, Replace, Su
 from frappe.utils import cint, floor, flt, today
 from frappe.utils.nestedset import get_descendants_of
 
-from erpnext.selling.doctype.sales_order.sales_order import (
+from beasm.selling.doctype.sales_order.sales_order import (
 	make_delivery_note as create_delivery_note_from_sales_order,
 )
-from erpnext.stock.get_item_details import get_conversion_factor
+from beasm.stock.get_item_details import get_conversion_factor
 
 # TODO: Prioritize SO or WO group warehouse
 

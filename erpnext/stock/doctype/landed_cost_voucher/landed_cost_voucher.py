@@ -9,9 +9,9 @@ from frappe.model.meta import get_field_precision
 from frappe.query_builder.custom import ConstantColumn
 from frappe.utils import flt
 
-import erpnext
-from erpnext.controllers.taxes_and_totals import init_landed_taxes_and_totals
-from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+import beasm
+from beasm.controllers.taxes_and_totals import init_landed_taxes_and_totals
+from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 
 class LandedCostVoucher(Document):
@@ -28,7 +28,7 @@ class LandedCostVoucher(Document):
 					item.description = d.description
 					item.qty = d.qty
 					item.rate = d.base_rate
-					item.cost_center = d.cost_center or erpnext.get_default_cost_center(self.company)
+					item.cost_center = d.cost_center or beasm.get_default_cost_center(self.company)
 					item.amount = d.base_amount
 					item.receipt_document_type = pr.receipt_document_type
 					item.receipt_document = pr.receipt_document

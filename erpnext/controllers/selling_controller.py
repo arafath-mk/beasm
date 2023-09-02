@@ -7,12 +7,12 @@ from frappe import _, bold, throw
 from frappe.contacts.doctype.address.address import get_address_display
 from frappe.utils import cint, cstr, flt, get_link_to_form, nowtime
 
-from erpnext.controllers.accounts_controller import get_taxes_and_charges
-from erpnext.controllers.sales_and_purchase_return import get_rate_for_return
-from erpnext.controllers.stock_controller import StockController
-from erpnext.stock.doctype.item.item import set_item_default
-from erpnext.stock.get_item_details import get_bin_details, get_conversion_factor
-from erpnext.stock.utils import get_incoming_rate
+from beasm.controllers.accounts_controller import get_taxes_and_charges
+from beasm.controllers.sales_and_purchase_return import get_rate_for_return
+from beasm.controllers.stock_controller import StockController
+from beasm.stock.doctype.item.item import set_item_default
+from beasm.stock.get_item_details import get_bin_details, get_conversion_factor
+from beasm.stock.utils import get_incoming_rate
 
 
 class SellingController(StockController):
@@ -65,7 +65,7 @@ class SellingController(StockController):
 				lead = self.party_name
 
 		if customer:
-			from erpnext.accounts.party import _get_party_details
+			from beasm.accounts.party import _get_party_details
 
 			fetch_payment_terms_template = False
 			if self.get("__islocal") or self.company != frappe.db.get_value(
@@ -89,7 +89,7 @@ class SellingController(StockController):
 			self.update_if_missing(party_details)
 
 		elif lead:
-			from erpnext.crm.doctype.lead.lead import get_lead_details
+			from beasm.crm.doctype.lead.lead import get_lead_details
 
 			self.update_if_missing(
 				get_lead_details(
@@ -663,7 +663,7 @@ class SellingController(StockController):
 
 	def validate_items(self):
 		# validate items to see if they have is_sales_item enabled
-		from erpnext.controllers.buying_controller import validate_item_type
+		from beasm.controllers.buying_controller import validate_item_type
 
 		validate_item_type(self, "is_sales_item", "sales")
 

@@ -2,7 +2,7 @@ import frappe
 from frappe.contacts.doctype.contact.test_contact import create_contact
 from frappe.tests.test_api import FrappeAPITestCase
 
-from erpnext.setup.doctype.employee.test_employee import make_employee
+from beasm.setup.doctype.employee.test_employee import make_employee
 
 
 class TestExotel(FrappeAPITestCase):
@@ -56,7 +56,7 @@ class TestExotel(FrappeAPITestCase):
 
 	def emulate_api_call_from_exotel(self, api_method, data):
 		self.post(
-			f"/api/method/erpnext.erpnext_integrations.exotel_integration.{api_method}",
+			f"/api/method/beasm.beasm_integrations.exotel_integration.{api_method}",
 			data=frappe.as_json(data),
 			content_type="application/json",
 		)

@@ -6,9 +6,9 @@ import unittest
 import frappe
 from frappe.utils import add_months, getdate
 
-from erpnext.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.loan_management.doctype.loan.test_loan import (
+from beasm.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.loan_management.doctype.loan.test_loan import (
 	create_loan,
 	create_loan_accounts,
 	create_loan_type,

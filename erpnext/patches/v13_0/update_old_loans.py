@@ -3,11 +3,11 @@ from frappe import _
 from frappe.model.naming import make_autoname
 from frappe.utils import flt, nowdate
 
-from erpnext.accounts.doctype.account.test_account import create_account
-from erpnext.loan_management.doctype.loan_repayment.loan_repayment import (
+from beasm.accounts.doctype.account.test_account import create_account
+from beasm.loan_management.doctype.loan_repayment.loan_repayment import (
 	get_accrued_interest_entries,
 )
-from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 	process_loan_interest_accrual_for_term_loans,
 )
 

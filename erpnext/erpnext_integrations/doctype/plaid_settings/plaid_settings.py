@@ -10,8 +10,8 @@ from frappe.model.document import Document
 from frappe.utils import add_months, formatdate, getdate, today
 from plaid.errors import ItemError
 
-from erpnext.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
-from erpnext.erpnext_integrations.doctype.plaid_settings.plaid_connector import PlaidConnector
+from beasm.accounts.doctype.journal_entry.journal_entry import get_default_bank_cash_account
+from beasm.beasm_integrations.doctype.plaid_settings.plaid_connector import PlaidConnector
 
 
 class PlaidSettings(Document):
@@ -298,7 +298,7 @@ def enqueue_synchronization():
 
 	for plaid_account in plaid_accounts:
 		frappe.enqueue(
-			"erpnext.erpnext_integrations.doctype.plaid_settings.plaid_settings.sync_transactions",
+			"beasm.beasm_integrations.doctype.plaid_settings.plaid_settings.sync_transactions",
 			bank=plaid_account.bank,
 			bank_account=plaid_account.name,
 		)

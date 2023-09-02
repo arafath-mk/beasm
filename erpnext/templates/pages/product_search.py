@@ -7,15 +7,15 @@ import frappe
 from frappe.utils import cint, cstr
 from redisearch import AutoCompleter, Client, Query
 
-from erpnext.e_commerce.redisearch_utils import (
+from beasm.e_commerce.redisearch_utils import (
 	WEBSITE_ITEM_CATEGORY_AUTOCOMPLETE,
 	WEBSITE_ITEM_INDEX,
 	WEBSITE_ITEM_NAME_AUTOCOMPLETE,
 	is_redisearch_enabled,
 	make_key,
 )
-from erpnext.e_commerce.shopping_cart.product_info import set_product_info_for_website
-from erpnext.setup.doctype.item_group.item_group import get_item_for_list_in_html
+from beasm.e_commerce.shopping_cart.product_info import set_product_info_for_website
+from beasm.setup.doctype.item_group.item_group import get_item_for_list_in_html
 
 no_cache = 1
 

@@ -4,13 +4,13 @@
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.accounts.doctype.bank_transaction.test_bank_transaction import (
+from beasm.accounts.doctype.bank_transaction.test_bank_transaction import (
 	create_loan_and_repayment,
 )
-from erpnext.accounts.report.bank_reconciliation_statement.bank_reconciliation_statement import (
+from beasm.accounts.report.bank_reconciliation_statement.bank_reconciliation_statement import (
 	execute,
 )
-from erpnext.loan_management.doctype.loan.test_loan import create_loan_accounts
+from beasm.loan_management.doctype.loan.test_loan import create_loan_accounts
 
 
 class TestBankReconciliationStatement(FrappeTestCase):

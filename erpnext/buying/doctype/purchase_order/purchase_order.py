@@ -10,24 +10,24 @@ from frappe.desk.notifications import clear_doctype_notifications
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cint, cstr, flt
 
-from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
+from beasm.accounts.doctype.sales_invoice.sales_invoice import (
 	unlink_inter_company_doc,
 	update_linked_doc,
 	validate_inter_company_party,
 )
-from erpnext.accounts.doctype.tax_withholding_category.tax_withholding_category import (
+from beasm.accounts.doctype.tax_withholding_category.tax_withholding_category import (
 	get_party_tax_withholding_details,
 )
-from erpnext.accounts.party import get_party_account, get_party_account_currency
-from erpnext.buying.utils import check_on_hold_or_closed_status, validate_for_items
-from erpnext.controllers.buying_controller import BuyingController
-from erpnext.manufacturing.doctype.blanket_order.blanket_order import (
+from beasm.accounts.party import get_party_account, get_party_account_currency
+from beasm.buying.utils import check_on_hold_or_closed_status, validate_for_items
+from beasm.controllers.buying_controller import BuyingController
+from beasm.manufacturing.doctype.blanket_order.blanket_order import (
 	validate_against_blanket_order,
 )
-from erpnext.setup.doctype.item_group.item_group import get_item_group_defaults
-from erpnext.stock.doctype.item.item import get_item_defaults, get_last_purchase_details
-from erpnext.stock.stock_balance import get_ordered_qty, update_bin_qty
-from erpnext.stock.utils import get_bin
+from beasm.setup.doctype.item_group.item_group import get_item_group_defaults
+from beasm.stock.doctype.item.item import get_item_defaults, get_last_purchase_details
+from beasm.stock.stock_balance import get_ordered_qty, update_bin_qty
+from beasm.stock.utils import get_bin
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -619,7 +619,7 @@ def get_mapped_purchase_invoice(source_name, target_doc=None, ignore_permissions
 
 
 def get_list_context(context=None):
-	from erpnext.controllers.website_list_for_contact import get_list_context
+	from beasm.controllers.website_list_for_contact import get_list_context
 
 	list_context = get_list_context(context)
 	list_context.update(
@@ -642,7 +642,7 @@ def update_status(status, name):
 
 @frappe.whitelist()
 def make_inter_company_sales_order(source_name, target_doc=None):
-	from erpnext.accounts.doctype.sales_invoice.sales_invoice import make_inter_company_transaction
+	from beasm.accounts.doctype.sales_invoice.sales_invoice import make_inter_company_transaction
 
 	return make_inter_company_transaction("Purchase Order", source_name, target_doc)
 

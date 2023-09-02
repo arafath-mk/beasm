@@ -4,7 +4,7 @@
 import frappe
 from frappe.utils import flt
 
-from erpnext.controllers.status_updater import StatusUpdater
+from beasm.controllers.status_updater import StatusUpdater
 
 
 class BankTransaction(StatusUpdater):
@@ -150,7 +150,7 @@ class BankTransaction(StatusUpdater):
 		)
 
 	def auto_set_party(self):
-		from erpnext.accounts.doctype.bank_transaction.auto_match_party import AutoMatchParty
+		from beasm.accounts.doctype.bank_transaction.auto_match_party import AutoMatchParty
 
 		if self.party_type and self.party:
 			return

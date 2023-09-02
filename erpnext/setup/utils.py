@@ -7,7 +7,7 @@ from frappe.utils import add_days, flt, get_datetime_str, nowdate
 from frappe.utils.data import now_datetime
 from frappe.utils.nestedset import get_ancestors_of, get_root_of  # noqa
 
-from erpnext import get_default_company
+from beasm import get_default_company
 
 
 def before_tests():
@@ -30,7 +30,7 @@ def before_tests():
 				"fy_end_date": f"{current_year}-12-31",
 				"language": "english",
 				"company_tagline": "Testing",
-				"email": "test@erpnext.com",
+				"email": "test@beasm.com",
 				"password": "test",
 				"chart_of_accounts": "Standard",
 			}

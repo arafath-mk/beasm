@@ -6,9 +6,9 @@ import frappe
 from frappe import _
 from frappe.utils import cint, flt, getdate
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
 
 
 class LoanWriteOff(AccountsController):
@@ -18,7 +18,7 @@ class LoanWriteOff(AccountsController):
 
 	def set_missing_values(self):
 		if not self.cost_center:
-			self.cost_center = erpnext.get_default_cost_center(self.company)
+			self.cost_center = beasm.get_default_cost_center(self.company)
 
 	def validate_write_off_amount(self):
 		precision = cint(frappe.db.get_default("currency_precision")) or 2

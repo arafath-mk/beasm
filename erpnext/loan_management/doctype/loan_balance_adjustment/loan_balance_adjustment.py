@@ -5,10 +5,10 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, nowdate
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
-from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
+from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 	process_loan_interest_accrual_for_demand_loans,
 )
 
@@ -39,7 +39,7 @@ class LoanBalanceAdjustment(AccountsController):
 			self.posting_date = nowdate()
 
 		if not self.cost_center:
-			self.cost_center = erpnext.get_default_cost_center(self.company)
+			self.cost_center = beasm.get_default_cost_center(self.company)
 
 	def set_status_and_amounts(self, cancel=0):
 		loan_details = frappe.db.get_value(

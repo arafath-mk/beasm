@@ -6,8 +6,8 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, cint, date_diff, flt, get_datetime, getdate, nowdate
 
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
 
 
 class LoanInterestAccrual(AccountsController):
@@ -91,7 +91,7 @@ class LoanInterestAccrual(AccountsController):
 def calculate_accrual_amount_for_demand_loans(
 	loan, posting_date, process_loan_interest, accrual_type
 ):
-	from erpnext.loan_management.doctype.loan_repayment.loan_repayment import (
+	from beasm.loan_management.doctype.loan_repayment.loan_repayment import (
 		calculate_amounts,
 		get_pending_principal_amount,
 	)

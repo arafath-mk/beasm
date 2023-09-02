@@ -8,16 +8,16 @@ import frappe
 from frappe.tests.utils import change_settings
 from frappe.utils import add_months, cint, nowdate
 
-from erpnext.accounts.doctype.tax_rule.tax_rule import ConflictingTaxRule
-from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-from erpnext.e_commerce.shopping_cart.cart import (
+from beasm.accounts.doctype.tax_rule.tax_rule import ConflictingTaxRule
+from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+from beasm.e_commerce.shopping_cart.cart import (
 	_get_cart_quotation,
 	get_cart_quotation,
 	get_party,
 	request_for_quotation,
 	update_cart,
 )
-from erpnext.tests.utils import create_test_contact_and_address
+from beasm.tests.utils import create_test_contact_and_address
 
 
 class TestShoppingCart(unittest.TestCase):
@@ -135,7 +135,7 @@ class TestShoppingCart(unittest.TestCase):
 		self.login_as_customer()
 		quotation = self.create_quotation()
 
-		from erpnext.accounts.party import set_taxes
+		from beasm.accounts.party import set_taxes
 
 		tax_rule_master = set_taxes(
 			quotation.party_name,
@@ -167,9 +167,9 @@ class TestShoppingCart(unittest.TestCase):
 	)
 	def test_add_item_variant_without_web_item_to_cart(self):
 		"Test adding Variants having no Website Items in cart via Template Web Item."
-		from erpnext.controllers.item_variant import create_variant
-		from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-		from erpnext.stock.doctype.item.test_item import make_item
+		from beasm.controllers.item_variant import create_variant
+		from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+		from beasm.stock.doctype.item.test_item import make_item
 
 		template_item = make_item(
 			"Test-Tshirt-Temp",

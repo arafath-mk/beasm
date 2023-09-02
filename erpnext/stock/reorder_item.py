@@ -9,7 +9,7 @@ import frappe
 from frappe import _
 from frappe.utils import add_days, cint, flt, nowdate
 
-import erpnext
+import beasm
 
 
 def reorder_item():
@@ -31,7 +31,7 @@ def _reorder_item():
 		)
 	)
 	default_company = (
-		erpnext.get_default_company() or frappe.db.sql("""select name from tabCompany limit 1""")[0][0]
+		beasm.get_default_company() or frappe.db.sql("""select name from tabCompany limit 1""")[0][0]
 	)
 
 	items_to_consider = frappe.db.sql_list(

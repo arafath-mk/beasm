@@ -4,13 +4,13 @@ frappe.treeview_settings["Cost Center"] = {
 	filters: [{
 		fieldname: "company",
 		fieldtype:"Select",
-		options: erpnext.utils.get_tree_options("company"),
+		options: beasm.utils.get_tree_options("company"),
 		label: __("Company"),
-		default: erpnext.utils.get_tree_default("company")
+		default: beasm.utils.get_tree_default("company")
 	}],
 	root_label: "Cost Centers",
-	get_tree_nodes: 'erpnext.accounts.utils.get_children',
-	add_tree_node: 'erpnext.accounts.utils.add_cc',
+	get_tree_nodes: 'beasm.accounts.utils.get_children',
+	add_tree_node: 'beasm.accounts.utils.add_cc',
 	menu_items:[
 		{
 			label: __('New Company'),

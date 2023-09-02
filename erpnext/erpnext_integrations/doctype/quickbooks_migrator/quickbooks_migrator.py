@@ -11,7 +11,7 @@ from frappe import _
 from frappe.model.document import Document
 from requests_oauthlib import OAuth2Session
 
-from erpnext import encode_company_abbr
+from beasm import encode_company_abbr
 
 
 # QuickBooks requires a redirect URL, User will be redirect to this URL
@@ -44,7 +44,7 @@ class QuickBooksMigrator(Document):
 
 	def on_update(self):
 		if self.company:
-			# We need a Cost Center corresponding to the selected erpnext Company
+			# We need a Cost Center corresponding to the selected beasm Company
 			self.default_cost_center = frappe.db.get_value("Company", self.company, "cost_center")
 			company_warehouses = frappe.get_all(
 				"Warehouse", filters={"company": self.company, "is_group": 0}

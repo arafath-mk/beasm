@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import show_attachments
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import show_attachments
 
 
 def get_context(context):
@@ -46,7 +46,7 @@ def get_context(context):
 		)
 
 		if customer_loyalty_program:
-			from erpnext.accounts.doctype.loyalty_program.loyalty_program import (
+			from beasm.accounts.doctype.loyalty_program.loyalty_program import (
 				get_loyalty_program_details_with_points,
 			)
 

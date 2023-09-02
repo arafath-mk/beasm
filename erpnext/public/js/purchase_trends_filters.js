@@ -1,7 +1,7 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
-erpnext.get_purchase_trends_filters = function() {
+beasm.get_purchase_trends_filters = function() {
 	return [
 		{
 			"fieldname":"company",

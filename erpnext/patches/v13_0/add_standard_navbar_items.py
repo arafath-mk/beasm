@@ -1,5 +1,5 @@
 # import frappe
-from erpnext.setup.install import add_standard_navbar_items
+from beasm.setup.install import add_standard_navbar_items
 
 
 def execute():

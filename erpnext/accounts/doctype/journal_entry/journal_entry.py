@@ -8,23 +8,23 @@ import frappe
 from frappe import _, msgprint, scrub
 from frappe.utils import cint, cstr, flt, fmt_money, formatdate, get_link_to_form, nowdate
 
-import erpnext
-from erpnext.accounts.deferred_revenue import get_deferred_booking_accounts
-from erpnext.accounts.doctype.invoice_discounting.invoice_discounting import (
+import beasm
+from beasm.accounts.deferred_revenue import get_deferred_booking_accounts
+from beasm.accounts.doctype.invoice_discounting.invoice_discounting import (
 	get_party_account_based_on_invoice_discounting,
 )
-from erpnext.accounts.doctype.tax_withholding_category.tax_withholding_category import (
+from beasm.accounts.doctype.tax_withholding_category.tax_withholding_category import (
 	get_party_tax_withholding_details,
 )
-from erpnext.accounts.party import get_party_account
-from erpnext.accounts.utils import (
+from beasm.accounts.party import get_party_account
+from beasm.accounts.utils import (
 	cancel_exchange_gain_loss_journal,
 	get_account_currency,
 	get_balance_on,
 	get_stock_accounts,
 	get_stock_and_account_balance,
 )
-from erpnext.controllers.accounts_controller import AccountsController
+from beasm.controllers.accounts_controller import AccountsController
 
 
 class StockAccountInvalidTransaction(frappe.ValidationError):
@@ -154,7 +154,7 @@ class JournalEntry(AccountsController):
 				)
 
 	def apply_tax_withholding(self):
-		from erpnext.accounts.report.general_ledger.general_ledger import get_account_type_map
+		from beasm.accounts.report.general_ledger.general_ledger import get_account_type_map
 
 		if not self.apply_tds or self.voucher_type not in ("Debit Note", "Credit Note"):
 			return
@@ -417,7 +417,7 @@ class JournalEntry(AccountsController):
 			)
 		)
 		if customers:
-			from erpnext.selling.doctype.customer.customer import check_credit_limit
+			from beasm.selling.doctype.customer.customer import check_credit_limit
 
 			for customer in customers:
 				check_credit_limit(customer, self.company)
@@ -918,7 +918,7 @@ class JournalEntry(AccountsController):
 		return gl_map
 
 	def make_gl_entries(self, cancel=0, adv_adj=0):
-		from erpnext.accounts.general_ledger import make_gl_entries
+		from beasm.accounts.general_ledger import make_gl_entries
 
 		merge_entries = frappe.db.get_single_value("Accounts Settings", "merge_similar_account_heads")
 
@@ -959,7 +959,7 @@ class JournalEntry(AccountsController):
 						"accounts",
 						{
 							"account": difference_account,
-							"cost_center": erpnext.get_default_cost_center(self.company),
+							"cost_center": beasm.get_default_cost_center(self.company),
 						},
 					)
 
@@ -1067,7 +1067,7 @@ class JournalEntry(AccountsController):
 
 @frappe.whitelist()
 def get_default_bank_cash_account(company, account_type=None, mode_of_payment=None, account=None):
-	from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
+	from beasm.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
 
 	if mode_of_payment:
 		account = get_bank_cash_account(mode_of_payment, company).get("account")
@@ -1319,7 +1319,7 @@ def get_outstanding(args):
 	if isinstance(args, str):
 		args = json.loads(args)
 
-	company_currency = erpnext.get_company_currency(args.get("company"))
+	company_currency = beasm.get_company_currency(args.get("company"))
 	due_date = None
 
 	if args.get("doctype") == "Journal Entry":
@@ -1405,7 +1405,7 @@ def get_account_balance_and_party_type(
 	if not frappe.has_permission("Account"):
 		frappe.msgprint(_("No Permission"), raise_exception=1)
 
-	company_currency = erpnext.get_company_currency(company)
+	company_currency = beasm.get_company_currency(company)
 	account_details = frappe.db.get_value(
 		"Account", account, ["account_type", "account_currency"], as_dict=1
 	)
@@ -1457,7 +1457,7 @@ def get_exchange_rate(
 	credit=None,
 	exchange_rate=None,
 ):
-	from erpnext.setup.utils import get_exchange_rate
+	from beasm.setup.utils import get_exchange_rate
 
 	account_details = frappe.db.get_value(
 		"Account", account, ["account_type", "root_type", "account_currency", "company"], as_dict=1
@@ -1472,7 +1472,7 @@ def get_exchange_rate(
 	if not account_currency:
 		account_currency = account_details.account_currency
 
-	company_currency = erpnext.get_company_currency(company)
+	company_currency = beasm.get_company_currency(company)
 
 	if account_currency != company_currency:
 		if reference_type in ("Sales Invoice", "Purchase Invoice") and reference_name:

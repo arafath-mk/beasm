@@ -4,12 +4,12 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_days, add_months, nowdate
 
-from erpnext.selling.doctype.sales_order.sales_order import make_sales_invoice
-from erpnext.selling.doctype.sales_order.test_sales_order import make_sales_order
-from erpnext.selling.report.payment_terms_status_for_sales_order.payment_terms_status_for_sales_order import (
+from beasm.selling.doctype.sales_order.sales_order import make_sales_invoice
+from beasm.selling.doctype.sales_order.test_sales_order import make_sales_order
+from beasm.selling.report.payment_terms_status_for_sales_order.payment_terms_status_for_sales_order import (
 	execute,
 )
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.item.test_item import create_item
 
 test_dependencies = ["Sales Order", "Item", "Sales Invoice", "Payment Terms Template", "Customer"]
 

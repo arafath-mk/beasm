@@ -1,12 +1,12 @@
 import frappe
 from frappe.utils import cint, flt
 
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 	get_shopping_cart_settings,
 )
-from erpnext.e_commerce.shopping_cart.cart import _set_price_list
-from erpnext.e_commerce.variant_selector.item_variants_cache import ItemVariantsCacheManager
-from erpnext.utilities.product import get_price
+from beasm.e_commerce.shopping_cart.cart import _set_price_list
+from beasm.e_commerce.variant_selector.item_variants_cache import ItemVariantsCacheManager
+from beasm.utilities.product import get_price
 
 
 def get_item_codes_by_attributes(attribute_filters, template_item_code=None):
@@ -156,7 +156,7 @@ def get_next_attribute_and_values(item_code, selected_attributes):
 	filtered_items_count = len(filtered_items)
 
 	# get product info if exact match
-	# from erpnext.e_commerce.shopping_cart.product_info import get_product_info_for_website
+	# from beasm.e_commerce.shopping_cart.product_info import get_product_info_for_website
 	if exact_match:
 		cart_settings = get_shopping_cart_settings()
 		product_info = get_item_variant_price_dict(exact_match[0], cart_settings)

@@ -12,7 +12,7 @@ from frappe.utils.pdf import get_pdf
 from frappe.utils.print_format import read_multi_pdf
 from PyPDF2 import PdfWriter
 
-from erpnext.accounts.utils import get_fiscal_year
+from beasm.accounts.utils import get_fiscal_year
 
 IRS_1099_FORMS_FILE_EXTENSION = ".pdf"
 

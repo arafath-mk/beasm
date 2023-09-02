@@ -5,16 +5,16 @@ from frappe import qb
 from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import nowdate
 
-from erpnext.accounts.doctype.account.test_account import create_account
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
-from erpnext.accounts.report.deferred_revenue_and_expense.deferred_revenue_and_expense import (
+from beasm.accounts.doctype.account.test_account import create_account
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.accounts.report.deferred_revenue_and_expense.deferred_revenue_and_expense import (
 	Deferred_Revenue_and_Expense_Report,
 )
-from erpnext.accounts.test.accounts_mixin import AccountsTestMixin
-from erpnext.accounts.utils import get_fiscal_year
-from erpnext.buying.doctype.supplier.test_supplier import create_supplier
-from erpnext.stock.doctype.item.test_item import create_item
+from beasm.accounts.test.accounts_mixin import AccountsTestMixin
+from beasm.accounts.utils import get_fiscal_year
+from beasm.buying.doctype.supplier.test_supplier import create_supplier
+from beasm.stock.doctype.item.test_item import create_item
 
 
 class TestDeferredRevenueAndExpense(FrappeTestCase, AccountsTestMixin):

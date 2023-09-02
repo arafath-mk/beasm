@@ -12,13 +12,13 @@ from frappe.utils.jinja import validate_template
 from frappe.utils.pdf import get_pdf
 from frappe.www.printview import get_print_style
 
-from erpnext import get_company_currency
-from erpnext.accounts.party import get_party_account_currency
-from erpnext.accounts.report.accounts_receivable.accounts_receivable import execute as get_ar_soa
-from erpnext.accounts.report.accounts_receivable_summary.accounts_receivable_summary import (
+from beasm import get_company_currency
+from beasm.accounts.party import get_party_account_currency
+from beasm.accounts.report.accounts_receivable.accounts_receivable import execute as get_ar_soa
+from beasm.accounts.report.accounts_receivable_summary.accounts_receivable_summary import (
 	execute as get_ageing,
 )
-from erpnext.accounts.report.general_ledger.general_ledger import execute as get_soa
+from beasm.accounts.report.general_ledger.general_ledger import execute as get_soa
 
 
 class ProcessStatementOfAccounts(Document):
@@ -156,9 +156,9 @@ def get_ar_filters(doc, entry):
 def get_html(doc, filters, entry, col, res, ageing):
 	base_template_path = "frappe/www/printview.html"
 	template_path = (
-		"erpnext/accounts/doctype/process_statement_of_accounts/process_statement_of_accounts.html"
+		"beasm/accounts/doctype/process_statement_of_accounts/process_statement_of_accounts.html"
 		if doc.report == "General Ledger"
-		else "erpnext/accounts/doctype/process_statement_of_accounts/process_statement_of_accounts_accounts_receivable.html"
+		else "beasm/accounts/doctype/process_statement_of_accounts/process_statement_of_accounts_accounts_receivable.html"
 	)
 
 	if doc.letter_head:

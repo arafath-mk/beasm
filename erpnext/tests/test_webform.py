@@ -2,7 +2,7 @@ import unittest
 
 import frappe
 
-from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
+from beasm.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
 
 
 class TestWebsite(unittest.TestCase):

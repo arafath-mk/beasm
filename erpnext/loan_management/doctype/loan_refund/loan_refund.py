@@ -5,10 +5,10 @@ import frappe
 from frappe import _
 from frappe.utils import getdate
 
-import erpnext
-from erpnext.accounts.general_ledger import make_gl_entries
-from erpnext.controllers.accounts_controller import AccountsController
-from erpnext.loan_management.doctype.loan_repayment.loan_repayment import (
+import beasm
+from beasm.accounts.general_ledger import make_gl_entries
+from beasm.controllers.accounts_controller import AccountsController
+from beasm.loan_management.doctype.loan_repayment.loan_repayment import (
 	get_pending_principal_amount,
 )
 
@@ -24,7 +24,7 @@ class LoanRefund(AccountsController):
 
 	def set_missing_values(self):
 		if not self.cost_center:
-			self.cost_center = erpnext.get_default_cost_center(self.company)
+			self.cost_center = beasm.get_default_cost_center(self.company)
 
 	def validate_refund_amount(self):
 		loan = frappe.get_doc("Loan", self.loan)

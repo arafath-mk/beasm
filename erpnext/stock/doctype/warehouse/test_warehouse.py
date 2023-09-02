@@ -5,11 +5,11 @@ import frappe
 from frappe.test_runner import make_test_records
 from frappe.tests.utils import FrappeTestCase
 
-import erpnext
-from erpnext.accounts.doctype.account.test_account import create_account
-from erpnext.stock.doctype.item.test_item import create_item
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
-from erpnext.stock.doctype.warehouse.warehouse import convert_to_group_or_ledger, get_children
+import beasm
+from beasm.accounts.doctype.account.test_account import create_account
+from beasm.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.warehouse.warehouse import convert_to_group_or_ledger, get_children
 
 test_records = frappe.get_test_records("Warehouse")
 
@@ -109,7 +109,7 @@ def create_warehouse(warehouse_name, properties=None, company=None):
 	if not company:
 		company = "_Test Company"
 
-	warehouse_id = erpnext.encode_company_abbr(warehouse_name, company)
+	warehouse_id = beasm.encode_company_abbr(warehouse_name, company)
 	if not frappe.db.exists("Warehouse", warehouse_id):
 		w = frappe.new_doc("Warehouse")
 		w.warehouse_name = warehouse_name

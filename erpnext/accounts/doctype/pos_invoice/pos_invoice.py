@@ -7,17 +7,17 @@ from frappe import _
 from frappe.query_builder.functions import IfNull, Sum
 from frappe.utils import cint, flt, get_link_to_form, getdate, nowdate
 
-from erpnext.accounts.doctype.loyalty_program.loyalty_program import validate_loyalty_points
-from erpnext.accounts.doctype.payment_request.payment_request import make_payment_request
-from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
+from beasm.accounts.doctype.loyalty_program.loyalty_program import validate_loyalty_points
+from beasm.accounts.doctype.payment_request.payment_request import make_payment_request
+from beasm.accounts.doctype.sales_invoice.sales_invoice import (
 	SalesInvoice,
 	get_bank_cash_account,
 	get_mode_of_payment_info,
 	update_multi_mode_option,
 )
-from erpnext.accounts.party import get_due_date, get_party_account
-from erpnext.stock.doctype.batch.batch import get_batch_qty, get_pos_reserved_batch_qty
-from erpnext.stock.doctype.serial_no.serial_no import (
+from beasm.accounts.party import get_due_date, get_party_account
+from beasm.stock.doctype.batch.batch import get_batch_qty, get_pos_reserved_batch_qty
+from beasm.stock.doctype.serial_no.serial_no import (
 	get_delivered_serial_nos,
 	get_pos_reserved_serial_nos,
 	get_serial_nos,
@@ -56,7 +56,7 @@ class POSInvoice(SalesInvoice):
 		self.validate_loyalty_transaction()
 		self.validate_company_with_pos_company()
 		if self.coupon_code:
-			from erpnext.accounts.doctype.pricing_rule.utils import validate_coupon_code
+			from beasm.accounts.doctype.pricing_rule.utils import validate_coupon_code
 
 			validate_coupon_code(self.coupon_code)
 
@@ -74,7 +74,7 @@ class POSInvoice(SalesInvoice):
 		self.set_status(update=True)
 
 		if self.coupon_code:
-			from erpnext.accounts.doctype.pricing_rule.utils import update_coupon_code_count
+			from beasm.accounts.doctype.pricing_rule.utils import update_coupon_code_count
 
 			update_coupon_code_count(self.coupon_code, "used")
 
@@ -109,7 +109,7 @@ class POSInvoice(SalesInvoice):
 			against_psi_doc.make_loyalty_point_entry()
 
 		if self.coupon_code:
-			from erpnext.accounts.doctype.pricing_rule.utils import update_coupon_code_count
+			from beasm.accounts.doctype.pricing_rule.utils import update_coupon_code_count
 
 			update_coupon_code_count(self.coupon_code, "cancelled")
 
@@ -221,7 +221,7 @@ class POSInvoice(SalesInvoice):
 		):
 			return
 
-		from erpnext.stock.stock_ledger import is_negative_stock_allowed
+		from beasm.stock.stock_ledger import is_negative_stock_allowed
 
 		for d in self.get("items"):
 			if d.serial_no:
@@ -446,7 +446,7 @@ class POSInvoice(SalesInvoice):
 
 	def set_pos_fields(self, for_validate=False):
 		"""Set retail related fields from POS Profiles"""
-		from erpnext.stock.get_item_details import get_pos_profile, get_pos_profile_item_details
+		from beasm.stock.get_item_details import get_pos_profile, get_pos_profile_item_details
 
 		if not self.pos_profile:
 			pos_profile = get_pos_profile(self.company) or {}
@@ -706,7 +706,7 @@ def get_pos_reserved_qty(item_code, warehouse):
 
 @frappe.whitelist()
 def make_sales_return(source_name, target_doc=None):
-	from erpnext.controllers.sales_and_purchase_return import make_return_doc
+	from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 	return make_return_doc("POS Invoice", source_name, target_doc)
 

@@ -1,11 +1,11 @@
 import frappe
 from frappe import _
 
-from erpnext.accounts.report.tds_payable_monthly.tds_payable_monthly import (
+from beasm.accounts.report.tds_payable_monthly.tds_payable_monthly import (
 	get_result,
 	get_tds_docs,
 )
-from erpnext.accounts.utils import get_fiscal_year
+from beasm.accounts.utils import get_fiscal_year
 
 
 def execute(filters=None):

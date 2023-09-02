@@ -21,29 +21,29 @@ from frappe.utils import (
 	nowdate,
 )
 
-import erpnext
-from erpnext.accounts.general_ledger import process_gl_map
-from erpnext.controllers.taxes_and_totals import init_landed_taxes_and_totals
-from erpnext.manufacturing.doctype.bom.bom import add_additional_cost, validate_bom_no
-from erpnext.setup.doctype.brand.brand import get_brand_defaults
-from erpnext.setup.doctype.item_group.item_group import get_item_group_defaults
-from erpnext.stock.doctype.batch.batch import get_batch_no, get_batch_qty, set_batch_nos
-from erpnext.stock.doctype.item.item import get_item_defaults
-from erpnext.stock.doctype.serial_no.serial_no import (
+import beasm
+from beasm.accounts.general_ledger import process_gl_map
+from beasm.controllers.taxes_and_totals import init_landed_taxes_and_totals
+from beasm.manufacturing.doctype.bom.bom import add_additional_cost, validate_bom_no
+from beasm.setup.doctype.brand.brand import get_brand_defaults
+from beasm.setup.doctype.item_group.item_group import get_item_group_defaults
+from beasm.stock.doctype.batch.batch import get_batch_no, get_batch_qty, set_batch_nos
+from beasm.stock.doctype.item.item import get_item_defaults
+from beasm.stock.doctype.serial_no.serial_no import (
 	get_serial_nos,
 	update_serial_nos_after_submit,
 )
-from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import (
+from beasm.stock.doctype.stock_reconciliation.stock_reconciliation import (
 	OpeningEntryAccountError,
 )
-from erpnext.stock.get_item_details import (
+from beasm.stock.get_item_details import (
 	get_bin_details,
 	get_conversion_factor,
 	get_default_cost_center,
 	get_reserved_qty_for_so,
 )
-from erpnext.stock.stock_ledger import NegativeStockError, get_previous_sle, get_valuation_rate
-from erpnext.stock.utils import get_bin, get_incoming_rate
+from beasm.stock.stock_ledger import NegativeStockError, get_previous_sle, get_valuation_rate
+from beasm.stock.utils import get_bin, get_incoming_rate
 
 
 class FinishedGoodError(frappe.ValidationError):
@@ -66,7 +66,7 @@ class MaxSampleAlreadyRetainedError(frappe.ValidationError):
 	pass
 
 
-from erpnext.controllers.stock_controller import StockController
+from beasm.controllers.stock_controller import StockController
 
 form_grid_templates = {"items": "templates/form_grid/stock_entry_grid.html"}
 
@@ -101,7 +101,7 @@ class StockEntry(StockController):
 			item.update(get_bin_details(item.item_code, item.s_warehouse))
 
 	def before_validate(self):
-		from erpnext.stock.doctype.putaway_rule.putaway_rule import apply_putaway_rule
+		from beasm.stock.doctype.putaway_rule.putaway_rule import apply_putaway_rule
 
 		apply_rule = self.apply_putaway_rule and (
 			self.purpose in ["Material Transfer", "Material Receipt"]
@@ -479,7 +479,7 @@ class StockEntry(StockController):
 				)
 
 	def validate_difference_account(self):
-		if not cint(erpnext.is_perpetual_inventory_enabled(self.company)):
+		if not cint(beasm.is_perpetual_inventory_enabled(self.company)):
 			return
 
 		for d in self.get("items"):
@@ -659,7 +659,7 @@ class StockEntry(StockController):
 				)
 
 	def set_actual_qty(self):
-		from erpnext.stock.stock_ledger import is_negative_stock_allowed
+		from beasm.stock.stock_ledger import is_negative_stock_allowed
 
 		for d in self.get("items"):
 			allow_negative_stock = is_negative_stock_allowed(item_code=d.item_code)
@@ -755,7 +755,7 @@ class StockEntry(StockController):
 					self.doctype,
 					self.name,
 					d.allow_zero_valuation_rate,
-					currency=erpnext.get_company_currency(self.company),
+					currency=beasm.get_company_currency(self.company),
 					company=self.company,
 					raise_error_if_no_rate=raise_error_if_no_rate,
 					batch_no=d.batch_no,
@@ -1705,7 +1705,7 @@ class StockEntry(StockController):
 		self.add_to_stock_entry_detail({item.name: args}, bom_no=self.bom_no)
 
 	def get_bom_raw_materials(self, qty):
-		from erpnext.manufacturing.doctype.bom.bom import get_bom_items_as_dict
+		from beasm.manufacturing.doctype.bom.bom import get_bom_items_as_dict
 
 		# item dict = { item_code: {qty, description, stock_uom} }
 		item_dict = get_bom_items_as_dict(
@@ -1739,7 +1739,7 @@ class StockEntry(StockController):
 		return item_dict
 
 	def get_bom_scrap_material(self, qty):
-		from erpnext.manufacturing.doctype.bom.bom import get_bom_items_as_dict
+		from beasm.manufacturing.doctype.bom.bom import get_bom_items_as_dict
 
 		# item dict = { item_code: {qty, description, stock_uom} }
 		item_dict = (
@@ -2373,14 +2373,14 @@ class StockEntry(StockController):
 
 	def update_subcontracting_order_status(self):
 		if self.subcontracting_order and self.purpose in ["Send to Subcontractor", "Material Transfer"]:
-			from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+			from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 				update_subcontracting_order_status,
 			)
 
 			update_subcontracting_order_status(self.subcontracting_order)
 
 	def update_pick_list_status(self):
-		from erpnext.stock.doctype.pick_list.pick_list import update_pick_list_status
+		from beasm.stock.doctype.pick_list.pick_list import update_pick_list_status
 
 		update_pick_list_status(self.pick_list)
 
@@ -2716,7 +2716,7 @@ def get_supplied_items(
 
 @frappe.whitelist()
 def get_items_from_subcontract_order(source_name, target_doc=None):
-	from erpnext.controllers.subcontracting_controller import make_rm_stock_entry
+	from beasm.controllers.subcontracting_controller import make_rm_stock_entry
 
 	if isinstance(target_doc, str):
 		target_doc = frappe.get_doc(json.loads(target_doc))

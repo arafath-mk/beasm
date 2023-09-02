@@ -22,16 +22,16 @@ from frappe.utils import (
 )
 from frappe.utils.html_utils import clean_html
 
-import erpnext
-from erpnext.controllers.item_variant import (
+import beasm
+from beasm.controllers.item_variant import (
 	ItemVariantExistsError,
 	copy_attributes_to_variant,
 	get_variant,
 	make_variant_item_code,
 	validate_item_variant_attributes,
 )
-from erpnext.setup.doctype.item_group.item_group import invalidate_cache_for
-from erpnext.stock.doctype.item_default.item_default import ItemDefault
+from beasm.setup.doctype.item_group.item_group import invalidate_cache_for
+from beasm.stock.doctype.item_default.item_default import ItemDefault
 
 
 class DuplicateReorderRows(frappe.ValidationError):
@@ -153,7 +153,7 @@ class Item(Document):
 					"item_code": self.name,
 					"uom": self.stock_uom,
 					"brand": self.brand,
-					"currency": erpnext.get_default_currency(),
+					"currency": beasm.get_default_currency(),
 					"price_list_rate": self.standard_rate,
 				}
 			)
@@ -167,7 +167,7 @@ class Item(Document):
 		if not self.valuation_rate and not self.standard_rate and not self.is_customer_provided_item:
 			frappe.throw(_("Valuation Rate is mandatory if Opening Stock entered"))
 
-		from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+		from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 		# default warehouse, or Stores
 		for default in self.item_defaults or [
@@ -580,7 +580,7 @@ class Item(Document):
 		frappe.db.set_value("Item", new_name, "last_purchase_rate", last_purchase_rate)
 
 	def recalculate_bin_qty(self, new_name):
-		from erpnext.stock.stock_balance import repost_stock
+		from beasm.stock.stock_balance import repost_stock
 
 		existing_allow_negative_stock = frappe.db.get_value(
 			"Stock Settings", None, "allow_negative_stock"
@@ -709,7 +709,7 @@ class Item(Document):
 					frappe.msgprint(_("Item Variants updated"))
 				else:
 					frappe.enqueue(
-						"erpnext.stock.doctype.item.item.update_variants",
+						"beasm.stock.doctype.item.item.update_variants",
 						variants=variants,
 						template=self,
 						now=frappe.flags.in_test,
@@ -1137,7 +1137,7 @@ def invalidate_cache_for_item(doc):
 
 def invalidate_item_variants_cache_for_website(doc):
 	"""Rebuild ItemVariantsCacheManager via Item or Website Item."""
-	from erpnext.e_commerce.variant_selector.item_variants_cache import ItemVariantsCacheManager
+	from beasm.e_commerce.variant_selector.item_variants_cache import ItemVariantsCacheManager
 
 	item_code = None
 	is_web_item = doc.get("published_in_website") or doc.get("published")
@@ -1295,7 +1295,7 @@ def update_variants(variants, template, publish_progress=True):
 			frappe.publish_progress(count / total * 100, title=_("Updating Variants..."))
 
 
-@erpnext.allow_regional
+@beasm.allow_regional
 def set_item_tax_from_hsn_code(item):
 	pass
 
@@ -1326,6 +1326,6 @@ def validate_item_default_company_links(item_defaults: List[ItemDefault]) -> Non
 
 @frappe.whitelist()
 def get_asset_naming_series():
-	from erpnext.assets.doctype.asset.asset import get_asset_naming_series
+	from beasm.assets.doctype.asset.asset import get_asset_naming_series
 
 	return get_asset_naming_series()

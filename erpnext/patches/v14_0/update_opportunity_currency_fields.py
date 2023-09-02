@@ -2,8 +2,8 @@ import click
 import frappe
 from frappe.utils import flt
 
-import erpnext
-from erpnext.setup.utils import get_exchange_rate
+import beasm
+from beasm.setup.utils import get_exchange_rate
 
 
 def execute():
@@ -18,7 +18,7 @@ def execute():
 	)
 
 	for opportunity in opportunities:
-		company_currency = erpnext.get_company_currency(opportunity.company)
+		company_currency = beasm.get_company_currency(opportunity.company)
 
 		if opportunity.currency is None or opportunity.currency == "":
 			opportunity.currency = company_currency

@@ -7,8 +7,8 @@ from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import flt, getdate, nowdate
 
-from erpnext.buying.utils import validate_for_items
-from erpnext.controllers.buying_controller import BuyingController
+from beasm.buying.utils import validate_for_items
+from beasm.controllers.buying_controller import BuyingController
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -20,7 +20,7 @@ class SupplierQuotation(BuyingController):
 		if not self.status:
 			self.status = "Draft"
 
-		from erpnext.controllers.status_updater import validate_status
+		from beasm.controllers.status_updater import validate_status
 
 		validate_status(self.status, ["Draft", "Submitted", "Stopped", "Cancelled"])
 
@@ -114,7 +114,7 @@ class SupplierQuotation(BuyingController):
 
 
 def get_list_context(context=None):
-	from erpnext.controllers.website_list_for_contact import get_list_context
+	from beasm.controllers.website_list_for_contact import get_list_context
 
 	list_context = get_list_context(context)
 	list_context.update(

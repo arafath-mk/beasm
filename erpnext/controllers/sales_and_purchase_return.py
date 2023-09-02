@@ -7,8 +7,8 @@ from frappe import _
 from frappe.model.meta import get_field_precision
 from frappe.utils import flt, format_datetime, get_datetime
 
-import erpnext
-from erpnext.stock.utils import get_incoming_rate
+import beasm
+from beasm.stock.utils import get_incoming_rate
 
 
 class StockOverReturnError(frappe.ValidationError):
@@ -69,7 +69,7 @@ def validate_return_against(doc):
 
 
 def validate_returned_items(doc):
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	valid_items = frappe._dict()
 
@@ -166,7 +166,7 @@ def validate_quantity(doc, args, ref, valid_items, already_returned_items):
 
 	already_returned_data = already_returned_items.get(args.item_code) or {}
 
-	company_currency = erpnext.get_company_currency(doc.company)
+	company_currency = beasm.get_company_currency(doc.company)
 	stock_qty_precision = get_field_precision(
 		frappe.get_meta(doc.doctype + " Item").get_field("stock_qty"), company_currency
 	)
@@ -201,7 +201,7 @@ def validate_quantity(doc, args, ref, valid_items, already_returned_items):
 
 
 def get_ref_item_dict(valid_items, ref_item_row):
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	valid_items.setdefault(
 		ref_item_row.item_code,
@@ -323,7 +323,7 @@ def get_returned_qty_map_for_row(return_against, party, row_name, doctype):
 def make_return_doc(doctype: str, source_name: str, target_doc=None):
 	from frappe.model.mapper import get_mapped_doc
 
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	company = frappe.db.get_value("Delivery Note", source_name, "company")
 	default_warehouse_for_sales_return = frappe.get_cached_value(
@@ -630,7 +630,7 @@ def get_filters(
 
 
 def get_returned_serial_nos(child_doc, parent_doc, serial_no_field="serial_no"):
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	return_ref_field = frappe.scrub(child_doc.doctype)
 	if child_doc.doctype == "Delivery Note Item":

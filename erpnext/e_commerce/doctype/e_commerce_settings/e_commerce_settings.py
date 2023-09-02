@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import comma_and, flt, unique
 
-from erpnext.e_commerce.redisearch_utils import (
+from beasm.e_commerce.redisearch_utils import (
 	create_website_items_index,
 	define_autocomplete_dictionary,
 	get_indexable_web_fields,
@@ -108,7 +108,7 @@ class ECommerceSettings(Document):
 
 	def validate_price_list_exchange_rate(self):
 		"Check if exchange rate exists for Price List currency (to Company's currency)."
-		from erpnext.setup.utils import get_exchange_rate
+		from beasm.setup.utils import get_exchange_rate
 
 		if not self.enabled or not self.company or not self.price_list:
 			return  # this function is also called from hooks, check values again

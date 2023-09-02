@@ -10,13 +10,13 @@ from frappe.query_builder.functions import CombineDatetime
 from frappe.utils import cint, flt, getdate, nowdate
 from pypika import functions as fn
 
-import erpnext
-from erpnext.accounts.utils import get_account_currency
-from erpnext.assets.doctype.asset.asset import get_asset_account, is_cwip_accounting_enabled
-from erpnext.assets.doctype.asset_category.asset_category import get_asset_category_account
-from erpnext.buying.utils import check_on_hold_or_closed_status
-from erpnext.controllers.buying_controller import BuyingController
-from erpnext.stock.doctype.delivery_note.delivery_note import make_inter_company_transaction
+import beasm
+from beasm.accounts.utils import get_account_currency
+from beasm.assets.doctype.asset.asset import get_asset_account, is_cwip_accounting_enabled
+from beasm.assets.doctype.asset_category.asset_category import get_asset_category_account
+from beasm.buying.utils import check_on_hold_or_closed_status
+from beasm.controllers.buying_controller import BuyingController
+from beasm.stock.doctype.delivery_note.delivery_note import make_inter_company_transaction
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -109,7 +109,7 @@ class PurchaseReceipt(BuyingController):
 			)
 
 	def before_validate(self):
-		from erpnext.stock.doctype.putaway_rule.putaway_rule import apply_putaway_rule
+		from beasm.stock.doctype.putaway_rule.putaway_rule import apply_putaway_rule
 
 		if self.get("items") and self.apply_putaway_rule and not self.get("is_return"):
 			apply_putaway_rule(self.doctype, self.get("items"), self.company)
@@ -264,7 +264,7 @@ class PurchaseReceipt(BuyingController):
 		# depends upon updated ordered qty in PO
 		self.update_stock_ledger()
 
-		from erpnext.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
+		from beasm.stock.doctype.serial_no.serial_no import update_serial_nos_after_submit
 
 		update_serial_nos_after_submit(self, "items")
 
@@ -309,7 +309,7 @@ class PurchaseReceipt(BuyingController):
 		self.set_consumed_qty_in_subcontract_order()
 
 	def get_gl_entries(self, warehouse_account=None):
-		from erpnext.accounts.general_ledger import process_gl_map
+		from beasm.accounts.general_ledger import process_gl_map
 
 		gl_entries = []
 
@@ -320,12 +320,12 @@ class PurchaseReceipt(BuyingController):
 		return process_gl_map(gl_entries)
 
 	def make_item_gl_entries(self, gl_entries, warehouse_account=None):
-		from erpnext.accounts.doctype.purchase_invoice.purchase_invoice import (
+		from beasm.accounts.doctype.purchase_invoice.purchase_invoice import (
 			get_purchase_document_details,
 		)
 
 		stock_rbnb = None
-		if erpnext.is_perpetual_inventory_enabled(self.company):
+		if beasm.is_perpetual_inventory_enabled(self.company):
 			stock_rbnb = self.get_company_default("stock_received_but_not_billed")
 			landed_cost_entries = get_item_account_wise_additional_cost(self.name)
 			expenses_included_in_valuation = self.get_company_default("expenses_included_in_valuation")
@@ -632,7 +632,7 @@ class PurchaseReceipt(BuyingController):
 
 	def make_tax_gl_entries(self, gl_entries):
 
-		if erpnext.is_perpetual_inventory_enabled(self.company):
+		if beasm.is_perpetual_inventory_enabled(self.company):
 			expenses_included_in_valuation = self.get_company_default("expenses_included_in_valuation")
 
 		negative_expense_to_be_booked = sum([flt(d.item_tax_amount) for d in self.get("items")])
@@ -1017,7 +1017,7 @@ def get_item_wise_returned_qty(pr_doc):
 
 @frappe.whitelist()
 def make_purchase_invoice(source_name, target_doc=None):
-	from erpnext.accounts.party import get_payment_terms_template
+	from beasm.accounts.party import get_payment_terms_template
 
 	doc = frappe.get_doc("Purchase Receipt", source_name)
 	returned_qty_map = get_returned_qty_map(source_name)
@@ -1141,7 +1141,7 @@ def get_returned_qty_map(purchase_receipt):
 
 @frappe.whitelist()
 def make_purchase_return(source_name, target_doc=None):
-	from erpnext.controllers.sales_and_purchase_return import make_return_doc
+	from beasm.controllers.sales_and_purchase_return import make_return_doc
 
 	return make_return_doc("Purchase Receipt", source_name, target_doc)
 

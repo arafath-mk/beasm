@@ -8,14 +8,14 @@ import frappe
 from frappe import utils
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.accounts.doctype.bank_reconciliation_tool.bank_reconciliation_tool import (
+from beasm.accounts.doctype.bank_reconciliation_tool.bank_reconciliation_tool import (
 	get_linked_payments,
 	reconcile_vouchers,
 )
-from erpnext.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
-from erpnext.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
-from erpnext.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
-from erpnext.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
+from beasm.accounts.doctype.payment_entry.test_payment_entry import get_payment_entry
+from beasm.accounts.doctype.pos_profile.test_pos_profile import make_pos_profile
+from beasm.accounts.doctype.purchase_invoice.test_purchase_invoice import make_purchase_invoice
+from beasm.accounts.doctype.sales_invoice.test_sales_invoice import create_sales_invoice
 
 test_dependencies = ["Item", "Cost Center"]
 
@@ -161,7 +161,7 @@ class TestBankTransaction(FrappeTestCase):
 		)
 
 	def test_matching_loan_repayment(self):
-		from erpnext.loan_management.doctype.loan.test_loan import create_loan_accounts
+		from beasm.loan_management.doctype.loan.test_loan import create_loan_accounts
 
 		create_loan_accounts()
 		bank_account = frappe.get_doc(
@@ -401,16 +401,16 @@ def add_vouchers():
 
 
 def create_loan_and_repayment():
-	from erpnext.loan_management.doctype.loan.test_loan import (
+	from beasm.loan_management.doctype.loan.test_loan import (
 		create_loan,
 		create_loan_type,
 		create_repayment_entry,
 		make_loan_disbursement_entry,
 	)
-	from erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
+	from beasm.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual import (
 		process_loan_interest_accrual_for_term_loans,
 	)
-	from erpnext.setup.doctype.employee.test_employee import make_employee
+	from beasm.setup.doctype.employee.test_employee import make_employee
 
 	create_loan_type(
 		"Personal Loan",

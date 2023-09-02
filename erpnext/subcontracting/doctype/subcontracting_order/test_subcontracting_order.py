@@ -7,12 +7,12 @@ from collections import defaultdict
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.buying.doctype.purchase_order.purchase_order import get_mapped_subcontracting_order
-from erpnext.controllers.subcontracting_controller import (
+from beasm.buying.doctype.purchase_order.purchase_order import get_mapped_subcontracting_order
+from beasm.controllers.subcontracting_controller import (
 	get_materials_from_supplier,
 	make_rm_stock_entry,
 )
-from erpnext.controllers.tests.test_subcontracting_controller import (
+from beasm.controllers.tests.test_subcontracting_controller import (
 	get_rm_items,
 	get_subcontracting_order,
 	make_bom_for_subcontracted_items,
@@ -24,9 +24,9 @@ from erpnext.controllers.tests.test_subcontracting_controller import (
 	make_subcontracted_items,
 	set_backflush_based_on,
 )
-from erpnext.stock.doctype.item.test_item import make_item
-from erpnext.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
-from erpnext.subcontracting.doctype.subcontracting_order.subcontracting_order import (
+from beasm.stock.doctype.item.test_item import make_item
+from beasm.stock.doctype.stock_entry.test_stock_entry import make_stock_entry
+from beasm.subcontracting.doctype.subcontracting_order.subcontracting_order import (
 	make_subcontracting_receipt,
 )
 

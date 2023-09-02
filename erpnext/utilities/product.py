@@ -4,8 +4,8 @@
 import frappe
 from frappe.utils import cint, flt, fmt_money, getdate, nowdate
 
-from erpnext.accounts.doctype.pricing_rule.pricing_rule import get_pricing_rule_for_item
-from erpnext.stock.doctype.batch.batch import get_batch_qty
+from beasm.accounts.doctype.pricing_rule.pricing_rule import get_pricing_rule_for_item
+from beasm.stock.doctype.batch.batch import get_batch_qty
 
 
 def get_web_item_qty_in_stock(item_code, item_warehouse_field, warehouse=None):
@@ -78,7 +78,7 @@ def qty_from_all_warehouses(batch_info):
 
 
 def get_price(item_code, price_list, customer_group, company, qty=1):
-	from erpnext.e_commerce.shopping_cart.cart import get_party
+	from beasm.e_commerce.shopping_cart.cart import get_party
 
 	template_item_code = frappe.db.get_value("Item", item_code, "variant_of")
 

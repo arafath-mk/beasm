@@ -6,10 +6,10 @@ from frappe import _
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import flt
 
-from erpnext.buying.doctype.purchase_order.purchase_order import is_subcontracting_order_created
-from erpnext.controllers.subcontracting_controller import SubcontractingController
-from erpnext.stock.stock_balance import get_ordered_qty, update_bin_qty
-from erpnext.stock.utils import get_bin
+from beasm.buying.doctype.purchase_order.purchase_order import is_subcontracting_order_created
+from beasm.controllers.subcontracting_controller import SubcontractingController
+from beasm.stock.stock_balance import get_ordered_qty, update_bin_qty
+from beasm.stock.utils import get_bin
 
 
 class SubcontractingOrder(SubcontractingController):

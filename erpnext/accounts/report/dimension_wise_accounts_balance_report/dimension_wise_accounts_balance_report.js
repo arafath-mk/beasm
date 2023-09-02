@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.require("assets/erpnext/js/financial_statements.js", function() {
+frappe.require("assets/beasm/js/financial_statements.js", function() {
 	frappe.query_reports["Dimension-wise Accounts Balance Report"] = {
 		"filters": [
 			{
@@ -18,7 +18,7 @@ frappe.require("assets/erpnext/js/financial_statements.js", function() {
 				"label": __("Fiscal Year"),
 				"fieldtype": "Link",
 				"options": "Fiscal Year",
-				"default": erpnext.utils.get_fiscal_year(frappe.datetime.get_today()),
+				"default": beasm.utils.get_fiscal_year(frappe.datetime.get_today()),
 				"reqd": 1,
 				"on_change": function(query_report) {
 					var fiscal_year = query_report.get_values().fiscal_year;
@@ -63,7 +63,7 @@ frappe.require("assets/erpnext/js/financial_statements.js", function() {
 				"reqd": 1,
 			},
 		],
-		"formatter": erpnext.financial_statements.formatter,
+		"formatter": beasm.financial_statements.formatter,
 		"tree": true,
 		"name_field": "account",
 		"parent_field": "parent_account",

@@ -8,14 +8,14 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from frappe.desk.page.setup_wizard.setup_wizard import add_all_roles_to
 from frappe.utils import cint
 
-from erpnext.accounts.doctype.cash_flow_mapper.default_cash_flow_mapper import DEFAULT_MAPPERS
-from erpnext.setup.default_energy_point_rules import get_default_energy_point_rules
-from erpnext.setup.doctype.incoterm.incoterm import create_incoterms
+from beasm.accounts.doctype.cash_flow_mapper.default_cash_flow_mapper import DEFAULT_MAPPERS
+from beasm.setup.default_energy_point_rules import get_default_energy_point_rules
+from beasm.setup.doctype.incoterm.incoterm import create_incoterms
 
 from .default_success_action import get_default_success_action
 
 default_mail_footer = """<div style="padding: 7px; text-align: right; color: #888"><small>Sent via
-	<a style="color: #888" href="http://erpnext.org">BEASM</a></div>"""
+	<a style="color: #888" href="http://beasm.org">BEASM</a></div>"""
 
 
 def after_install():
@@ -153,11 +153,11 @@ def add_company_to_session_defaults():
 def add_standard_navbar_items():
 	navbar_settings = frappe.get_single("Navbar Settings")
 
-	erpnext_navbar_items = [
+	beasm_navbar_items = [
 		{
 			"item_label": "Documentation",
 			"item_type": "Route",
-			"route": "https://docs.erpnext.com/docs/v14/user/manual/en/introduction",
+			"route": "https://docs.beasm.com/docs/v14/user/manual/en/introduction",
 			"is_standard": 1,
 		},
 		{
@@ -169,7 +169,7 @@ def add_standard_navbar_items():
 		{
 			"item_label": "Report an Issue",
 			"item_type": "Route",
-			"route": "https://github.com/frappe/erpnext/issues",
+			"route": "https://github.com/frappe/beasm/issues",
 			"is_standard": 1,
 		},
 	]
@@ -177,7 +177,7 @@ def add_standard_navbar_items():
 	current_navbar_items = navbar_settings.help_dropdown
 	navbar_settings.set("help_dropdown", [])
 
-	for item in erpnext_navbar_items:
+	for item in beasm_navbar_items:
 		current_labels = [item.get("item_label") for item in current_navbar_items]
 		if not item.get("item_label") in current_labels:
 			navbar_settings.append("help_dropdown", item)

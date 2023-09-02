@@ -3,12 +3,12 @@
 
 import frappe
 
-from erpnext.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.e_commerce_settings import (
 	get_shopping_cart_settings,
 	show_quantity_in_website,
 )
-from erpnext.e_commerce.shopping_cart.cart import _get_cart_quotation, _set_price_list
-from erpnext.utilities.product import (
+from beasm.e_commerce.shopping_cart.cart import _get_cart_quotation, _set_price_list
+from beasm.utilities.product import (
 	get_non_stock_item_status,
 	get_price,
 	get_web_item_qty_in_stock,

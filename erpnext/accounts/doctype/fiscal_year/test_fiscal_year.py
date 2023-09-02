@@ -7,7 +7,7 @@ import unittest
 import frappe
 from frappe.utils import now_datetime
 
-from erpnext.accounts.doctype.fiscal_year.fiscal_year import FiscalYearIncorrectDate
+from beasm.accounts.doctype.fiscal_year.fiscal_year import FiscalYearIncorrectDate
 
 test_ignore = ["Company"]
 

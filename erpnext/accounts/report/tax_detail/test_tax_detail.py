@@ -18,7 +18,7 @@ from .tax_detail import filter_match, save_custom_report
 
 class TestTaxDetail(unittest.TestCase):
 	def load_testdocs(self):
-		from erpnext.accounts.utils import FiscalYearError, get_fiscal_year
+		from beasm.accounts.utils import FiscalYearError, get_fiscal_year
 
 		datapath, _ = os.path.splitext(os.path.realpath(__file__))
 		with open(datapath + ".json", "r") as fp:
@@ -88,7 +88,7 @@ class TestTaxDetail(unittest.TestCase):
 
 	def rm_testdocs(self):
 		"Remove the Company and all data"
-		from erpnext.setup.doctype.company.company import create_transaction_deletion_request
+		from beasm.setup.doctype.company.company import create_transaction_deletion_request
 
 		create_transaction_deletion_request(self.company.name)
 

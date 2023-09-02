@@ -6,7 +6,7 @@ from datetime import date
 import frappe
 from frappe.model.document import Document
 
-from erpnext.utilities.bulk_transaction import task, update_logger
+from beasm.utilities.bulk_transaction import task, update_logger
 
 
 class BulkTransactionLog(Document):

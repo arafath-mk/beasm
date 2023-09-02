@@ -4,8 +4,8 @@
 
 import frappe
 
-from erpnext.regional.italy import state_codes
-from erpnext.regional.italy.setup import make_custom_fields, setup_report
+from beasm.regional.italy import state_codes
+from beasm.regional.italy.setup import make_custom_fields, setup_report
 
 
 def execute():

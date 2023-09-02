@@ -7,28 +7,28 @@ from frappe.permissions import add_user_permission, remove_user_permission
 from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.utils import add_days, add_to_date, flt, nowdate, nowtime, today
 
-from erpnext.accounts.doctype.account.test_account import get_inventory_account
-from erpnext.stock.doctype.item.test_item import (
+from beasm.accounts.doctype.account.test_account import get_inventory_account
+from beasm.stock.doctype.item.test_item import (
 	create_item,
 	make_item,
 	make_item_variant,
 	set_item_variant_settings,
 )
-from erpnext.stock.doctype.serial_no.serial_no import *  # noqa
-from erpnext.stock.doctype.stock_entry.stock_entry import (
+from beasm.stock.doctype.serial_no.serial_no import *  # noqa
+from beasm.stock.doctype.stock_entry.stock_entry import (
 	FinishedGoodError,
 	make_stock_in_entry,
 	move_sample_to_retention_warehouse,
 )
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
-from erpnext.stock.doctype.stock_ledger_entry.stock_ledger_entry import StockFreezeError
-from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import (
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.stock_ledger_entry.stock_ledger_entry import StockFreezeError
+from beasm.stock.doctype.stock_reconciliation.stock_reconciliation import (
 	OpeningEntryAccountError,
 )
-from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 	create_stock_reconciliation,
 )
-from erpnext.stock.stock_ledger import NegativeStockError, get_previous_sle
+from beasm.stock.stock_ledger import NegativeStockError, get_previous_sle
 
 
 def get_sle(**args):
@@ -148,7 +148,7 @@ class TestStockEntry(FrappeTestCase):
 			variant.reorder_levels[0].material_request_type = material_request_type
 			variant.save()
 
-		from erpnext.stock.reorder_item import reorder_item
+		from beasm.stock.reorder_item import reorder_item
 
 		mr_list = reorder_item()
 
@@ -162,7 +162,7 @@ class TestStockEntry(FrappeTestCase):
 		self.assertTrue(item_code in items)
 
 	def test_add_to_transit_entry(self):
-		from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+		from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 		item_code = "_Test Transit Item"
 		company = "_Test Company"
@@ -709,7 +709,7 @@ class TestStockEntry(FrappeTestCase):
 		Expected Result: 1) Batch is created with Reference in Serial No
 		2) Batch is deleted and Serial No is Inactive
 		"""
-		from erpnext.stock.doctype.batch.batch import get_batch_qty
+		from beasm.stock.doctype.batch.batch import get_batch_qty
 
 		item = frappe.db.exists("Item", {"item_name": "Batched and Serialised Item"})
 		if not item:
@@ -751,7 +751,7 @@ class TestStockEntry(FrappeTestCase):
 		2) Cancelling second Stock Entry should make Serial Nos that are, linked to mentioned batch
 		and in that transaction only, Inactive.
 		"""
-		from erpnext.stock.doctype.batch.batch import get_batch_qty
+		from beasm.stock.doctype.batch.batch import get_batch_qty
 
 		item = frappe.db.exists("Item", {"item_name": "Batched and Serialised Item"})
 		if not item:
@@ -807,7 +807,7 @@ class TestStockEntry(FrappeTestCase):
 		)
 		frappe.set_user("test2@example.com")
 
-		from erpnext.stock.utils import InvalidWarehouseCompany
+		from beasm.stock.utils import InvalidWarehouseCompany
 
 		st1 = frappe.copy_doc(test_records[0])
 		st1.get("items")[0].t_warehouse = "_Test Warehouse 2 - _TC1"
@@ -874,7 +874,7 @@ class TestStockEntry(FrappeTestCase):
 		frappe.db.set_value("Stock Settings", None, "stock_frozen_upto_days", 0)
 
 	def test_work_order(self):
-		from erpnext.manufacturing.doctype.work_order.work_order import (
+		from beasm.manufacturing.doctype.work_order.work_order import (
 			make_stock_entry as _make_stock_entry,
 		)
 
@@ -916,7 +916,7 @@ class TestStockEntry(FrappeTestCase):
 
 	@change_settings("Manufacturing Settings", {"material_consumption": 1})
 	def test_work_order_manufacture_with_material_consumption(self):
-		from erpnext.manufacturing.doctype.work_order.work_order import (
+		from beasm.manufacturing.doctype.work_order.work_order import (
 			make_stock_entry as _make_stock_entry,
 		)
 
@@ -996,7 +996,7 @@ class TestStockEntry(FrappeTestCase):
 		work_order.insert()
 		work_order.submit()
 
-		from erpnext.manufacturing.doctype.work_order.work_order import make_stock_entry
+		from beasm.manufacturing.doctype.work_order.work_order import make_stock_entry
 
 		stock_entry = frappe.get_doc(make_stock_entry(work_order.name, "Manufacture", 1))
 		stock_entry.insert()
@@ -1034,8 +1034,8 @@ class TestStockEntry(FrappeTestCase):
 		s2.cancel()
 
 	def test_retain_sample(self):
-		from erpnext.stock.doctype.batch.batch import get_batch_qty
-		from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+		from beasm.stock.doctype.batch.batch import get_batch_qty
+		from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 		create_warehouse("Test Warehouse for Sample Retention")
 		frappe.db.set_value(
@@ -1387,7 +1387,7 @@ class TestStockEntry(FrappeTestCase):
 
 	@change_settings("Stock Settings", {"allow_negative_stock": 0})
 	def test_future_negative_sle_batch(self):
-		from erpnext.stock.doctype.batch.test_batch import TestBatch
+		from beasm.stock.doctype.batch.test_batch import TestBatch
 
 		# Initialize item, batch, warehouse, opening qty
 		item_code = "_Test MultiBatch Item"
@@ -1432,7 +1432,7 @@ class TestStockEntry(FrappeTestCase):
 		| issue       | A     | -1  | 10   | -30 (to assert after submit) |
 		| issue       | B     | -1  | 20   |                              |
 		"""
-		from erpnext.stock.doctype.batch.test_batch import TestBatch
+		from beasm.stock.doctype.batch.test_batch import TestBatch
 
 		batch_nos = []
 
@@ -1476,8 +1476,8 @@ class TestStockEntry(FrappeTestCase):
 
 	def test_mapped_stock_entry(self):
 		"Check if rate and stock details are populated in mapped SE given warehouse."
-		from erpnext.stock.doctype.purchase_receipt.purchase_receipt import make_stock_entry
-		from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
+		from beasm.stock.doctype.purchase_receipt.purchase_receipt import make_stock_entry
+		from beasm.stock.doctype.purchase_receipt.test_purchase_receipt import make_purchase_receipt
 
 		item_code = "_TestMappedItem"
 		create_item(item_code, is_stock_item=True)
@@ -1509,8 +1509,8 @@ class TestStockEntry(FrappeTestCase):
 		self.assertEqual(se.items[0].stock_uom, item.stock_uom)
 
 	def test_reposting_for_depedent_warehouse(self):
-		from erpnext.stock.doctype.repost_item_valuation.repost_item_valuation import repost_sl_entries
-		from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+		from beasm.stock.doctype.repost_item_valuation.repost_item_valuation import repost_sl_entries
+		from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 		# Inward at WH1 warehouse (Component)
 		# 1st Repack (Component (WH1) - Subcomponent (WH2))
@@ -1641,8 +1641,8 @@ class TestStockEntry(FrappeTestCase):
 			self.assertEqual(obj.items[index].basic_amount, 2000)
 
 	def test_batch_expiry(self):
-		from erpnext.controllers.stock_controller import BatchExpiredError
-		from erpnext.stock.doctype.batch.test_batch import make_new_batch
+		from beasm.controllers.stock_controller import BatchExpiredError
+		from beasm.stock.doctype.batch.test_batch import make_new_batch
 
 		item_code = "Test Batch Expiry Test Item - 001"
 		item_doc = create_item(item_code=item_code, is_stock_item=1, valuation_rate=10)
@@ -1666,8 +1666,8 @@ class TestStockEntry(FrappeTestCase):
 		self.assertRaises(BatchExpiredError, se.save)
 
 	def test_negative_stock_reco(self):
-		from erpnext.controllers.stock_controller import BatchExpiredError
-		from erpnext.stock.doctype.batch.test_batch import make_new_batch
+		from beasm.controllers.stock_controller import BatchExpiredError
+		from beasm.stock.doctype.batch.test_batch import make_new_batch
 
 		frappe.db.set_single_value("Stock Settings", "allow_negative_stock", 0)
 
@@ -1818,11 +1818,11 @@ test_records = frappe.get_test_records("Stock Entry")
 def initialize_records_for_future_negative_sle_test(
 	item_code, batch_no, warehouses, opening_qty, posting_date
 ):
-	from erpnext.stock.doctype.batch.test_batch import TestBatch, make_new_batch
-	from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
+	from beasm.stock.doctype.batch.test_batch import TestBatch, make_new_batch
+	from beasm.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 		create_stock_reconciliation,
 	)
-	from erpnext.stock.doctype.warehouse.test_warehouse import create_warehouse
+	from beasm.stock.doctype.warehouse.test_warehouse import create_warehouse
 
 	TestBatch.make_batch_item(item_code)
 	make_new_batch(item_code=item_code, batch_id=batch_no)

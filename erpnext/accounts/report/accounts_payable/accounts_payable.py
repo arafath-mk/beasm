@@ -2,7 +2,7 @@
 # License: GNU General Public License v3. See license.txt
 
 
-from erpnext.accounts.report.accounts_receivable.accounts_receivable import ReceivablePayableReport
+from beasm.accounts.report.accounts_receivable.accounts_receivable import ReceivablePayableReport
 
 
 def execute(filters=None):

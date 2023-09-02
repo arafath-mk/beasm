@@ -6,7 +6,7 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, get_datetime
 
-from erpnext.loan_management.doctype.loan_security_unpledge.loan_security_unpledge import (
+from beasm.loan_management.doctype.loan_security_unpledge.loan_security_unpledge import (
 	get_pledged_security_qty,
 )
 

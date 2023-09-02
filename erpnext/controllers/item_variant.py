@@ -166,7 +166,7 @@ def find_variant(template, args, variant_item_code=None):
 
 	conditions = " or ".join(conditions)
 
-	from erpnext.e_commerce.variant_selector.utils import get_item_codes_by_attributes
+	from beasm.e_commerce.variant_selector.utils import get_item_codes_by_attributes
 
 	possible_variants = [
 		i for i in get_item_codes_by_attributes(args, template) if i != variant_item_code
@@ -226,7 +226,7 @@ def enqueue_multiple_variant_creation(item, args):
 		return create_multiple_variants(item, args)
 	else:
 		frappe.enqueue(
-			"erpnext.controllers.item_variant.create_multiple_variants",
+			"beasm.controllers.item_variant.create_multiple_variants",
 			item=item,
 			args=args,
 			now=frappe.flags.in_test,

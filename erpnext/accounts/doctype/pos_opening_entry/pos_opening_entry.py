@@ -6,7 +6,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint, get_link_to_form
 
-from erpnext.controllers.status_updater import StatusUpdater
+from beasm.controllers.status_updater import StatusUpdater
 
 
 class POSOpeningEntry(StatusUpdater):

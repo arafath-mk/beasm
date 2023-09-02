@@ -5,7 +5,7 @@ import json
 from typing import TYPE_CHECKING, Dict, Literal, Optional, Union
 
 if TYPE_CHECKING:
-	from erpnext.manufacturing.doctype.bom_update_log.bom_update_log import BOMUpdateLog
+	from beasm.manufacturing.doctype.bom_update_log.bom_update_log import BOMUpdateLog
 
 import frappe
 from frappe.model.document import Document

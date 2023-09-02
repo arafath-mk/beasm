@@ -7,11 +7,11 @@ from frappe import _, msgprint
 from frappe.model.meta import get_field_precision
 from frappe.utils import flt
 
-from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+from beasm.accounts.doctype.accounting_dimension.accounting_dimension import (
 	get_accounting_dimensions,
 	get_dimension_with_children,
 )
-from erpnext.accounts.report.utils import get_query_columns, get_values_for_columns
+from beasm.accounts.report.utils import get_query_columns, get_values_for_columns
 
 
 def execute(filters=None):

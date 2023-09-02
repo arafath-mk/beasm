@@ -7,8 +7,8 @@ from frappe import _
 from frappe.query_builder.functions import Sum
 from frappe.utils import add_to_date, flt, get_date_str
 
-from erpnext.accounts.report.financial_statements import get_columns, get_data, get_period_list
-from erpnext.accounts.report.profit_and_loss_statement.profit_and_loss_statement import (
+from beasm.accounts.report.financial_statements import get_columns, get_data, get_period_list
+from beasm.accounts.report.profit_and_loss_statement.profit_and_loss_statement import (
 	get_net_profit_loss,
 )
 
@@ -484,7 +484,7 @@ def _get_account_type_based_data(
 		# only proceed if account_names is a list of account names
 		return {}
 
-	from erpnext.accounts.report.cash_flow.cash_flow import get_start_date
+	from beasm.accounts.report.cash_flow.cash_flow import get_start_date
 
 	company = filters.company
 	data = {}

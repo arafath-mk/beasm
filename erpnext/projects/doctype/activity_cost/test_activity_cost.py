@@ -5,7 +5,7 @@ import unittest
 
 import frappe
 
-from erpnext.projects.doctype.activity_cost.activity_cost import DuplicationError
+from beasm.projects.doctype.activity_cost.activity_cost import DuplicationError
 
 
 class TestActivityCost(unittest.TestCase):

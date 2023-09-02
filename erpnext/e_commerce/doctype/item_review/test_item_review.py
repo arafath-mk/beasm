@@ -6,17 +6,17 @@ import unittest
 import frappe
 from frappe.core.doctype.user_permission.test_user_permission import create_user
 
-from erpnext.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
+from beasm.e_commerce.doctype.e_commerce_settings.test_e_commerce_settings import (
 	setup_e_commerce_settings,
 )
-from erpnext.e_commerce.doctype.item_review.item_review import (
+from beasm.e_commerce.doctype.item_review.item_review import (
 	UnverifiedReviewer,
 	add_item_review,
 	get_item_reviews,
 )
-from erpnext.e_commerce.doctype.website_item.website_item import make_website_item
-from erpnext.e_commerce.shopping_cart.cart import get_party
-from erpnext.stock.doctype.item.test_item import make_item
+from beasm.e_commerce.doctype.website_item.website_item import make_website_item
+from beasm.e_commerce.shopping_cart.cart import get_party
+from beasm.stock.doctype.item.test_item import make_item
 
 
 class TestItemReview(unittest.TestCase):

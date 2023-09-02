@@ -2,10 +2,10 @@ import unittest
 
 import frappe
 
-import erpnext
+import beasm
 
 
-@erpnext.allow_regional
+@beasm.allow_regional
 def test_method():
 	return "original"
 

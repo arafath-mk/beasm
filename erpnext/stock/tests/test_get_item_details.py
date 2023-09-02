@@ -4,7 +4,7 @@ import frappe
 from frappe.test_runner import make_test_records
 from frappe.tests.utils import FrappeTestCase
 
-from erpnext.stock.get_item_details import get_item_details
+from beasm.stock.get_item_details import get_item_details
 
 test_ignore = ["BOM"]
 test_dependencies = ["Customer", "Supplier", "Item", "Price List", "Item Price"]

@@ -14,10 +14,10 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cint, cstr, flt, today
 from frappe.website.website_generator import WebsiteGenerator
 
-import erpnext
-from erpnext.setup.utils import get_exchange_rate
-from erpnext.stock.doctype.item.item import get_item_details
-from erpnext.stock.get_item_details import get_conversion_factor, get_price_list_rate
+import beasm
+from beasm.setup.utils import get_exchange_rate
+from beasm.stock.doctype.item.item import get_item_details
+from beasm.stock.get_item_details import get_conversion_factor, get_price_list_rate
 
 form_grid_templates = {"items": "templates/form_grid/item_grid.html"}
 
@@ -503,7 +503,7 @@ class BOM(WebsiteGenerator):
 				m.qty = m.stock_qty
 
 	def validate_uom_is_interger(self):
-		from erpnext.utilities.transaction_base import validate_uom_is_integer
+		from beasm.utilities.transaction_base import validate_uom_is_integer
 
 		validate_uom_is_integer(self, "uom", "qty", "BOM Item")
 		validate_uom_is_integer(self, "stock_uom", "stock_qty", "BOM Item")
@@ -775,7 +775,7 @@ class BOM(WebsiteGenerator):
 				)
 
 	def company_currency(self):
-		return erpnext.get_company_currency(self.company)
+		return beasm.get_company_currency(self.company)
 
 	def add_to_cur_exploded_items(self, args):
 		if self.cur_exploded_items.get(args.item_code):
@@ -1213,7 +1213,7 @@ def add_non_stock_items_cost(stock_entry, work_order, expense_account):
 
 
 def add_operations_cost(stock_entry, work_order=None, expense_account=None):
-	from erpnext.stock.doctype.stock_entry.stock_entry import get_operating_cost_per_unit
+	from beasm.stock.doctype.stock_entry.stock_entry import get_operating_cost_per_unit
 
 	operating_cost_per_unit = get_operating_cost_per_unit(work_order, stock_entry.bom_no)
 
@@ -1357,7 +1357,7 @@ def item_query(doctype, txt, searchfield, start, page_len, filters):
 
 @frappe.whitelist()
 def make_variant_bom(source_name, bom_no, item, variant_items, target_doc=None):
-	from erpnext.manufacturing.doctype.work_order.work_order import add_variant_item
+	from beasm.manufacturing.doctype.work_order.work_order import add_variant_item
 
 	def postprocess(source, doc):
 		doc.item = item

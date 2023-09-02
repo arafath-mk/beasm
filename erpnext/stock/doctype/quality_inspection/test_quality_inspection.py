@@ -5,15 +5,15 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import nowdate
 
-from erpnext.controllers.stock_controller import (
+from beasm.controllers.stock_controller import (
 	QualityInspectionNotSubmittedError,
 	QualityInspectionRejectedError,
 	QualityInspectionRequiredError,
 	make_quality_inspections,
 )
-from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
-from erpnext.stock.doctype.item.test_item import create_item
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
+from beasm.stock.doctype.item.test_item import create_item
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 # test_records = frappe.get_test_records('Quality Inspection')
 

@@ -1,4 +1,4 @@
-# BEASM - web based ERP (http://erpnext.com)
+# BEASM - web based ERP (http://beasm.com)
 # Copyright (C) 2012 Frappe Technologies Pvt Ltd
 #
 # This program is free software: you can redistribute it and/or modify

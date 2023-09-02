@@ -11,14 +11,14 @@ from frappe.model.meta import get_field_precision
 from frappe.query_builder.functions import CombineDatetime, Sum
 from frappe.utils import cint, cstr, flt, get_link_to_form, getdate, now, nowdate
 
-import erpnext
-from erpnext.stock.doctype.bin.bin import update_qty as update_bin_qty
-from erpnext.stock.utils import (
+import beasm
+from beasm.stock.doctype.bin.bin import update_qty as update_bin_qty
+from beasm.stock.utils import (
 	get_incoming_outgoing_rate_for_cancel,
 	get_or_make_bin,
 	get_valuation_method,
 )
-from erpnext.stock.valuation import FIFOValuation, LIFOValuation, round_off_if_near_zero
+from beasm.stock.valuation import FIFOValuation, LIFOValuation, round_off_if_near_zero
 
 
 class NegativeStockError(frappe.ValidationError):
@@ -40,7 +40,7 @@ def make_sl_entries(sl_entries, allow_negative_stock=False, via_landed_cost_vouc
 	        such cases certain validations need to be ignored (like negative
 	                        stock)
 	"""
-	from erpnext.controllers.stock_controller import future_sle_exists
+	from beasm.controllers.stock_controller import future_sle_exists
 
 	if sl_entries:
 		cancel = sl_entries[0].get("is_cancelled")
@@ -132,7 +132,7 @@ def get_args_for_future_sle(row):
 
 
 def validate_serial_no(sle):
-	from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+	from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 	for sn in get_serial_nos(sle.serial_no):
 		args = copy.deepcopy(sle)
@@ -437,7 +437,7 @@ class update_entries_after(object):
 		)
 
 	def build(self):
-		from erpnext.controllers.stock_controller import future_sle_exists
+		from beasm.controllers.stock_controller import future_sle_exists
 
 		if self.args.get("sle_id"):
 			self.process_sle_against_current_timestamp()
@@ -554,7 +554,7 @@ class update_entries_after(object):
 		return self.distinct_item_warehouses[key].dependent_voucher_detail_nos
 
 	def process_sle(self, sle):
-		from erpnext.stock.doctype.serial_no.serial_no import get_serial_nos
+		from beasm.stock.doctype.serial_no.serial_no import get_serial_nos
 
 		# previous sle data for this warehouse
 		self.wh_data = self.data[sle.warehouse]
@@ -686,7 +686,7 @@ class update_entries_after(object):
 			"Subcontracting Receipt",
 		):
 			if frappe.get_cached_value(sle.voucher_type, sle.voucher_no, "is_return"):
-				from erpnext.controllers.sales_and_purchase_return import (
+				from beasm.controllers.sales_and_purchase_return import (
 					get_rate_for_return,  # don't move this import to top
 				)
 
@@ -1070,7 +1070,7 @@ class update_entries_after(object):
 			sle.voucher_type,
 			sle.voucher_no,
 			self.allow_zero_rate,
-			currency=erpnext.get_company_currency(sle.company),
+			currency=beasm.get_company_currency(sle.company),
 			company=sle.company,
 			batch_no=sle.batch_no,
 		)
@@ -1389,7 +1389,7 @@ def get_valuation_rate(
 		not allow_zero_rate
 		and not valuation_rate
 		and raise_error_if_no_rate
-		and cint(erpnext.is_perpetual_inventory_enabled(company))
+		and cint(beasm.is_perpetual_inventory_enabled(company))
 	):
 		form_link = get_link_to_form("Item", item_code)
 

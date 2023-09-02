@@ -7,13 +7,13 @@ import unittest
 import frappe
 from frappe.tests.utils import change_settings
 
-from erpnext.accounts.doctype.pos_closing_entry.test_pos_closing_entry import init_user_and_profile
-from erpnext.accounts.doctype.pos_invoice.pos_invoice import make_sales_return
-from erpnext.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
-from erpnext.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
+from beasm.accounts.doctype.pos_closing_entry.test_pos_closing_entry import init_user_and_profile
+from beasm.accounts.doctype.pos_invoice.pos_invoice import make_sales_return
+from beasm.accounts.doctype.pos_invoice.test_pos_invoice import create_pos_invoice
+from beasm.accounts.doctype.pos_invoice_merge_log.pos_invoice_merge_log import (
 	consolidate_pos_invoices,
 )
-from erpnext.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
+from beasm.stock.doctype.stock_entry.stock_entry_utils import make_stock_entry
 
 
 class TestPOSInvoiceMergeLog(unittest.TestCase):
@@ -403,8 +403,8 @@ class TestPOSInvoiceMergeLog(unittest.TestCase):
 		The second and third POS Invoice should be consolidated with a single Merge Log
 		"""
 
-		from erpnext.stock.doctype.serial_no.test_serial_no import get_serial_nos
-		from erpnext.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
+		from beasm.stock.doctype.serial_no.test_serial_no import get_serial_nos
+		from beasm.stock.doctype.stock_entry.test_stock_entry import make_serialized_item
 
 		frappe.db.sql("delete from `tabPOS Invoice`")
 
